@@ -29,8 +29,18 @@ Board::Board(){
     display = make_unique<Display>(this, x, y);
 }
 
+void Board::addPlayer(std::shared_ptr<Player> p){
+    positions[p] = {2,2};
+    display->notify();
+}
+
+
 const vector<vector<shared_ptr<Tile>>> Board::getState(){
     return map;
+}
+
+const unordered_map<shared_ptr<Player>, pair<int,int>> Board::getPositions(){
+    return positions;
 }
 
 void Board::update(){

@@ -31,6 +31,7 @@ add_executable(goose_party
                 src/tiles/TrapTile.cc
                 src/board/Board.cc
                 src/display/Display.cc
+                src/player/Player.cc
                 src/utils/Observer.cc
                 )
 target_include_directories(goose_party PRIVATE include)

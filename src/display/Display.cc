@@ -28,8 +28,16 @@ void Display::notify(){
         }
     }
 
+    auto positions = board->getPositions();
+    for (auto [player, pos] : positions){
+        auto [i,j] = pos;
+        grid[i][j] = dbox({
+            grid[i][j],
+            text("P1") | border | center
+        });
+    }
+
     setSize();
-    gridElement = gridbox(grid) | border;
 }
 
 void Display::setSize(){
@@ -41,6 +49,7 @@ void Display::setSize(){
 }
 
 void Display::print(){
+    auto gridElement = gridbox(grid) | border;
     auto screen = Screen::Create(Dimension::Fit(gridElement));
     Render(screen, gridElement);
     screen.Print();

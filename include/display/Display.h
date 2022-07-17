@@ -16,8 +16,7 @@ class Display : public Observer{
     int y;
 
     std::vector<std::vector<ftxui::Element>> grid;
-    ftxui::Element gridElement;
-
+    
     void setSize();
 
   public:
