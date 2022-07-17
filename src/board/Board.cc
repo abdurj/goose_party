@@ -44,7 +44,7 @@ const unordered_map<shared_ptr<Player>, pair<int,int>> Board::getPositions(){
 }
 
 void Board::update(){
-    map[0][2] = make_shared<TrapTile>(map[0][0].get());
+    map[0][2] = make_shared<TrapTile>(move(map[0][2]));
     display->notify();
 }
 

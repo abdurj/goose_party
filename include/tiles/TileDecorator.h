@@ -5,12 +5,12 @@
 #include "ftxui/dom/elements.hpp"
 
 class TileDecorator : public Tile{
-  Tile* tile;
+  std::shared_ptr<Tile> tile;
   
   virtual ftxui::Element stylize(ftxui::Element) = 0;
 
   public:
-    TileDecorator(Tile*);
+    TileDecorator(std::shared_ptr<Tile>);
 
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
