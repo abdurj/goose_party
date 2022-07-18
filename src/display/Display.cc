@@ -43,7 +43,7 @@ void Display::notify(){
 void Display::setSize(){
     for(int i = 0; i < grid.size(); ++i){
         for(int j = 0; j < grid[0].size(); ++j){
-            grid[i][j] |=  size(WIDTH, EQUAL, 10) | size(HEIGHT, EQUAL, 5);
+            grid[i][j] |=  size(WIDTH, EQUAL, 8) | size(HEIGHT, EQUAL, 5);
         }
     }
 }

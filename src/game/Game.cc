@@ -16,9 +16,15 @@ void Game::play(){
     players.emplace_back();
 
     b.addPlayer(players[0]);
-
-    int x;
-    cin >> x;
-    b.update();
-    b.print();
+    //int x;
+    char c;
+    while (cin >> c) {
+        if (c == 'q') {
+            break;
+        }
+        b.update();
+        b.print();
+    }
+    // cin >> x;
+    
 }

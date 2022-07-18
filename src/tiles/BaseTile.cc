@@ -3,9 +3,9 @@
 using namespace ftxui;
 
 Element BaseTile::tileElement(){
-    return text("!");
+    return text(" ");
 }
 
 Element BaseTile::getElement(){
-    return BaseTile::tileElement() | border;
+    return tileElement() | border;
 };
