@@ -33,6 +33,7 @@ add_executable(goose_party
                 src/board/Board.cc
                 src/display/Display.cc
                 src/player/Player.cc
+                src/player/PlayerOptions.cc
                 src/utils/Observer.cc
                 )
 target_include_directories(goose_party PRIVATE include)

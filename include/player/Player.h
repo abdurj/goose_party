@@ -7,15 +7,9 @@
 class Player{
     int degrees;
     int grades;
-    int attack;
-    int defence;
-    int luck;
-    std::string name;
-    int playerNum;
+    PlayerOptions options;
     public:
-        Player(PlayerClass);
-        Player(PlayerClass, int, std::string);
-        Player(int, std::string);
+        Player(PlayerOptions);
         ftxui::Element getPlayerTile();  
 };
 

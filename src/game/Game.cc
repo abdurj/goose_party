@@ -13,7 +13,7 @@ void Game::play(){
     b.print();
     
     vector<shared_ptr<Player>> players;
-    players.emplace_back(make_shared<Player>(PlayerClass::FIGHTER));
+    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::FIGHTER, "Abdur", 1}));
     b.addPlayer(players[0]);
     char c;
     while (cin >> c) {
