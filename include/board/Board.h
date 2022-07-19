@@ -15,7 +15,10 @@ class Board{
     std::unique_ptr<Display> display;
     int x; // x dimension
     int y; // y dimension
-
+    static std::shared_ptr<Tile> baseCell();
+    static std::shared_ptr<Tile> degreeTile();
+    static std::vector<std::vector<std::shared_ptr<Tile>>> getMapOne();
+    static std::vector<std::vector<std::shared_ptr<Tile>>> getMapTwo();
   public:
     Board();
     const std::vector<std::vector<std::shared_ptr<Tile>>> getState();
