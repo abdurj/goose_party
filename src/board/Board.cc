@@ -44,34 +44,8 @@ vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
 
 
 Board::Board() {
-    // vector<vector<shared_ptr<Tile>>> tiles;
-    // for(int i = 0; i < 5; ++i){
-    //     vector<shared_ptr<Tile>> row;
-    //     for(int j = 0; j < 5; ++j){
-    //         if( (i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1) ){
-    //             row.emplace_back(make_shared<BaseTile>());
-    //         }else{
-    //             row.emplace_back(nullptr);
-    //         }
-    //     }
-    //     tiles.emplace_back(row);
-    // }
     map = Board::getMapTwo();
-    //int g = 0;
-    // for (auto i : map) {
-    //     cout << "row: " << g++ << " ";
-    //     int h = 0;
-    //     for (auto j : i) {
-    //         if (j == nullptr) {
-    //             cout << "null ";
-    //         } else {
-    //             cout << "column: " << h++ << " ";
-    //         }
-    //     }
-    //     cout << endl;
-
-    // }
-    //    map = tiles;
+    
     x = map.at(0).size();
     y = map.size();
 

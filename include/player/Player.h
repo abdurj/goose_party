@@ -1,12 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-
-enum class PlayerClass {
-    FIGHTER,
-    DEFENDER,
-    MESSENGER,
-    ROGUE
-};
+#include "PlayerOptions.h"
 
 class Player{
     int degrees;
@@ -16,7 +10,6 @@ class Player{
     int luck;
     public:
         Player(PlayerClass);
-
 };
 
 #endif // PLAYER_H

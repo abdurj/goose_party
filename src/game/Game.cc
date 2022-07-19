@@ -14,17 +14,15 @@ void Game::play(){
     
     vector<shared_ptr<Player>> players;
     players.emplace_back();
-
     b.addPlayer(players[0]);
-    //int x;
     char c;
     while (cin >> c) {
+        
         if (c == 'q') {
             break;
         }
         b.update();
         b.print();
     }
-    // cin >> x;
     
 }
