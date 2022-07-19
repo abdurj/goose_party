@@ -23,7 +23,7 @@ class Board{
     Board();
     const std::vector<std::vector<std::shared_ptr<Tile>>> getState();
     const std::unordered_map<std::shared_ptr<Player>, std::pair<int,int>> getPositions();
-
+    void move(std::shared_ptr<Player>, int);
     void addPlayer(std::shared_ptr<Player>);
     void update();
     void print();

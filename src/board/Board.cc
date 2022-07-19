@@ -63,7 +63,7 @@ shared_ptr<Tile> Board::degreeTile() {
 
 
 void Board::addPlayer(std::shared_ptr<Player> p){
-    positions[p] = {2,2};
+    positions[p] = {0,0};
     display->notify();
 }
 
