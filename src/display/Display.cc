@@ -33,7 +33,7 @@ void Display::notify(){
         auto [i,j] = pos;
         grid[i][j] = dbox({
             grid[i][j],
-            text("P1") | border | center
+            player->getPlayerTile()
         });
     }
 

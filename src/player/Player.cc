@@ -1,6 +1,9 @@
 #include "player/Player.h"
 
-Player::Player(PlayerClass p): degrees{0}, grades{0} {
+using namespace ftxui;
+using namespace std;
+
+Player::Player(PlayerClass p): degrees{0}, grades{0}, name{"AbdurGay"}, playerNum{1} {
     switch (p) {
         case PlayerClass::FIGHTER:
 
@@ -18,4 +21,8 @@ Player::Player(PlayerClass p): degrees{0}, grades{0} {
             luck = 1;
         break;
     }
+}
+
+Element Player::getPlayerTile() {
+    return text( "P" + to_string(playerNum)) | border | center;
 }
