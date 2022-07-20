@@ -9,7 +9,7 @@ namespace utils {
     // TODO: Use C++ style random
     int roll(std::shared_ptr<Player> p) {
         int roll = rand() % 12;
-        cout << "Rolled a " << roll << endl;
+        cout << "Rolled a: " << roll << endl;
         return roll;
     }
 
