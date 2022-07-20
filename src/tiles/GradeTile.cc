@@ -7,8 +7,8 @@ using namespace std;
 GradeTile::GradeTile(bool intersection) : Tile(intersection) {};
 
 void GradeTile::apply(std::shared_ptr<Player> p) {
-    //int amt = utils::roll(p);
     cout << "landed on grade tile" << endl;
+    p->addGrades(100); //TODO: adds amt based on a roll
 }
 
 Element GradeTile::tileElement() {

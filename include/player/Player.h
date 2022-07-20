@@ -11,7 +11,9 @@ class Player{
     public:
         Player(PlayerOptions);
         virtual int Grades() const;
-        virtual void addGrades(int); //maybe doesn't need to be virtual
+        virtual void addGrades(int); //Maybe doesn't need to be virtual? Will we have stuff that lets them get more gold?
+        virtual int deductGrades(int); //Also maybe not virtual? Will we have an ability like lose less gold, etc?
+        virtual bool claimDegree();
         ftxui::Element getPlayerTile();  
 };
 
