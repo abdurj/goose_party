@@ -21,6 +21,8 @@ class Board {
 
     static std::shared_ptr<Tile> degreeTile(bool);
 
+    static Direction handleIntersection(Direction);
+
     static std::vector<std::vector<std::shared_ptr<Tile>>> getMapOne();
 
     static std::vector<std::vector<std::shared_ptr<Tile>>> getMapTwo();
