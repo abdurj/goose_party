@@ -7,7 +7,7 @@
 class GradeTile : public Tile {
   public:
     GradeTile(bool);
-    void apply(Player* p) override;
+    void apply(std::shared_ptr<Player>) override;
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
 };

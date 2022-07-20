@@ -4,7 +4,7 @@ using namespace ftxui;
 
 BaseTile::BaseTile(bool intersection) : Tile(intersection) {};
 
-void BaseTile::apply(Player* p) {}
+void BaseTile::apply(std::shared_ptr<Player> p) {}
 
 Element BaseTile::tileElement(){
     return text(" ");
