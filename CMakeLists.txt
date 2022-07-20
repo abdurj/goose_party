@@ -28,6 +28,7 @@ add_executable(goose_party
         src/tiles/Tile.cc
         src/tiles/BaseTile.cc
         src/tiles/DegreeTile.cc
+        src/tiles/GradeTile.cc
         src/tiles/TileDecorator.cc
         src/tiles/TrapTile.cc
         src/board/Board.cc

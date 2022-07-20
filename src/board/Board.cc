@@ -9,6 +9,7 @@
 #include "tiles/BaseTile.h"
 #include "tiles/TrapTile.h"
 #include "tiles/DegreeTile.h"
+#include "tiles/GradeTile.h"
 
 using namespace std;
 
@@ -128,12 +129,16 @@ unordered_map<shared_ptr<Player>, pair<::Direction, pair<int, int>>> Board::getP
 }
 
 // static
-shared_ptr<Tile> Board::baseCell(bool inter = false) {
+shared_ptr<Tile> baseCell(bool inter = false) {
     return make_shared<BaseTile>(inter);
 }
 
-shared_ptr<Tile> Board::degreeTile(bool inter = false) {
+shared_ptr<Tile> degreeTile(bool inter = false) {
     return make_shared<DegreeTile>(inter);
+}
+
+shared_ptr<Tile> gradeTile(bool inter = false) {
+    return make_shared<GradeTile>(inter);
 }
 
 vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
@@ -158,7 +163,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), baseCell(), baseCell(), baseCell(),     baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),   baseCell(), baseCell(), baseCell(), baseCell(), baseCell(
+            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), baseCell(), baseCell(), baseCell(),   baseCell(), baseCell(), baseCell(), baseCell(), baseCell(
                     true),                                                                                                                                                                 baseCell(), baseCell(), baseCell(), baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),   baseCell(), baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
