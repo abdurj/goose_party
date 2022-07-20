@@ -17,10 +17,6 @@ enum class Direction {
 };
 
 class Board {
-    static std::shared_ptr<Tile> baseCell(bool);
-
-    static std::shared_ptr<Tile> degreeTile(bool);
-
     static Direction handleIntersection(Direction);
 
     static std::vector<std::vector<std::shared_ptr<Tile>>> getMapOne();
