@@ -7,6 +7,7 @@
 class DegreeTile : public Tile{
   public:
     DegreeTile(bool);
+    void apply(Player* p) override;
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
 };
