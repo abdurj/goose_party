@@ -2,6 +2,8 @@
 
 using namespace ftxui;
 
+DegreeTile::DegreeTile(bool intersection) : Tile(intersection) {};
+
 Element DegreeTile::tileElement() {
     return text(" ") |  bgcolor(Color::Blue);
 }

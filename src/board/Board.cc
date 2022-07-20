@@ -34,6 +34,23 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
                     ++j;
                     ++moves;
                 } else {
+                    dir = ::Direction::DOWN;
+                }
+                break;
+            }
+            case ::Direction::DOWN: {
+                if (i + 1 < map.size() && map[i + 1][j]) {
+                    ++i;
+                    ++moves;
+                }else{
+                    dir = ::Direction::LEFT;
+                }
+            }
+            case ::Direction::LEFT: {
+                if (j - 1 >= 0 && map[i][j - 1]) {
+                    --j;
+                    ++moves;
+                } else {
                     dir = ::Direction::UP;
                 }
                 break;
@@ -43,24 +60,9 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
                     --i;
                     ++moves;
                 } else {
-                    dir = ::Direction::LEFT;
+                    dir = ::Direction::RIGHT;
                 }
                 break;
-            }
-            case ::Direction::LEFT: {
-                if (j - 1 >= 0 && map[i][j - 1]) {
-                    --j;
-                    ++moves;
-                } else {
-                    dir = ::Direction::DOWN;
-                }
-                break;
-            }
-            case ::Direction::DOWN: {
-                if (i + 1 < map.size() && map[i + 1][j]) {
-                    ++i;
-                    ++moves;
-                }
             }
         }
     }
@@ -85,12 +87,12 @@ unordered_map<shared_ptr<Player>, pair<::Direction, pair<int, int>>> Board::getP
 }
 
 // static
-shared_ptr<Tile> Board::baseCell() {
-    return make_shared<BaseTile>();
+shared_ptr<Tile> Board::baseCell(bool inter = false) {
+    return make_shared<BaseTile>(inter);
 }
 
-shared_ptr<Tile> Board::degreeTile() {
-    return make_shared<DegreeTile>();
+shared_ptr<Tile> Board::degreeTile(bool inter = false) {
+    return make_shared<DegreeTile>(inter);
 }
 
 vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
