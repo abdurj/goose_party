@@ -9,23 +9,41 @@
 #include "display/Display.h"
 #include "player/Player.h"
 
-class Board{
+enum class Direction {
+    UP,
+    RIGHT,
+    LEFT,
+    DOWN
+};
+
+class Board {
+    static std::shared_ptr<Tile> baseCell();
+
+    static std::shared_ptr<Tile> degreeTile();
+
+    static std::vector<std::vector<std::shared_ptr<Tile>>> getMapOne();
+
+    static std::vector<std::vector<std::shared_ptr<Tile>>> getMapTwo();
+
     std::vector<std::vector<std::shared_ptr<Tile>>> map;
-    std::unordered_map<std::shared_ptr<Player>, std::pair<int,int>> positions;
+    std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> positions;
     std::unique_ptr<Display> display;
     int x; // x dimension
     int y; // y dimension
-    static std::shared_ptr<Tile> baseCell();
-    static std::shared_ptr<Tile> degreeTile();
-    static std::vector<std::vector<std::shared_ptr<Tile>>> getMapOne();
-    static std::vector<std::vector<std::shared_ptr<Tile>>> getMapTwo();
-  public:
+
+public:
     Board();
-    const std::vector<std::vector<std::shared_ptr<Tile>>> getState();
-    const std::unordered_map<std::shared_ptr<Player>, std::pair<int,int>> getPositions();
+
+    std::vector<std::vector<std::shared_ptr<Tile>>> getState();
+
+    std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> getPositions();
+
     void move(std::shared_ptr<Player>, int);
+
     void addPlayer(std::shared_ptr<Player>);
+
     void update();
+
     void print();
 };
 

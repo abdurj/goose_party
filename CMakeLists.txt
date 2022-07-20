@@ -22,20 +22,20 @@ project(goose_party
   VERSION 1.0.0
 )
 
-add_executable(goose_party 
-                src/main.cc
-                src/game/Game.cc
-                src/tiles/Tile.cc
-                src/tiles/BaseTile.cc
-                src/tiles/DegreeTile.cc
-                src/tiles/TileDecorator.cc
-                src/tiles/TrapTile.cc
-                src/board/Board.cc
-                src/display/Display.cc
-                src/player/Player.cc
-                src/player/PlayerOptions.cc
-                src/utils/Observer.cc
-                )
+add_executable(goose_party
+        src/main.cc
+        src/game/Game.cc
+        src/tiles/Tile.cc
+        src/tiles/BaseTile.cc
+        src/tiles/DegreeTile.cc
+        src/tiles/TileDecorator.cc
+        src/tiles/TrapTile.cc
+        src/board/Board.cc
+        src/display/Display.cc
+        src/player/Player.cc
+        src/player/PlayerOptions.cc
+        src/utils/Observer.cc
+        src/utils/Utils.cc include/utils/Utils.h)
 target_include_directories(goose_party PRIVATE include)
 
 target_link_libraries(goose_party

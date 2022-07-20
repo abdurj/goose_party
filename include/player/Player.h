@@ -4,6 +4,7 @@
 #include "ftxui/dom/elements.hpp"
 #include <string.h>
 
+
 class Player{
     int degrees;
     int grades;
