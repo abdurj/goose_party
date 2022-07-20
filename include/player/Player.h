@@ -10,6 +10,8 @@ class Player{
     PlayerOptions options;
     public:
         Player(PlayerOptions);
+        virtual int Grades() const;
+        virtual void addGrades(int); //maybe doesn't need to be virtual
         ftxui::Element getPlayerTile();  
 };
 
