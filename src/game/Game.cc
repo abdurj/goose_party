@@ -27,8 +27,6 @@ void Game::play(){
 
             int moves = utils::roll(players[curTurn]);
 
-            cout << "Rolled a: " << moves << endl;
-
             b.move(players[curTurn], moves);
 
             curTurn = (curTurn + 1) % players.size();

@@ -7,6 +7,7 @@
 class BaseTile : public Tile{
   public:
     BaseTile(bool);
+    void apply(std::shared_ptr<Player>) override;
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
 };

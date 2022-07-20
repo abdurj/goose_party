@@ -7,6 +7,7 @@
 class TrapTile : public TileDecorator{
   ftxui::Element stylize(ftxui::Element) override;
   public:
+    void apply(std::shared_ptr<Player>) override;
     TrapTile(std::shared_ptr<Tile>);
 };
 

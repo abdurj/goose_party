@@ -87,6 +87,8 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
             this_thread::sleep_for(chrono::milliseconds(50));
         }
     }
+
+    map[i][j]->apply(p);
 }
 
 Direction Board::handleIntersection(Direction dir) {
