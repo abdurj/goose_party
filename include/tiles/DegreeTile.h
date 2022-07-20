@@ -5,6 +5,8 @@
 #include "ftxui/dom/elements.hpp"
 
 class DegreeTile : public Tile{
+  public:
+    DegreeTile(bool);
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
 };

@@ -5,6 +5,8 @@
 #include "ftxui/dom/elements.hpp"
 
 class BaseTile : public Tile{
+  public:
+    BaseTile(bool);
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
 };

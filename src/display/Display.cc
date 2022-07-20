@@ -12,11 +12,11 @@ using namespace ftxui;
 
 Display::Display(Board* b, int x, int y) : board{b}, x{x}, y{y} {
     grid.resize(y, vector<Element>(x));
-    notify();
+    Display::notify();
 };
 
 void Display::notify(){
-    auto tiles = board->getState();
+    const auto tiles = board->getState();
     for(int i = 0; i < y; ++i){
         for(int j = 0; j < x; ++j){
             auto tile = tiles[i][j];
@@ -28,9 +28,9 @@ void Display::notify(){
         }
     }
 
-    auto positions = board->getPositions();
+    const auto positions = board->getPositions();
     for (auto [player, pos] : positions){
-        auto [i,j] = pos;
+        auto [i, j] = pos.second;
         grid[i][j] = dbox({
             grid[i][j],
             player->getPlayerTile()
