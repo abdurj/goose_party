@@ -6,20 +6,9 @@
 #include <queue>
 #include <climits>
 
-#include "tiles/TrapTile.h"
-
 #include "display/Display.h"
 #include "utils/Utils.h"
 #include "game/Game.h"
-
-#include "tiles/BaseTile.h"
-#include "tiles/TrapTile.h"
-#include "tiles/DegreeTile.h"
-#include "tiles/GradeTile.h"
-#include "tiles/AbilityTile.h"
-#include "tiles/BeaconTile.h"
-#include "tiles/HealthTile.h"
-#include "tiles/CardTile.h"
 
 using namespace std;
 
