@@ -23,7 +23,7 @@ Board::Board() {
     x = map.at(0).size();
     y = map.size();
     // set a marker for the degreetile (hard coded initially for now)
-    degreeSpot = pair<int,int> {0,6};
+    degreeSpot = {0,6};
 
     display = make_unique<Display>(this, x, y);
 }
@@ -87,7 +87,7 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
             }
         }
 
-        if(pair<int,int> {i,j} == degreeSpot) { 
+        if(pos == degreeSpot) { 
             map[i][j]->apply(p);
             if(p->claimDegree()) {
                 // If a player claims the degree, it should end their turn automatically regardless of any extra moves they may have
