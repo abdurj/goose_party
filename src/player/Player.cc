@@ -38,3 +38,11 @@ bool Player::claimDegree() { //Returns true if a degree was claimed
 Element Player::getPlayerTile() {
     return text( "P" + to_string(options.playerNum)) | border | center;
 }
+
+string Player::getName() {
+    return options.playerName;
+}
+
+int Player::getNum() {
+    return options.playerNum;
+}
