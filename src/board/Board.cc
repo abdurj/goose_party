@@ -116,7 +116,6 @@ void Board::generateNewDegree() {
         }
     }
 
-
     queue<pair<intPair, int>> q; // coord, depth
 
     const vector<intPair> dirs = {  {0,-1},
@@ -161,8 +160,6 @@ void Board::generateNewDegree() {
     map[old_y][old_x] = utils::baseCell(map[old_y][old_x]->isIntersection());
     auto [new_y, new_x] = degreeSpot;
     map[new_y][new_x] = utils::degreeTile(map[new_y][new_x]->isIntersection());
-
-
 }
 
 Direction Board::handleIntersection(Direction dir) {
