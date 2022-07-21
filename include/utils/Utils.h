@@ -1,7 +1,7 @@
 #ifndef GOOSE_PARTY_UTILS_H
 #define GOOSE_PARTY_UTILS_H
 
-#include "memory"
+#include <memory>
 #include "player/Player.h"
 
 namespace utils {
@@ -13,6 +13,7 @@ namespace utils {
      * @return int The dice roll the player got
      */
     int roll(std::shared_ptr<Player> p);
+
 }
 
 #endif //GOOSE_PARTY_UTILS_H
