@@ -3,6 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <queue>
 
 #include "display/Display.h"
 
@@ -90,8 +91,7 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
         if(pos == degreeSpot) { 
             map[i][j]->apply(p);
             if(p->claimDegree()) {
-                // If a player claims the degree, it should end their turn automatically regardless of any extra moves they may have
-                // TODO: call a method to place the degreeTile somewhere else and update the degreeTile pointer appropriately
+                generateNewDegree();
                 return;
             }
         }
@@ -104,6 +104,48 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
     }
 
     map[i][j]->apply(p);
+}
+
+void Board::generateNewDegree() {
+    vector<vector<int>> dist{y, vector<int>(x, INT_MAX)};
+
+    using intPair = pair<int,int>;
+    queue<pair<intPair, int>> q; // coord, depth
+
+    const vector<intPair> dirs = {  {0,-1},
+                                    {-1,0},
+                                    {1,0},
+                                    {0,1}};
+
+    for(const auto& [p, playerPos] : positions){
+        const auto& [p_i,p_j] = playerPos.second;
+        dist[p_i][p_j] = 0;
+
+        q.push({{p_i, p_j}, 0});
+        while(!q.empty()){
+            const auto& [pos, depth] = q.front(); q.pop();
+            const auto& [pos_i,pos_j] = pos;
+            for(auto& [dir_i, dir_j] : dirs){
+                int ii = pos_i + dir_i;
+                int jj = pos_j + dir_j;
+                if(ii < 0 || ii >= y || jj < 0 || jj >= x || map[ii][jj] == nullptr){
+                    continue;
+                }
+                dist[ii][jj] = min(dist[ii][jj], depth+1);
+                q.push({{ii,jj}, depth+1});
+            }
+        }
+    }
+
+    int minDist = INT_MAX;
+    for(int i = 0; i < y; ++i){
+        for(int j = 0; j < x; ++j){
+            if(dist[i][j] < minDist){
+                minDist = dist[i][j];
+                degreeSpot = {i,j};
+            }
+        }
+    }
 }
 
 Direction Board::handleIntersection(Direction dir) {
