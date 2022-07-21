@@ -10,6 +10,10 @@
 #include "tiles/TrapTile.h"
 #include "tiles/DegreeTile.h"
 #include "tiles/GradeTile.h"
+#include "tiles/AbilityTile.h"
+#include "tiles/BeaconTile.h"
+#include "tiles/HealthTile.h"
+#include "tiles/CardTile.h"
 
 using namespace std;
 
@@ -154,6 +158,23 @@ shared_ptr<Tile> gradeTile(bool inter = false) {
     return make_shared<GradeTile>(inter);
 }
 
+shared_ptr<Tile> cardTile(bool inter = false) {
+    return make_shared<CardTile>(inter);
+}
+
+shared_ptr<Tile> healthTile(bool inter = false) {
+    return make_shared<HealthTile>(inter);
+}
+
+shared_ptr<Tile> abilityTile(bool inter = false) {
+    return make_shared<AbilityTile>(inter);
+}
+
+shared_ptr<Tile> beaconTile(bool inter = false) {
+    return make_shared<BeaconTile>(inter);
+}
+
+
 vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
     vector<vector<shared_ptr<Tile>>> board = {
             {baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), nullptr,    nullptr},
@@ -185,8 +206,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    baseCell(), baseCell(), baseCell(), baseCell(),   baseCell(), baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), baseCell(), baseCell(), baseCell(
-                    true),                                       baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), baseCell(), baseCell(), baseCell(true), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), beaconTile(), healthTile(), cardTile(), abilityTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
     };
 
     return board;
