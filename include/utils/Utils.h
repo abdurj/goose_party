@@ -3,7 +3,9 @@
 
 #include <memory>
 #include "player/Player.h"
-
+#include <algorithm>
+#include <chrono>
+#include <random>
 namespace utils {
 
     /**
@@ -13,6 +15,8 @@ namespace utils {
      * @return int The dice roll the player got
      */
     int roll(std::shared_ptr<Player> p);
+
+    void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
 
 }
 

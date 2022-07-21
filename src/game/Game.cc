@@ -6,9 +6,7 @@
 #include "board/Board.h"
 #include "player/Player.h"
 #include "utils/Utils.h"
-#include <algorithm>
-#include <chrono>
-#include <random>
+
 
 using namespace std;
 
@@ -31,10 +29,8 @@ void Game::init() {
     players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::ROGUE, "sussybaka123", 3}));
     players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::MESSENGER, "messenger", 4}));
 
-    // randomize order of the players. 
-    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-    shuffle (players.begin(), players.end(), default_random_engine(seed));
-
+    // randomize player order
+    utils::shufflePlayers(players);
     // add all the players.
     for (auto i : players) {
         b.addPlayer(i);

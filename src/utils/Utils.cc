@@ -14,4 +14,10 @@ namespace utils {
         return roll;
     }
 
+    void shufflePlayers(vector<shared_ptr<Player>> &players) {
+        // randomize order of the players. 
+        unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+        shuffle (players.begin(), players.end(), default_random_engine(seed));
+    }
+
 }
