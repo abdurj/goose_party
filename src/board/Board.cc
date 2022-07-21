@@ -136,11 +136,11 @@ void Board::generateNewDegree() {
             for(auto& [dir_i, dir_j] : dirs){
                 int ii = pos_i + dir_i;
                 int jj = pos_j + dir_j;
-                if(ii < 0 || ii >= y || jj < 0 || jj >= x || map[ii][jj] == nullptr || visited[ii][jj]){
+                if(ii < 0 || ii >= y || jj < 0 || jj >= x || map[ii][jj] == nullptr || visited[ii][jj] || dist[ii][jj] < depth + 1){
                     continue;
                 }
                 visited[ii][jj] = true;
-                dist[ii][jj] = min(dist[ii][jj], depth+1);
+                dist[ii][jj] = depth+1;
                 q.push({{ii,jj}, depth+1});
             }
         }
