@@ -3,9 +3,8 @@
 
 #include <memory>
 #include "player/Player.h"
-#include <algorithm>
-#include <chrono>
-#include <random>
+#include "tiles/Tile.h"
+
 namespace utils {
 
     /**
@@ -18,6 +17,19 @@ namespace utils {
 
     void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
 
+    std::shared_ptr<Tile> baseCell(bool inter = false);
+
+    std::shared_ptr<Tile> degreeTile(bool inter = false);
+
+    std::shared_ptr<Tile> gradeTile(bool inter = false);
+
+    std::shared_ptr<Tile> cardTile(bool inter = false);
+
+    std::shared_ptr<Tile> healthTile(bool inter = false);
+
+    std::shared_ptr<Tile> abilityTile(bool inter = false);
+
+    std::shared_ptr<Tile> beaconTile(bool inter = false);
 }
 
 #endif //GOOSE_PARTY_UTILS_H
