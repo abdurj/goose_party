@@ -31,9 +31,9 @@ void Game::init() {
     // }
 
     players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::FIGHTER, "Abdur", 1}));
-    //players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::DEFENDER, "Fei", 2}));
-    //players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::ROGUE, "sussybaka123", 3}));
-    //players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::MESSENGER, "messenger", 4}));
+    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::DEFENDER, "Fei", 2}));
+    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::ROGUE, "sussybaka123", 3}));
+    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::MESSENGER, "messenger", 4}));
 
     // randomize player order
     utils::shufflePlayers(players);
