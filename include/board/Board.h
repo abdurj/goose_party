@@ -27,8 +27,10 @@ class Board {
     std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> positions;
     std::unique_ptr<Display> display;
     std::pair<int, int> degreeSpot;
-    int x; // x dimension
-    int y; // y dimension
+    size_t x; // x dimension
+    size_t y; // y dimension
+
+    void generateNewDegree();
 
 public:
     Board();

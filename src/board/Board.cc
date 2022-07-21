@@ -3,17 +3,13 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <queue>
+#include <climits>
+
+#include "tiles/TrapTile.h"
 
 #include "display/Display.h"
-
-#include "tiles/BaseTile.h"
-#include "tiles/TrapTile.h"
-#include "tiles/DegreeTile.h"
-#include "tiles/GradeTile.h"
-#include "tiles/AbilityTile.h"
-#include "tiles/BeaconTile.h"
-#include "tiles/HealthTile.h"
-#include "tiles/CardTile.h"
+#include "utils/Utils.h"
 
 using namespace std;
 
@@ -90,8 +86,7 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
         if(pos == degreeSpot) { 
             map[i][j]->apply(p);
             if(p->claimDegree()) {
-                // If a player claims the degree, it should end their turn automatically regardless of any extra moves they may have
-                // TODO: call a method to place the degreeTile somewhere else and update the degreeTile pointer appropriately
+                generateNewDegree();
                 return;
             }
         }
@@ -104,6 +99,67 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
     }
 
     map[i][j]->apply(p);
+}
+
+void Board::generateNewDegree() {
+    using intPair = pair<int,int>;
+
+    intPair oldDegree = degreeSpot;
+
+    vector<vector<int>> dist{y, vector<int>(x, INT_MAX)};
+    vector<vector<bool>> visited;
+    for(int i = 0; i < y; ++i){
+        for(int j = 0; j < x; ++j){
+            if(map[i][j] == nullptr){
+                dist[i][j] = -1;
+            }
+        }
+    }
+
+    queue<pair<intPair, int>> q; // coord, depth
+
+    const vector<intPair> dirs = {  {0,-1},
+                                    {-1,0},
+                                    {1,0},
+                                    {0,1}};
+
+    for(const auto& [p, playerPos] : positions){
+        visited.clear();
+        visited.resize(y, vector<bool>(x, false));
+        const auto& [p_i,p_j] = playerPos.second;
+        dist[p_i][p_j] = 0;
+
+        q.push({{p_i, p_j}, 0});
+        while(!q.empty()){
+            const auto& [pos, depth] = q.front(); q.pop();
+            const auto& [pos_i,pos_j] = pos;
+            for(auto& [dir_i, dir_j] : dirs){
+                int ii = pos_i + dir_i;
+                int jj = pos_j + dir_j;
+                if(ii < 0 || ii >= y || jj < 0 || jj >= x || map[ii][jj] == nullptr || visited[ii][jj] || dist[ii][jj] < depth + 1){
+                    continue;
+                }
+                visited[ii][jj] = true;
+                dist[ii][jj] = depth+1;
+                q.push({{ii,jj}, depth+1});
+            }
+        }
+    }
+
+    int maxDist = -1;
+    for(int i = 0; i < y; ++i){
+        for(int j = 0; j < x; ++j){
+            if(dist[i][j] > maxDist){
+                maxDist = dist[i][j];
+                degreeSpot = {i,j};
+            }
+        }
+    }
+
+    auto [old_y, old_x] = oldDegree;
+    map[old_y][old_x] = utils::baseCell(map[old_y][old_x]->isIntersection());
+    auto [new_y, new_x] = degreeSpot;
+    map[new_y][new_x] = utils::degreeTile(map[new_y][new_x]->isIntersection());
 }
 
 Direction Board::handleIntersection(Direction dir) {
@@ -146,36 +202,9 @@ unordered_map<shared_ptr<Player>, pair<::Direction, pair<int, int>>> Board::getP
 }
 
 // static
-shared_ptr<Tile> baseCell(bool inter = false) {
-    return make_shared<BaseTile>(inter);
-}
-
-shared_ptr<Tile> degreeTile(bool inter = false) {
-    return make_shared<DegreeTile>(inter);
-}
-
-shared_ptr<Tile> gradeTile(bool inter = false) {
-    return make_shared<GradeTile>(inter);
-}
-
-shared_ptr<Tile> cardTile(bool inter = false) {
-    return make_shared<CardTile>(inter);
-}
-
-shared_ptr<Tile> healthTile(bool inter = false) {
-    return make_shared<HealthTile>(inter);
-}
-
-shared_ptr<Tile> abilityTile(bool inter = false) {
-    return make_shared<AbilityTile>(inter);
-}
-
-shared_ptr<Tile> beaconTile(bool inter = false) {
-    return make_shared<BeaconTile>(inter);
-}
-
 
 vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
+    using namespace utils;
     vector<vector<shared_ptr<Tile>>> board = {
             {baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), nullptr,    nullptr},
             {baseCell(), nullptr,    nullptr,    nullptr,    nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr},
@@ -196,18 +225,17 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 }
 
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
+    using namespace utils;
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(
-                    true),                                                                                                                                                                 baseCell(), baseCell(), baseCell(), baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),   baseCell(), baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    baseCell(), baseCell(), baseCell(), baseCell(),   baseCell(), baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), baseCell(), baseCell(), baseCell(
-                    true),                                       baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), beaconTile(), healthTile(), cardTile(), abilityTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(true),  baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), baseCell(), baseCell(), baseCell(true), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),   beaconTile(), healthTile(), cardTile(), abilityTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
     };
 
     return board;

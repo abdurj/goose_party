@@ -4,7 +4,7 @@
 using namespace ftxui;
 using namespace std;
 
-Player::Player(PlayerOptions p): degrees{0}, grades{0}, options{p} {
+Player::Player(PlayerOptions p): degrees{0}, grades{100}, options{p} {
 }
 
 
