@@ -26,6 +26,7 @@ class Board {
     std::vector<std::vector<std::shared_ptr<Tile>>> map;
     std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> positions;
     std::unique_ptr<Display> display;
+    std::pair<int, int> degreeSpot;
     int x; // x dimension
     int y; // y dimension
 
