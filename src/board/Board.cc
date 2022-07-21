@@ -18,6 +18,8 @@ Board::Board() {
 
     x = map.at(0).size();
     y = map.size();
+    // set a marker for the degreetile (hard coded initially for now)
+    degreeSpot = pair<int,int> {0,6};
 
     display = make_unique<Display>(this, x, y);
 }
@@ -81,9 +83,11 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
             }
         }
 
-        if(i == 0 && (j == 6 || j == 7 || j == 8)) { //TODO: change to if map[i][j] == degreeTile
+        if(pair<int,int> {i,j} == degreeSpot) { 
             map[i][j]->apply(p);
             if(p->claimDegree()) {
+                // If a player claims the degree, it should end their turn automatically regardless of any extra moves they may have
+                // TODO: call a method to place the degreeTile somewhere else and update the degreeTile pointer appropriately
                 return;
             }
         }
@@ -172,7 +176,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), degreeTile(), degreeTile(),   baseCell(), baseCell(), baseCell(), baseCell(), baseCell(
+            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(
                     true),                                                                                                                                                                 baseCell(), baseCell(), baseCell(), baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),   baseCell(), baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
@@ -182,7 +186,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), baseCell(), baseCell(), baseCell(
-                    true),                                       baseCell(), baseCell(), baseCell(), baseCell(), degreeTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+                    true),                                       baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
     };
 
     return board;
