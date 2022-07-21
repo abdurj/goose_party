@@ -26,31 +26,39 @@ void Game::play(){
     unsigned int curTurn = 0;
     char c = '0';
     cin.exceptions(ios::eofbit|ios::failbit);
-    while (true) {
+
+    bool playing = true;
+    while (playing) {
         try {
             cout << "It is Player " << curTurn + 1 << "'s turn." << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
-            cin >> c;
-            if (c == 'm') {
-                cout << "Moving Player: " << curTurn + 1 << "." << endl;
-                cout << "Rolling..." << endl;
+            cin >> c; 
 
-                int moves = utils::roll(players[curTurn]);
+            switch (c) {
+                case 'm':
+                    {                
+                    cout << "Moving Player: " << curTurn + 1 << "." << endl;
+                    cout << "Rolling..." << endl;
 
-                b.move(players[curTurn], moves);
-                curTurn = (curTurn + 1) % players.size();
-                
-                b.update();
-                b.print();
+                    int moves = utils::roll(players[curTurn]);
+
+                    b.move(players[curTurn], moves);
+                    curTurn = (curTurn + 1) % players.size();
+                    
+                    b.update();
+                    b.print();
+                    break;
+                    }
+                case 'q':
+                    playing = false;
+                    break;
+                default:
+                    cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
             }
 
-            if (c == 'q') {
-                break;
-            }
         } catch (...) {
             break;
         }
-        
     }
     
 }
