@@ -81,6 +81,13 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
             }
         }
 
+        if(i == 0 && (j == 6 || j == 7 || j == 8)) { //TODO: change to if map[i][j] == degreeTile
+            map[i][j]->apply(p);
+            if(p->claimDegree()) {
+                return;
+            }
+        }
+
         if (update) {
             display->notify();
             display->print();
@@ -165,7 +172,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), baseCell(), baseCell(), baseCell(),   baseCell(), baseCell(), baseCell(), baseCell(), baseCell(
+            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), degreeTile(), degreeTile(),   baseCell(), baseCell(), baseCell(), baseCell(), baseCell(
                     true),                                                                                                                                                                 baseCell(), baseCell(), baseCell(), baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),   baseCell(), baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
@@ -177,6 +184,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
             {baseCell(), baseCell(), baseCell(), baseCell(
                     true),                                       baseCell(), baseCell(), baseCell(), baseCell(), degreeTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
     };
+
     return board;
 }
 
