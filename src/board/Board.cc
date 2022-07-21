@@ -206,7 +206,8 @@ vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    baseCell(), baseCell(), baseCell(), baseCell(),   baseCell(), baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    baseCell(), nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(), nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), baseCell(), baseCell(), baseCell(true), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), baseCell(), baseCell(), baseCell(
+                    true),                                       baseCell(), baseCell(), baseCell(), baseCell(), baseCell(), beaconTile(), healthTile(), cardTile(), abilityTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
     };
 
     return board;
