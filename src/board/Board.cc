@@ -6,6 +6,8 @@
 #include <queue>
 #include <climits>
 
+#include "tiles/TrapTile.h"
+
 #include "display/Display.h"
 #include "utils/Utils.h"
 #include "game/Game.h"
