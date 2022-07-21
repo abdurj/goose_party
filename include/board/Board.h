@@ -9,18 +9,18 @@
 #include "display/Display.h"
 #include "player/Player.h"
 
-enum class Direction {
+class Game;
+
+enum class Direction{
     UP,
     RIGHT,
     LEFT,
     DOWN
 };
 
-class Board {
+class Board{
     static Direction handleIntersection(Direction);
-
     static std::vector<std::vector<std::shared_ptr<Tile>>> getMapOne();
-
     static std::vector<std::vector<std::shared_ptr<Tile>>> getMapTwo();
 
     std::vector<std::vector<std::shared_ptr<Tile>>> map;
@@ -29,12 +29,12 @@ class Board {
     std::pair<int, int> degreeSpot;
     size_t x; // x dimension
     size_t y; // y dimension
-
+    Game *game;
+    
     void generateNewDegree();
-
 public:
     Board();
-
+    void attach(Game*);
     std::vector<std::vector<std::shared_ptr<Tile>>> getState();
 
     std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> getPositions();

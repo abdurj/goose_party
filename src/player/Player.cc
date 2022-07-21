@@ -1,5 +1,6 @@
 #include "player/Player.h"
 #include <iostream>
+#include <string>
 
 using namespace ftxui;
 using namespace std;
@@ -7,9 +8,13 @@ using namespace std;
 Player::Player(PlayerOptions p): degrees{0}, grades{100}, options{p} {
 }
 
-
+//Getters
 int Player::Grades() const {return grades;}
+int Player::Degrees() const {return degrees;}
+string Player::Name() const {return options.playerName;}
+int Player::PlayerNum() const {return options.playerNum;}
 
+//Setters
 void Player::addGrades(int amt) {
     grades+=amt;
 }
@@ -39,10 +44,4 @@ Element Player::getPlayerTile() {
     return text( "P" + to_string(options.playerNum)) | border | center;
 }
 
-string Player::getName() {
-    return options.playerName;
-}
 
-int Player::getNum() {
-    return options.playerNum;
-}

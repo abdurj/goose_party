@@ -10,6 +10,16 @@
 
 #include "display/Display.h"
 #include "utils/Utils.h"
+#include "game/Game.h"
+
+#include "tiles/BaseTile.h"
+#include "tiles/TrapTile.h"
+#include "tiles/DegreeTile.h"
+#include "tiles/GradeTile.h"
+#include "tiles/AbilityTile.h"
+#include "tiles/BeaconTile.h"
+#include "tiles/HealthTile.h"
+#include "tiles/CardTile.h"
 
 using namespace std;
 
@@ -20,9 +30,11 @@ Board::Board() {
     y = map.size();
     // set a marker for the degreetile (hard coded initially for now)
     degreeSpot = {0,6};
-
+    game = nullptr;
     display = make_unique<Display>(this, x, y);
 }
+
+void Board::attach(Game *g) {game = g;}
 
 void Board::addPlayer(std::shared_ptr<Player> p){
     positions[p] = {::Direction::RIGHT, {0, 0}};
