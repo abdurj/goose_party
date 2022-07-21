@@ -10,6 +10,7 @@
 
 #include "display/Display.h"
 #include "utils/Utils.h"
+#include "game/Game.h"
 
 using namespace std;
 
@@ -20,9 +21,11 @@ Board::Board() {
     y = map.size();
     // set a marker for the degreetile (hard coded initially for now)
     degreeSpot = {0,6};
-
+    game = nullptr;
     display = make_unique<Display>(this, x, y);
 }
+
+void Board::attach(Game *g) {game = g;}
 
 void Board::addPlayer(std::shared_ptr<Player> p){
     positions[p] = {::Direction::RIGHT, {0, 0}};

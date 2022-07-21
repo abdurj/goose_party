@@ -6,12 +6,13 @@
 
 class Game{
   Board b;
+  bool playing;
   std::vector<std::shared_ptr<Player>> players;
   public:
     Game();
     void play();
     void init();
-
+    void notifyWinner(Player &);
 };
 
 #endif // GAME_H
