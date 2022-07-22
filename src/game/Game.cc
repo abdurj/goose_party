@@ -74,8 +74,6 @@ void Game::play() {
                     b.move(players[curTurn], moves);
                     players[curTurn]->endTurn();
                     
-                    b.update();
-                    b.print();
                     break;
                     }
                 case 'q':
