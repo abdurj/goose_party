@@ -13,6 +13,7 @@ int Player::Grades() const {return grades;}
 int Player::Degrees() const {return degrees;}
 string Player::Name() const {return options.playerName;}
 int Player::PlayerNum() const {return options.playerNum;}
+int Player::PlayerLuck() const {return options.luck;}
 
 //Setters
 void Player::addGrades(int amt) {

@@ -21,10 +21,10 @@ using namespace std;
 
 namespace utils {
 
-    int roll(std::shared_ptr<Player> p) {
+    int roll(std::shared_ptr<Player> p, int c) {
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine eng(seed);
-        int roll = eng() % 12;
+        int roll = (eng() + c - 12) % c;
         cout << "Rolled a: " << roll << endl;
         return roll;
     }
