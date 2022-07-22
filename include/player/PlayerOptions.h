@@ -9,9 +9,9 @@ enum class PlayerClass {
 };
 
 struct PlayerOptions {
-    PlayerClass pClass;
-    std::string playerName;
-    int playerNum;
+    const PlayerClass pClass;
+    const std::string name;
+    const int id;
     int attack;
     int defence;
     int luck;

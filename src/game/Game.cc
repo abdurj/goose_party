@@ -11,7 +11,7 @@
 using namespace std;
 
 void Game::notifyWinner(Player &p) {
-    cout << p.Name() << " has won the game!" << endl;
+    cout << p.Options()->name << " has won the game!" << endl;
     playing = false;
 }
 
@@ -29,11 +29,11 @@ void Game::init() {
     // for (int i = 0; i < n; ++i) {
     //     cout << "Player " << i + 1 << " , please enter your name" << endl;
     // }
-
-    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::FIGHTER, "Abdur", 1}));
-    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::DEFENDER, "Fei", 2}));
-    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::ROGUE, "sussybaka123", 3}));
-    players.emplace_back(make_shared<Player>(PlayerOptions{PlayerClass::MESSENGER, "messenger", 4}));
+    auto abdur = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
+    auto fei = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
+    auto kev = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
+    auto kp = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
+    players.insert(players.end(), {abdur, fei, kev, kp});
 
     // randomize player order
     utils::shufflePlayers(players);
@@ -58,7 +58,7 @@ void Game::play() {
 
     while (playing) {
         try {
-            cout << "It is " << players[curTurn]->Name() << "'s turn." << " (Player " << players[curTurn]->PlayerNum() << ")" << endl;
+            cout << "It is " << players[curTurn]->Options()->name << "'s turn." << " (Player " << players[curTurn]->Options()->id << ")" << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
             cin >> c; 
 

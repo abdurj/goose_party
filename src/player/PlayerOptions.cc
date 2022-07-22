@@ -1,7 +1,7 @@
 #include "player/PlayerOptions.h"
 #include <string>
 using namespace std;
-PlayerOptions::PlayerOptions(PlayerClass p, string name, int num): pClass{p}, playerName{name}, playerNum{num} {
+PlayerOptions::PlayerOptions(PlayerClass p, string name, int num): pClass{p}, name{name}, id{num} {
     switch (p) {
         case PlayerClass::FIGHTER:
             attack = 3;
