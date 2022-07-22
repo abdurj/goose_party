@@ -33,6 +33,11 @@ void Board::addPlayer(std::shared_ptr<Player> p){
 }
 
 void Board::move(std::shared_ptr<Player> p, int roll) {
+    if(roll == 0){
+        return;
+    }
+    
+    std::cout << "\x1B[2J\x1B[H";
     auto &[dir, pos] = positions[p];
     auto &[i, j] = pos;
 
@@ -104,7 +109,8 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
             this_thread::sleep_for(chrono::milliseconds(50));
         }
     }
-
+    
+    cout << endl;
     map[i][j]->apply(p);
 }
 
@@ -170,11 +176,13 @@ void Board::generateNewDegree() {
 }
 
 Direction Board::handleIntersection(Direction dir) {
+    cout << endl;
     cout << "This tile is an intersection. Press 1 to continue on your path, or 2 to take a new path." << endl;
     int op = 0;
     while (op != 1 && op != 2) {
         cin >> op;
     }
+    cout << "\x1B[2J\x1B[H";
     if (op == 2) {
         switch (dir) {
             case Direction::UP:
