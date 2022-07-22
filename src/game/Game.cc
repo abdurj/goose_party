@@ -73,8 +73,6 @@ void Game::play() {
                     b.move(players[curTurn], moves);
                     curTurn = (curTurn + 1) % players.size();
                     
-                    b.update();
-                    b.print();
                     break;
                     }
                 case 'q':

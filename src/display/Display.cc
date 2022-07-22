@@ -10,9 +10,10 @@
 using namespace std;
 using namespace ftxui;
 
-Display::Display(Board* b, int x, int y) : board{b}, x{x}, y{y} {
+Display::Display(Board* b, int x, int y) : board{b}, x{x}, y{y}, screen{0,0} {
     grid.resize(y, vector<Element>(x));
     Display::notify();
+    screen = Screen::Create(Dimension::Fit(gridElement));
 };
 
 void Display::notify(){
@@ -38,6 +39,8 @@ void Display::notify(){
     }
 
     setSize();
+
+    gridElement = gridbox(grid) | border;
 }
 
 void Display::setSize(){
@@ -49,10 +52,10 @@ void Display::setSize(){
 }
 
 void Display::print(){
-    auto gridElement = gridbox(grid) | border;
-    auto screen = Screen::Create(Dimension::Fit(gridElement));
+    screen.Clear();
+    auto reset = screen.ResetPosition();
     Render(screen, gridElement);
+    cout << reset;
     screen.Print();
-    cout << endl;
 }
 
