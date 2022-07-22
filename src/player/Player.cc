@@ -16,7 +16,7 @@ int Player::PlayerNum() const {return options.playerNum;}
 
 int Player::getAttack() const {return 0;}
 int Player::Attack() const {
-    return options.defence + getAttack();
+    return options.attack + getAttack();
 }
 
 int Player::getDefence() const {return 0;}
