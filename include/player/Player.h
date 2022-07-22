@@ -4,19 +4,23 @@
 #include "ftxui/dom/elements.hpp"
 #include <string.h>
 
-class Player{
-    int degrees;
-    int grades;
-    std::shared_ptr<PlayerOptions> options;
-    public:
-        Player(std::shared_ptr<PlayerOptions>);
-        int Grades() const;
-        int Degrees() const;
-        int modifyGrades(int); //Maybe doesn't need to be virtual? Will we have stuff that lets them get more gold?
-        bool claimDegree();
+class Player { //Abstract base class
+    virtual void listAbilities() const = 0;
+    virtual void doEndTurn() = 0; //Better name suggestions?
+    virtual void doEndCycle() = 0;
 
-        std::shared_ptr<PlayerOptions> Options() const;
-        ftxui::Element getPlayerTile();
+    public:
+    virtual int Grades() const = 0;
+    virtual int Degrees() const = 0;
+    virtual int modifyGrades(int) = 0;
+    virtual bool claimDegree() = 0;
+    void Abilities() const;
+    void endTurn();
+    void endCycle();
+    virtual std::shared_ptr<PlayerOptions> Options() const = 0;
+    virtual ftxui::Element getPlayerTile() = 0;
+
+    virtual ~Player() = 0;
 };
 
 #endif // PLAYER_H

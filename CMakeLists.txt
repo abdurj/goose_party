@@ -39,6 +39,9 @@ add_executable(goose_party
         src/display/Display.cc
         src/player/Player.cc
         src/player/PlayerOptions.cc
+        src/player/BasePlayer.cc
+        src/player/PlayerDecorator.cc
+        src/ability/GradeCurve.cc
         src/utils/Observer.cc
         src/utils/Utils.cc include/utils/Utils.h)
 target_include_directories(goose_party PRIVATE include)
