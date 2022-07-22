@@ -7,18 +7,16 @@
 class Player{
     int degrees;
     int grades;
-    PlayerOptions options;
+    std::shared_ptr<PlayerOptions> options;
     public:
-        Player(PlayerOptions);
+        Player(std::shared_ptr<PlayerOptions>);
         int Grades() const;
         int Degrees() const;
-        void addGrades(int); //Maybe doesn't need to be virtual? Will we have stuff that lets them get more gold?
-        int deductGrades(int); //Also maybe not virtual? Will we have an ability like lose less gold, etc?
+        int modifyGrades(int); //Maybe doesn't need to be virtual? Will we have stuff that lets them get more gold?
         bool claimDegree();
-        std::string Name() const;
-        int PlayerNum() const;
-        int PlayerLuck() const;
-        ftxui::Element getPlayerTile();  
+
+        std::shared_ptr<PlayerOptions> Options() const;
+        ftxui::Element getPlayerTile();
 };
 
 #endif // PLAYER_H

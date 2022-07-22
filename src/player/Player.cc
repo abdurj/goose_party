@@ -1,26 +1,23 @@
 #include "player/Player.h"
 #include <iostream>
 #include <string>
+#include <utility>
 
 using namespace ftxui;
 using namespace std;
 
-Player::Player(PlayerOptions p): degrees{0}, grades{100}, options{p} {
+Player::Player(shared_ptr<PlayerOptions> p): degrees{0}, grades{100}, options{std::move(p)} {
 }
 
 //Getters
+shared_ptr<PlayerOptions> Player::Options() const {
+    return options;
+}
 int Player::Grades() const {return grades;}
 int Player::Degrees() const {return degrees;}
-string Player::Name() const {return options.playerName;}
-int Player::PlayerNum() const {return options.playerNum;}
-int Player::PlayerLuck() const {return options.luck;}
 
 //Setters
-void Player::addGrades(int amt) {
-    grades+=amt;
-}
-
-int Player::deductGrades(int amt) { //Returns int because we can re-use this for "stealing" grades
+int Player::modifyGrades(int amt) { //Returns int because we can re-use this for "stealing" grades
     grades = max(0, grades - amt);
     return amt;
 }
@@ -42,7 +39,7 @@ bool Player::claimDegree() { //Returns true if a degree was claimed
 }
 
 Element Player::getPlayerTile() {
-    return text( "P" + to_string(options.playerNum)) | border | center;
+    return text( "P" + to_string(options->id)) | border | center;
 }
 
 
