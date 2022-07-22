@@ -89,7 +89,11 @@ void Board::move(std::shared_ptr<Player> p, int roll) {
         if(pos == degreeSpot) { 
             map[i][j]->apply(p);
             if(p->claimDegree()) {
-                generateNewDegree();
+                if(p->Degrees() >= 3) {
+                    game->notifyWinner(*p);
+                } else {
+                    generateNewDegree();
+                }
                 return;
             }
         }
