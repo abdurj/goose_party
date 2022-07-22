@@ -17,6 +17,7 @@ class Player{
         bool claimDegree();
         std::string Name() const;
         int PlayerNum() const;
+        int PlayerLuck() const;
         ftxui::Element getPlayerTile();  
 };
 

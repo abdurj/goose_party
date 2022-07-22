@@ -8,12 +8,12 @@
 namespace utils {
 
     /**
-     * @brief Makes a dice roll for a given player
+     * @brief Makes a dice roll for a given player @param p
      *
      * @param p the Player class
      * @return int The dice roll the player got
      */
-    int roll(std::shared_ptr<Player> p);
+    int roll(std::shared_ptr<Player> p, int c = 12);
 
     void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
 
