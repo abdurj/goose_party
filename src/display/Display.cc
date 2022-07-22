@@ -13,7 +13,6 @@ using namespace ftxui;
 Display::Display(Board* b, int x, int y) : board{b}, x{x}, y{y} {
     grid.resize(y, vector<Element>(x));
     Display::notify();
-    screen = Screen::Create(Dimension::Fit(gridElement));
 };
 
 void Display::notify(){
@@ -39,8 +38,6 @@ void Display::notify(){
     }
 
     setSize();
-
-    gridElement = gridbox(grid) | border;
 }
 
 void Display::setSize(){
@@ -52,7 +49,8 @@ void Display::setSize(){
 }
 
 void Display::print(){
-    screen.Clear();
+    auto gridElement = gridbox(grid) | border;
+    auto screen = Screen::Create(Dimension::Fit(gridElement));
     Render(screen, gridElement);
     screen.Print();
     cout << endl;
