@@ -14,6 +14,22 @@ int Player::Degrees() const {return degrees;}
 string Player::Name() const {return options.playerName;}
 int Player::PlayerNum() const {return options.playerNum;}
 
+int Player::getAttack() const {return options.attack;}
+int Player::Attack() const {
+    return getAttack();
+}
+
+int Player::getDefence() const {return options.defence;}
+int Player::Defence() const {
+    return getDefence();
+}
+
+int Player::getLuck() const {return options.luck;}
+int Player::Luck() const {
+    return getLuck();
+}
+
+
 //Setters
 void Player::addGrades(int amt) {
     grades+=amt;
