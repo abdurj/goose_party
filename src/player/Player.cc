@@ -14,19 +14,19 @@ int Player::Degrees() const {return degrees;}
 string Player::Name() const {return options.playerName;}
 int Player::PlayerNum() const {return options.playerNum;}
 
-int Player::getAttack() const {return options.attack;}
+int Player::getAttack() const {return 0;}
 int Player::Attack() const {
-    return getAttack();
+    return options.defence + getAttack();
 }
 
-int Player::getDefence() const {return options.defence;}
+int Player::getDefence() const {return 0;}
 int Player::Defence() const {
-    return getDefence();
+    return options.defence + getDefence();
 }
 
-int Player::getLuck() const {return options.luck;}
+int Player::getLuck() const {return 0;}
 int Player::Luck() const {
-    return getLuck();
+    return options.luck + getLuck();
 }
 
 
