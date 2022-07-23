@@ -8,6 +8,8 @@
 #include "player/Player.h"
 #include "tiles/Tile.h"
 #include <string>
+#include "cards/Card.h"
+
 
 namespace utils {
 
@@ -25,6 +27,8 @@ namespace utils {
     int roll(std::shared_ptr<Player> p, int c = 12);
 
     void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
+
+    std::unique_ptr<Card> generateCard();
 
     std::shared_ptr<Tile> baseCell(bool inter = false);
 

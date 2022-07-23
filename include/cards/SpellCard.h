@@ -2,11 +2,12 @@
 #define SPELL_CARD_H
 #include "cards/Card.h"
 
-// TODO: delete later
-
 class JuiceCard : public SpellCard {
-    void apply(std::shared_ptr<Player>, Board*) override;
+    public:
+    JuiceCard();
+    void apply(std::shared_ptr<Player>, Board&) override;
     bool requiresTarget() override;
+    std::string getName() override;
 };
 
 // Other spell cards defined here
