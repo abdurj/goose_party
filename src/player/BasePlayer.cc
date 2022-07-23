@@ -65,8 +65,9 @@ int BasePlayer::listCards() const {
 }
 
 void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
-    deck.at(i)->apply(p, b);
-}
+    deck.at(i)->apply(this, p, b);
+    deck.erase(next(deck.begin(), i));
+}   
 
 bool BasePlayer::requiresTarget(int i) {
     return deck.at(i)->requiresTarget();

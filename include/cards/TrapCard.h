@@ -4,7 +4,7 @@
 
 class BossCard : public TrapCard {
     void activate() override;
-    void apply(std::shared_ptr<Player>, Board*) override;
+    void apply(Player*, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget() override;
     std::string getName() override;
 };
