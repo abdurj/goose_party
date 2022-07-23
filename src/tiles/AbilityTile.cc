@@ -6,7 +6,7 @@ using namespace std;
 AbilityTile::AbilityTile(bool intersection) : Tile(intersection) {};
 
 void AbilityTile::apply(std::shared_ptr<Player> p) {
-    cout << "landed on card tile" << endl;
+    cout << "landed on ability tile" << endl;
 }
 
 Element AbilityTile::tileElement() {

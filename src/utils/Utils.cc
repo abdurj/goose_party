@@ -6,6 +6,9 @@
 #include <chrono>
 #include <random>
 
+#include "cards/SpellCard.h"
+#include "cards/TrapCard.h"
+#include "cards/Card.h"
 
 #include "tiles/BaseTile.h"
 #include "tiles/TrapTile.h"
@@ -33,6 +36,24 @@ namespace utils {
         // randomize order of the players. 
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         shuffle (players.begin(), players.end(), default_random_engine(seed));
+    }
+
+    unique_ptr<Card> generateCard() {
+        unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+        default_random_engine eng(seed);
+        int rand = (eng()) % 10;
+        switch (rand) {
+            case 0: {
+                return make_unique<JuiceCard>();
+            }
+            case 1: {
+                break;
+            }
+            default: {
+                return make_unique<JuiceCard>();
+            }
+        }
+        return make_unique<JuiceCard>();
     }
 
     shared_ptr<Tile> baseCell(bool inter) {

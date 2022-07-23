@@ -7,19 +7,7 @@
 
 using namespace std;
 
-string JuiceCard::getName() {
-    return "Juice Card";
-}
-
-void JuiceCard::apply(shared_ptr<Player> p, Board *b) {
-    cout << "juice card effect applied" << endl;
-    // apply its effect
-}
-
-bool JuiceCard::requiresTarget() {
-    // this particular spell card doesn't require a target
-    return false;
-}
-
+SpellCard::SpellCard() {}
+TrapCard::TrapCard() {}
 // Other spell cards defined here
 
