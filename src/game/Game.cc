@@ -72,7 +72,7 @@ void Game::play() {
 
                     int moves = utils::roll(players[curTurn]);
 
-                    b.move(players[curTurn], 1);
+                    b.move(players[curTurn], moves);
                     players[curTurn]->endTurn();
                     break;
                     }
