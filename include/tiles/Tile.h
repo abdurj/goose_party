@@ -10,7 +10,7 @@ class Tile{
   public:
     Tile(bool);
     bool isIntersection();
-    virtual void apply(std::shared_ptr<Player>) = 0;
+    virtual void apply(std::shared_ptr<Player> &) = 0;
     virtual ftxui::Element tileElement() = 0;
     virtual ftxui::Element getElement() = 0;
     ~Tile();

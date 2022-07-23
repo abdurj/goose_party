@@ -75,22 +75,18 @@ namespace utils {
         string key = "";
 
         for(int i = 0; i < abilities.size(); ++i) {
-/*             switch((n+i) % abilities.size()) {
+             switch((n+i) % abilities.size()) {
                 case 0:
-                key = to_string(p->Options()->id) + "GradeCurve";
-
-                return;
-            } */
-            ability = abilities[(n+i) % abilities.size()];
-            key = to_string(p->Options()->id) + ability;
-            if(!playerAbilities.count(key)) {
-                p = make_shared<GradeCurve>(p);
-                playerAbilities.insert(key);
-                cout << p->Options()->name << " now has the ability: " << ability << endl;
-            } else {
-                cout << "already has" << endl;
+                    key = to_string(p->Options()->id) + "GradeCurve";
+                    if(!playerAbilities.count(key)) {
+                        p = make_shared<GradeCurve>(p);
+                        playerAbilities.insert(key);
+                        cout << p->Options()->name << " now has the ability: " << ability << endl;
+                        return;
+                    }  
+                break;
             } 
         }
-        
+        cout << "already has" << endl;
     }
 }

@@ -1,10 +1,11 @@
 #include "tiles/BaseTile.h"
 
 using namespace ftxui;
+using namespace std;
 
 BaseTile::BaseTile(bool intersection) : Tile(intersection) {};
 
-void BaseTile::apply(std::shared_ptr<Player> p) {}
+void BaseTile::apply(shared_ptr<Player> &p) {}
 
 Element BaseTile::tileElement(){
     return text(" ");

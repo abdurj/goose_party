@@ -18,9 +18,10 @@ namespace utils {
      * @return int The dice roll the player got
      */
 
-
-    static std::unordered_set<std::string> playerAbilities;
-    static std::vector<std::string> abilities = {"GradeCurve"};
+    namespace {
+        static std::unordered_set<std::string> playerAbilities;
+        static std::vector<std::string> abilities = {"GradeCurve"};
+    }
 
     int roll(std::shared_ptr<Player> p, int c = 12);
 
@@ -40,7 +41,7 @@ namespace utils {
 
     std::shared_ptr<Tile> beaconTile(bool inter = false);
 
-    void drawAbility(std::shared_ptr<Player>);
+    void drawAbility(std::shared_ptr<Player> &);
 }
 
 #endif //GOOSE_PARTY_UTILS_H

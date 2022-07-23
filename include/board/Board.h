@@ -39,9 +39,9 @@ public:
 
     std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> getPositions();
 
-    void move(std::shared_ptr<Player>, int);
+    void move(std::shared_ptr<Player> &, int);
 
-    void addPlayer(std::shared_ptr<Player>);
+    void addPlayer(std::shared_ptr<Player> &);
 
     void update();
 

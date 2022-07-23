@@ -5,7 +5,7 @@ using namespace std;
 
 CardTile::CardTile(bool intersection) : Tile(intersection) {};
 
-void CardTile::apply(std::shared_ptr<Player> p) {
+void CardTile::apply(shared_ptr<Player> &p) {
     cout << "landed on card tile" << endl;
 }
 
