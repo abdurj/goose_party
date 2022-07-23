@@ -28,7 +28,7 @@ Board::Board() {
 void Board::attach(Game *g) {game = g;}
 
 void Board::addPlayer(std::shared_ptr<Player> &p){
-    positions[p] = {::Direction::RIGHT, {0, 0}};
+    positions[p->Options()->id] = {::Direction::RIGHT, {0, 0}};
     display->notify();
 }
 
@@ -36,9 +36,9 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
     if(roll == 0){
         return;
     }
-    
+
     std::cout << "\x1B[2J\x1B[H";
-    auto &[dir, pos] = positions[p];
+    auto &[dir, pos] = positions[p->Options()->id];
     auto &[i, j] = pos;
 
     int moves = 0;
@@ -212,7 +212,7 @@ vector<vector<shared_ptr<Tile>>> Board::getState() {
     return map;
 }
 
-unordered_map<shared_ptr<Player>, pair<::Direction, pair<int, int>>> Board::getPositions() {
+unordered_map<int, pair<::Direction, pair<int, int>>> Board::getPositions() {
     return positions;
 }
 
@@ -242,7 +242,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     using namespace utils;
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), abilityTile(), abilityTile(), abilityTile(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(true),  baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(true),  baseCell(), baseCell(), baseCell(), baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},

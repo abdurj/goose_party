@@ -39,7 +39,7 @@ void Game::init() {
     // randomize player order
     utils::shufflePlayers(players);
     // add all the players.
-    for (auto i : players) {
+    for (auto &i : players) {
         b.addPlayer(i);
     }
     
@@ -69,11 +69,10 @@ void Game::play() {
                     cout << "Moving Player: " << curTurn + 1 << "." << endl;
                     cout << "Rolling..." << endl;
 
-                    int moves = 1;//utils::roll(players[curTurn]);
+                    int moves = utils::roll(players[curTurn]);
 
                     b.move(players[curTurn], moves);
                     players[curTurn]->endTurn();
-                    cout << players[curTurn]->Grades() << endl;
                     break;
                     }
                 case 'q':

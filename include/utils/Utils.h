@@ -20,7 +20,6 @@ namespace utils {
 
     namespace {
         static std::unordered_set<std::string> playerAbilities;
-        static std::vector<std::string> abilities = {"GradeCurve"};
     }
 
     int roll(std::shared_ptr<Player> p, int c = 12);
