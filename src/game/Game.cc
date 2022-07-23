@@ -39,7 +39,7 @@ void Game::init() {
     // randomize player order
     utils::shufflePlayers(players);
     // add all the players.
-    for (auto i : players) {
+    for (auto &i : players) {
         b.addPlayer(i);
     }
     
@@ -73,7 +73,6 @@ void Game::play() {
 
                     b.move(players[curTurn], moves);
                     players[curTurn]->endTurn();
-                    
                     break;
                     }
                 case 'q':

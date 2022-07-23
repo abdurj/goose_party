@@ -6,7 +6,7 @@ using namespace std;
 
 GradeTile::GradeTile(bool intersection) : Tile(intersection) {};
 
-void GradeTile::apply(std::shared_ptr<Player> p) {
+void GradeTile::apply(shared_ptr<Player> &p) {
     cout << "landed on grade tile" << endl;
     int roll = utils::roll(p, 20);
     p->modifyGrades(roll); //TODO: adds amt based on a roll

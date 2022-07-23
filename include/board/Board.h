@@ -24,7 +24,7 @@ class Board{
     static std::vector<std::vector<std::shared_ptr<Tile>>> getMapTwo();
 
     std::vector<std::vector<std::shared_ptr<Tile>>> map;
-    std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> positions;
+    std::unordered_map<int, std::pair<Direction, std::pair<int, int>>> positions;
     std::unique_ptr<Display> display;
     std::pair<int, int> degreeSpot;
     size_t x; // x dimension
@@ -37,11 +37,11 @@ public:
     void attach(Game*);
     std::vector<std::vector<std::shared_ptr<Tile>>> getState();
 
-    std::unordered_map<std::shared_ptr<Player>, std::pair<Direction, std::pair<int, int>>> getPositions();
+    std::unordered_map<int, std::pair<Direction, std::pair<int, int>>> getPositions();
 
-    void move(std::shared_ptr<Player>, int);
+    void move(std::shared_ptr<Player> &, int);
 
-    void addPlayer(std::shared_ptr<Player>);
+    void addPlayer(std::shared_ptr<Player> &);
 
     void update();
 

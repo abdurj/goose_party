@@ -10,6 +10,12 @@
 using namespace std;
 using namespace ftxui;
 
+namespace {
+    Element getPlayerTile(int id) {
+        return text( "P" + to_string(id)) | border | center;
+    }
+}
+
 Display::Display(Board* b, int x, int y) : board{b}, x{x}, y{y}, screen{0,0} {
     grid.resize(y, vector<Element>(x));
     Display::notify();
@@ -34,7 +40,7 @@ void Display::notify(){
         auto [i, j] = pos.second;
         grid[i][j] = dbox({
             grid[i][j],
-            player->getPlayerTile()
+            getPlayerTile(player)
         });
     }
 

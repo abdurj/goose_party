@@ -5,7 +5,7 @@ using namespace std;
 
 HealthTile::HealthTile(bool intersection) : Tile(intersection) {};
 
-void HealthTile::apply(std::shared_ptr<Player> p) {
+void HealthTile::apply(shared_ptr<Player> &p) {
     cout << "landed on health tile" << endl;
 }
 
