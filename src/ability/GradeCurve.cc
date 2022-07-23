@@ -6,7 +6,7 @@ GradeCurve::GradeCurve(shared_ptr<Player> p) : PlayerDecorator{p} {}
 
 void GradeCurve::listAbilities() const {
     playerComponent->Abilities();
-    cout << "Grade Curve - Some of your finals were curved! +10 grades per cycle." << endl;
+    cout << "Grade Curve - Some of this player's finals were curved! +10 grades per cycle." << endl;
 }
 
 void GradeCurve::doEndCycle() {

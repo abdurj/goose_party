@@ -43,10 +43,15 @@ bool BasePlayer::claimDegree() { //Returns true if a degree was claimed
     return false;
 }
 
-void BasePlayer::doEndTurn() {}
-void BasePlayer::doEndCycle() {}
+//TODO: Delete these debugs. Leaving for now
+void BasePlayer::doEndTurn() {
+    //cout << "base end turn" << endl;
+}
+void BasePlayer::doEndCycle() {
+    //cout << "base end cycle" << endl;
+}
 
 
 void BasePlayer::listAbilities() const {
-    cout << options->name << "\' abilities: " << endl;
+    cout << options->name << "\'s abilities: " << endl;
 }

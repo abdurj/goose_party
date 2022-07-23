@@ -1,12 +1,17 @@
 #include "player/PlayerDecorator.h"
-
+#include <iostream>
 using namespace std;
 
 PlayerDecorator::~PlayerDecorator() {}
 
-//TODO: Is there a way I can avoid creating empty methods for these?
-void PlayerDecorator::doEndCycle() {}
-void PlayerDecorator::doEndTurn() {}
+void PlayerDecorator::doEndCycle() {
+    playerComponent->endCycle();
+
+}
+
+void PlayerDecorator::doEndTurn() {
+    playerComponent->endTurn();
+}
 void PlayerDecorator::listAbilities() const {}
 
 PlayerDecorator::PlayerDecorator(shared_ptr<Player> p) : playerComponent{p} {}
