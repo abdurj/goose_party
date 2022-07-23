@@ -17,6 +17,9 @@
 #include "tiles/CardTile.h"
 
 
+#include "player/Player.h"
+#include "ability/GradeCurve.h"
+
 using namespace std;
 
 namespace utils {
@@ -61,5 +64,33 @@ namespace utils {
 
     shared_ptr<Tile> beaconTile(bool inter) {
         return make_shared<BeaconTile>(inter);
+    }
+
+    void drawAbility(shared_ptr<Player> &p) {
+        //TODO: check if player has all abilities
+        
+        //randomly generate n and ability
+        int n = 0;
+        string ability = abilities[0];
+        string key = "";
+
+        for(int i = 0; i < abilities.size(); ++i) {
+/*             switch((n+i) % abilities.size()) {
+                case 0:
+                key = to_string(p->Options()->id) + "GradeCurve";
+
+                return;
+            } */
+            ability = abilities[(n+i) % abilities.size()];
+            key = to_string(p->Options()->id) + ability;
+            if(!playerAbilities.count(key)) {
+                p = make_shared<GradeCurve>(p);
+                playerAbilities.insert(key);
+                cout << p->Options()->name << " now has the ability: " << ability << endl;
+            } else {
+                cout << "already has" << endl;
+            } 
+        }
+        
     }
 }
