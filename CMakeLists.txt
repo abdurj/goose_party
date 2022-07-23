@@ -42,6 +42,10 @@ add_executable(goose_party
         src/player/BasePlayer.cc
         src/player/PlayerDecorator.cc
         src/ability/GradeCurve.cc
+        src/ability/BonusMarks.cc
+        src/ability/GoodSleep.cc
+        src/ability/AllNighter.cc
+        src/ability/TimeManagement.cc
         src/utils/Observer.cc
         src/utils/Utils.cc include/utils/Utils.h)
 target_include_directories(goose_party PRIVATE include)
