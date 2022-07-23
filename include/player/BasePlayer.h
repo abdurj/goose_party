@@ -21,7 +21,9 @@ class BasePlayer : public Player {
     int modifyGrades(int) override; //Maybe doesn't need to be virtual? Will we have stuff that lets them get more gold?
     bool claimDegree() override;
     void addCard(std::unique_ptr<Card>) override;
-    void listCards() const override;
+    int listCards() const override;
+    void useCard(int, std::shared_ptr<Player>, Board*) override;
+    bool requiresTarget(int) override;
 
 
     std::shared_ptr<PlayerOptions> Options() const override;

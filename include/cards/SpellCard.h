@@ -5,7 +5,7 @@
 class JuiceCard : public SpellCard {
     public:
     JuiceCard();
-    void apply(std::shared_ptr<Player>, Board&) override;
+    void apply(std::shared_ptr<Player>, Board*) override;
     bool requiresTarget() override;
     std::string getName() override;
 };

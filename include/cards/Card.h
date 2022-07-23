@@ -6,7 +6,7 @@ class Player;
 class Board;
 class Card {
     public:
-    virtual void apply(std::shared_ptr<Player>, Board&) = 0;
+    virtual void apply(std::shared_ptr<Player>, Board*) = 0;
     virtual bool requiresTarget() = 0;
     virtual std::string getName() = 0;
 };

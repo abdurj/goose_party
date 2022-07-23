@@ -55,8 +55,19 @@ void BasePlayer::listAbilities() const {
     cout << options->name << "\' abilities: " << endl;
 }
 
-void BasePlayer::listCards() const {
+int BasePlayer::listCards() const {
+    cout << "Available Cards: ";
     for (int i = 0; i < deck.size(); ++i) {
-        cout << deck[i]->getName() << " " << endl;
+        cout << deck[i]->getName() << ", ";
     }
+    cout << endl;
+    return deck.size();
+}
+
+void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
+    deck.at(i)->apply(p, b);
+}
+
+bool BasePlayer::requiresTarget(int i) {
+    return deck.at(i)->requiresTarget();
 }

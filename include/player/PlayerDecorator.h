@@ -17,7 +17,9 @@ class PlayerDecorator : public Player {
     int modifyGrades(int) override;
     bool claimDegree() override;
     void addCard(std::unique_ptr<Card>) override;
-    void listCards() const override;
+    int listCards() const override;
+    void useCard(int, std::shared_ptr<Player>, Board*) override;
+    bool requiresTarget(int) override;
     std::shared_ptr<PlayerOptions> Options() const override;
     ftxui::Element getPlayerTile() override;
     virtual ~PlayerDecorator() = 0;
