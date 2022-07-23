@@ -41,6 +41,8 @@ public:
 
     void move(std::shared_ptr<Player> &, int);
 
+    void resetPlayer(int);
+    
     void addPlayer(std::shared_ptr<Player> &);
 
     void update();

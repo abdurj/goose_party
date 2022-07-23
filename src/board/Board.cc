@@ -32,6 +32,10 @@ void Board::addPlayer(std::shared_ptr<Player> &p){
     display->notify();
 }
 
+void Board::resetPlayer(int id) {
+    positions[id] = {::Direction::RIGHT, {0, 0}};
+}
+
 void Board::move(std::shared_ptr<Player> &p, int roll) {
     if(roll == 0){
         return;
