@@ -72,3 +72,21 @@ void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
 bool BasePlayer::requiresTarget(int i) {
     return deck.at(i)->requiresTarget();
 }
+
+int BasePlayer::listCards() const {
+    cout << "Available Cards: ";
+    for (int i = 0; i < deck.size(); ++i) {
+        cout << deck[i]->getName() << ", ";
+    }
+    cout << endl;
+    return deck.size();
+}
+
+void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
+    deck.at(i)->apply(this, p, b);
+    deck.erase(next(deck.begin(), i));
+}   
+
+bool BasePlayer::requiresTarget(int i) {
+    return deck.at(i)->requiresTarget();
+}
