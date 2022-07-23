@@ -5,6 +5,7 @@
 #include "game/Game.h"
 #include "board/Board.h"
 #include "player/Player.h"
+#include "player/BasePlayer.h"
 #include "utils/Utils.h"
 
 
@@ -29,10 +30,10 @@ void Game::init() {
     // for (int i = 0; i < n; ++i) {
     //     cout << "Player " << i + 1 << " , please enter your name" << endl;
     // }
-    auto abdur = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
-    auto fei = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
-    auto kev = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
-    auto kp = make_shared<Player>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
+    auto abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
+    auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
+    auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
+    auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
     players.insert(players.end(), {abdur, fei, kev, kp});
 
     // randomize player order
@@ -71,7 +72,7 @@ void Game::play() {
                     int moves = utils::roll(players[curTurn]);
 
                     b.move(players[curTurn], moves);
-                    curTurn = (curTurn + 1) % players.size();
+                    players[curTurn]->endTurn();
                     
                     break;
                     }
@@ -81,10 +82,18 @@ void Game::play() {
                 default:
                     cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
             }
-
+            
         } catch (...) {
             break;
         }
+
+        if(((curTurn + 1) % players.size())==0) {
+            for(auto p : players) {
+                p->endCycle();
+            }
+        }
+
+        curTurn = (curTurn + 1) % players.size();
     }
     
 }
