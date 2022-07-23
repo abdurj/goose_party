@@ -31,10 +31,10 @@ void Game::init() {
     //     cout << "Player " << i + 1 << " , please enter your name" << endl;
     // }
     auto abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
-    auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
-    auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
-    auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
-    players.insert(players.end(), {abdur, fei, kev, kp});
+    // auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
+    // auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
+    // auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
+    players.insert(players.end(), {abdur});
 
     // randomize player order
     utils::shufflePlayers(players);
@@ -61,6 +61,7 @@ void Game::play() {
         try {
             cout << "It is " << players[curTurn]->Options()->name << "'s turn." << " (Player " << players[curTurn]->Options()->id << ")" << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
+            cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them 
             cin >> c; 
 
             switch (c) {
@@ -71,9 +72,14 @@ void Game::play() {
 
                     int moves = utils::roll(players[curTurn]);
 
-                    b.move(players[curTurn], moves);
+                    b.move(players[curTurn], 1);
                     players[curTurn]->endTurn();
                     break;
+                    }
+                case 'c':
+                    {
+                        players[curTurn]->listCards();
+                        break;
                     }
                 case 'q':
                     playing = false;
@@ -96,3 +102,6 @@ void Game::play() {
     }
     
 }
+
+
+
