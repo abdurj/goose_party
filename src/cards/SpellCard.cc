@@ -7,14 +7,14 @@
 using namespace std;
 
 JuiceCard::JuiceCard() {
-    
+
 }
 
 string JuiceCard::getName() {
     return "Juice Card";
 }
 
-void JuiceCard::apply(shared_ptr<Player> p, Board &b) {
+void JuiceCard::apply(shared_ptr<Player> p, Board *b) {
     cout << "juice card effect applied" << endl;
     // apply its effect
 }

@@ -78,7 +78,35 @@ void Game::play() {
                     }
                 case 'c':
                     {
-                        players[curTurn]->listCards();
+                        int size = players[curTurn]->listCards();
+                        if (size <= 0) break;
+                        cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
+                        int index;
+                        
+                        cin >> index;
+                        if (index < 0 || index >= size) {
+                            break;
+                        }
+                        if (players[curTurn]->requiresTarget(index)) {
+                            cout << "Available Players: ";
+                            for (auto i : players) {
+                                cout << " " << i->Options()->name << ",";
+                            }
+                            cout << endl;
+                            cout << "Enter a number from 0 to " << players.size() - 1 << " to pick a player, or -1 to exit" << endl;
+                            int i = 0;
+                            cin >> i;
+                            if (i < 0 || i >= players.size()) {
+                                break;
+                            }
+                            players[curTurn]->useCard(index, players[i], &b);
+                            
+
+                        }
+                        players[curTurn]->useCard(index, players[curTurn], &b);
+                            
+                        
+
                         break;
                     }
                 case 'q':
