@@ -14,7 +14,7 @@ string JuiceCard::getName() {
     return "Juice Card";
 }
 
-void JuiceCard::apply(shared_ptr<Player> p, Board *b) {
+void JuiceCard::apply(Player *caller, shared_ptr<Player> target, Board *b) {
     cout << "juice card effect applied" << endl;
     // apply its effect
 }
@@ -22,4 +22,18 @@ void JuiceCard::apply(shared_ptr<Player> p, Board *b) {
 bool JuiceCard::requiresTarget() {
     // this particular spell card doesn't require a target
     return false;
+}
+
+// Portal Card
+PortalCard::PortalCard() {}
+string PortalCard::getName() {
+    return "Portal Card";
+}
+
+void PortalCard::apply(Player * caller, shared_ptr<Player> target, Board *b) {
+    // portal card effect
+}
+
+bool PortalCard::requiresTarget() {
+    return true;
 }
