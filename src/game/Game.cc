@@ -74,12 +74,21 @@ void Game::play() {
 
                     b.move(players[curTurn], moves);
                     players[curTurn]->endTurn();
+                    if(((curTurn + 1) % players.size())==0) {
+                        for(auto p : players) {
+                            p->endCycle();
+                        }
+                    }
+
+                    curTurn = (curTurn + 1) % players.size();
                     break;
                     }
                 case 'c':
                     {
                         int size = players[curTurn]->listCards();
-                        if (size <= 0) break;
+                        if (size <= 0) {
+                            break;
+                        }
                         cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
                         int index;
                         
@@ -103,10 +112,7 @@ void Game::play() {
                             
 
                         }
-                        players[curTurn]->useCard(index, players[curTurn], &b);
-                            
-                        
-
+                        players[curTurn]->useCard(index, players[curTurn], &b);                        
                         break;
                     }
                 case 'q':
@@ -119,14 +125,6 @@ void Game::play() {
         } catch (...) {
             break;
         }
-
-        if(((curTurn + 1) % players.size())==0) {
-            for(auto p : players) {
-                p->endCycle();
-            }
-        }
-
-        curTurn = (curTurn + 1) % players.size();
     }
     
 }
