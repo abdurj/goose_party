@@ -35,6 +35,7 @@ void PortalCard::apply(Player * caller, shared_ptr<Player> target, Board *b) {
     int callerID = caller->Options()->id;
     int targetID = target->Options()->id;
     b->swapPositions(callerID, targetID);
+    cout << "Portal Card Used. Swapped the positions of players " << callerID << " and " << targetID << "." << endl;
 }
 
 bool PortalCard::requiresTarget() {
