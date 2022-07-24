@@ -59,7 +59,7 @@ bool Game::input(string c) {
 
         int moves = utils::roll(players[curTurn]);
 
-        b.move(players[curTurn], moves);
+        b.move(players[curTurn], 1);
         players[curTurn]->endTurn();
 
         if(((curTurn + 1) % players.size())==0) {
@@ -72,7 +72,7 @@ bool Game::input(string c) {
         int size = players[curTurn]->listCards();
         if(size == 0) {
             cout << "There are no cards in the player's deck!" << endl;
-            return;
+            return true;
         }
         cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
 
@@ -93,6 +93,7 @@ bool Game::input(string c) {
                 int i = 0;
                 cin >> i;
                 if (i < 0 || i >= players.size()) {
+                    return true;
                 }
                 players[curTurn]->useCard(index, players[i], &b);
                 b.update();

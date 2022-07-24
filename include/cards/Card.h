@@ -30,7 +30,7 @@ class TrapCard : public Card {
     protected:
     TrapCard();
     public:
-        virtual void activate() = 0;
+        virtual void activate(Player*) = 0;
         //virtual void apply(std::shared_ptr<Player>, Board*) = 0;
         //virtual bool requiresTarget() = 0;
 };

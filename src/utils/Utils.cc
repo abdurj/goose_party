@@ -51,13 +51,13 @@ namespace utils {
         int rand = (eng()) % 10;
         switch (rand) {
             case 0: {
-                return make_unique<PortalCard>();
+                return make_unique<ExplosiveMine>();
             }
             case 1: {
                 break;
             }
             default: {
-                return make_unique<PortalCard>();
+                return make_unique<ExplosiveMine>();
             }
         }
         return make_unique<JuiceCard>();

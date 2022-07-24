@@ -204,6 +204,11 @@ void Board::update() {
     display->notify();
 }
 
+void Board::placeTrap(int ID, unique_ptr<TrapCard> trap) {
+    auto[row, col] = positions.at(ID).second;
+    map[row][col] = make_shared<TrapTile>(std::move(map[row][col]), std::move(trap));
+}
+
 void Board::print() {
     display->print();
 }
