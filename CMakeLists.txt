@@ -50,6 +50,8 @@ add_executable(goose_party
         src/ability/GoodSleep.cc
         src/ability/AllNighter.cc
         src/ability/TimeManagement.cc
+        src/beacon/Beacon.cc
+        src/beacon/TuitionBeacon.cc
         src/utils/Observer.cc
         src/utils/Utils.cc include/utils/Utils.h)
 target_include_directories(goose_party PRIVATE include)

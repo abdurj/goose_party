@@ -7,7 +7,8 @@
 #include "player/Player.h"
 #include "player/BasePlayer.h"
 #include "utils/Utils.h"
-
+#include "beacon/Beacon.h"
+#include "beacon/TutionBeacon.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ void Game::init() {
     //     cout << "Player " << i + 1 << " , please enter your name" << endl;
     // }
     auto abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
-    auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
+    shared_ptr<Player> fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
     auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
     auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
     players.insert(players.end(), {abdur, fei, kev, kp});
@@ -43,12 +44,19 @@ void Game::init() {
         b.addPlayer(i);
     }
     
+    beacons.emplace_back(make_shared<TutionBeacon>());
     playing = true;
 }
 
 void Game::endCycle() {
-    for(auto p : players) {
+    for(auto &p : players) {
         p->endCycle();
+    }
+    for(auto &beacon : beacons) {
+        if(beacon->period() == PeriodType::Cycle && beacon->Duration() > 0) {
+            beacon->effect(players, b);
+            beacon->decrementDuration();
+        }
     }
 }
 
@@ -72,7 +80,7 @@ bool Game::input(string c) {
         int size = players[curTurn]->listCards();
         if(size == 0) {
             cout << "There are no cards in the player's deck!" << endl;
-            return;
+            return true;
         }
         cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
 
@@ -103,11 +111,9 @@ bool Game::input(string c) {
         else {
             cout << "Chosen card index is out of range / doesn't exist." << endl;
         }
-                
     } else if (c == "q") {
         playing = false;
     } else {
-        cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
         return false;
     }
 
@@ -124,13 +130,17 @@ void Game::GameLoop() {
         cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them
         try {
             cin >> c; 
-            input(c);
+            if(!input(c)) cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
         } catch (...) {
             cerr << "An error occured when processing command. Ending game." << endl;
             playing = false;
             break;
         }
     }
+}
+
+void Game::activateBeacon(int i, shared_ptr<Player> &p) {
+    beacons[i]->activate(p);
 }
 
 void Game::play() {

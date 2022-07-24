@@ -1,4 +1,5 @@
 #include "game/DebugGame.h"
+#include "beacon/Beacon.h"
 #include <iostream>
 
 using namespace std;
@@ -6,7 +7,7 @@ using namespace std;
 
 DebugGame::DebugGame() {};
 
-void DebugGame::debugInput(string c) {
+bool DebugGame::debugInput(string c) {
     int player, amt;
     if(c == "move") {
         try {
@@ -31,7 +32,29 @@ void DebugGame::debugInput(string c) {
                 players.at(player)->claimDegree();
             }
         }
+    } else if (c == "show") {
+        cin >> c;
+        cin >> player;
+        if(c == "grades") {
+            cout << players.at(player)->Options()->name << "'s Grades: "
+            << players.at(player)->Grades() << endl;
+        }
+    } else if(c == "beacons") {
+        for(auto &beacon : beacons) {
+            beacon->Desc();
+        }
+    } else if(c == "clear") {
+        system("clear");
+    } else if(c == "ordering") {
+        cout << "Player Ordering:" << endl;
+        for(int i = 0; i < players.size(); i++) {
+            cout << i << ": " << players.at(i)->Options()->name << endl;
+        }
+    } else {
+        return false;
     }
+
+    return true;
 }
 
 void DebugGame::GameLoop() {
@@ -45,7 +68,7 @@ void DebugGame::GameLoop() {
         try {
             cin >> c; 
             if(!input(c)) {
-                debugInput(c);
+                if(!debugInput(c)) cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
             }
             
         } catch (...) {
