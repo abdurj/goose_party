@@ -95,10 +95,12 @@ bool Game::input(string c) {
                 if (i < 0 || i >= players.size()) {
                 }
                 players[curTurn]->useCard(index, players[i], &b);
+                std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
             } else {
                 players[curTurn]->useCard(index, players[curTurn], &b); 
+                std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
             }
