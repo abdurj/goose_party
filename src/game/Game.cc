@@ -72,7 +72,7 @@ bool Game::input(string c) {
         int size = players[curTurn]->listCards();
         if(size == 0) {
             cout << "There are no cards in the player's deck!" << endl;
-            return;
+            return true;
         }
         cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
 
