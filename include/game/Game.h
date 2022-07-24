@@ -17,7 +17,7 @@ class Game{
   bool input(std::string);
   virtual void GameLoop();
   void endCycle();
-
+  void setup();
   public:
     Game();
     void play();
