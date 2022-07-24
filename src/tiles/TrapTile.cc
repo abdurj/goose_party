@@ -11,6 +11,9 @@ TrapTile::TrapTile(std::shared_ptr<Tile> t, std::unique_ptr<TrapCard> trap) : Ti
 TrapTile::TrapTile(std::shared_ptr<Tile> t, std::unique_ptr<TrapCard> trap) : TileDecorator(t), trap{std::move(trap)} {}
 
 
+TrapTile::TrapTile(std::shared_ptr<Tile> t, std::unique_ptr<TrapCard> trap) : TileDecorator(t), trap{std::move(trap)} {}
+
+
 void TrapTile::apply(shared_ptr<Player> &p) {
     if (!activated) {
         cout << "landed on trap tile, trap activated" << endl;
