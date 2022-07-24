@@ -43,15 +43,32 @@ bool BasePlayer::claimDegree() { //Returns true if a degree was claimed
     return false;
 }
 
-//TODO: Delete these debugs. Leaving for now
-void BasePlayer::doEndTurn() {
-    //cout << "base end turn" << endl;
+void BasePlayer::addCard(unique_ptr<Card> p) {
+    deck.emplace_back(move(p));
 }
-void BasePlayer::doEndCycle() {
-    //cout << "base end cycle" << endl;
-}
+
+void BasePlayer::doEndTurn() {}
+void BasePlayer::doEndCycle() {}
 
 
 void BasePlayer::listAbilities() const {
     cout << options->name << "\'s abilities: " << endl;
+}
+
+int BasePlayer::listCards() const {
+    cout << "Available Cards: ";
+    for (int i = 0; i < deck.size(); ++i) {
+        cout << deck[i]->getName() << ", ";
+    }
+    cout << endl;
+    return deck.size();
+}
+
+void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
+    deck.at(i)->apply(this, p, b);
+    deck.erase(next(deck.begin(), i));
+}   
+
+bool BasePlayer::requiresTarget(int i) {
+    return deck.at(i)->requiresTarget();
 }

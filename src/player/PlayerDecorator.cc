@@ -29,6 +29,22 @@ bool PlayerDecorator::claimDegree() {
     return playerComponent->claimDegree();
 }
 
+void PlayerDecorator::addCard(unique_ptr<Card> p) {
+    playerComponent->addCard(move(p));
+}
+
+int PlayerDecorator::listCards() const {
+    return playerComponent->listCards();
+}
+
+void PlayerDecorator::useCard(int i, shared_ptr<Player> p, Board* b) {
+    playerComponent->useCard(i, p, b);
+}
+
+bool PlayerDecorator::requiresTarget(int i) {
+    return playerComponent->requiresTarget(i);
+}
+
 shared_ptr<PlayerOptions> PlayerDecorator::Options() const {
     return playerComponent->Options();
 }
