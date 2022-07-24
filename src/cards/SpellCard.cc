@@ -32,6 +32,9 @@ string PortalCard::getName() {
 
 void PortalCard::apply(Player * caller, shared_ptr<Player> target, Board *b) {
     // portal card effect
+    int callerID = caller->Options()->id;
+    int targetID = target->Options()->id;
+    b->swapPositions(callerID, targetID);
 }
 
 bool PortalCard::requiresTarget() {

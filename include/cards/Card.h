@@ -2,8 +2,8 @@
 #define CARD_H
 
 #include "player/Player.h"
-class Player;
-class Board;
+#include "board/Board.h"
+
 class Card {
     public:
     virtual void apply(Player*, std::shared_ptr<Player>, Board*) = 0;
