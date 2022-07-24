@@ -13,6 +13,7 @@ class BasePlayer : public Player {
     int grades;
     std::shared_ptr<PlayerOptions> options;
     std::vector<std::unique_ptr<Card>> deck;
+    
 
     public:
     BasePlayer(std::shared_ptr<PlayerOptions>);

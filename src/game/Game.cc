@@ -59,7 +59,7 @@ bool Game::input(string c) {
 
         int moves = utils::roll(players[curTurn]);
 
-        b.move(players[curTurn], moves);
+        b.move(players[curTurn], 1);
         players[curTurn]->endTurn();
 
         if(((curTurn + 1) % players.size())==0) {
@@ -93,6 +93,7 @@ bool Game::input(string c) {
                 int i = 0;
                 cin >> i;
                 if (i < 0 || i >= players.size()) {
+                    return true;
                 }
                 players[curTurn]->useCard(index, players[i], &b);
                 std::cout << "\x1B[2J\x1B[H";
