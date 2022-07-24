@@ -51,6 +51,8 @@ public:
     std::vector<int> checkCollision(const std::shared_ptr<Player>&) const;
 
     void resurrect(std::shared_ptr<Player>);
+    // Swap the positions of two players. yt
+    void swapPositions(int, int);
 };
 
 #endif // BOARD_H;
