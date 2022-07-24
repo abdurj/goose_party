@@ -14,6 +14,7 @@ class BasePlayer : public Player {
     int hp = 20;
     std::shared_ptr<PlayerOptions> options;
     std::vector<std::unique_ptr<Card>> deck;
+    
 
     public:
     BasePlayer(std::shared_ptr<PlayerOptions>);

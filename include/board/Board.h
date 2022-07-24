@@ -8,9 +8,10 @@
 #include "tiles/Tile.h"
 #include "display/Display.h"
 #include "player/Player.h"
+#include "cards/Card.h"
 
 class Game;
-
+class TrapCard;
 enum class Direction{
     UP,
     RIGHT,
@@ -45,6 +46,8 @@ public:
     void addPlayer(std::shared_ptr<Player> &);
 
     void update();
+
+    void placeTrap(int, std::unique_ptr<TrapCard>);
 
     void print();
 

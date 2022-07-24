@@ -4,6 +4,7 @@ using namespace ftxui;
 
 TileDecorator::TileDecorator(std::shared_ptr<Tile> t) : Tile(t->isIntersection()), tile{t} {};
 
+
 Element TileDecorator::tileElement(){
     return tile->tileElement();
 }
