@@ -34,7 +34,7 @@ void Game::init() {
     auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
     auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
     auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
-    players.insert(players.end(), {abdur, fei, kev, kp});
+    players.insert(players.end(), {abdur, fei, kev});
 
     // randomize player order
     utils::shufflePlayers(players);

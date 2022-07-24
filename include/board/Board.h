@@ -46,6 +46,9 @@ public:
     void update();
 
     void print();
+
+    // Swap the positions of two players. yt
+    void swapPositions(int, int);
 };
 
 #endif // BOARD_H;
