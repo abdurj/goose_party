@@ -41,3 +41,40 @@ void PortalCard::apply(Player * caller, shared_ptr<Player> target, Board *b) {
 bool PortalCard::requiresTarget() {
     return true;
 }
+
+// Lazeez
+
+LazeezCard::LazeezCard() {}
+void LazeezCard::apply(Player *, std::shared_ptr<Player>, Board*) {
+
+}
+bool LazeezCard::requiresTarget() {
+    return false;
+}
+string LazeezCard::getName() {
+    return "Lazeez";
+}
+
+// CS247
+CS247Card::CS247Card() {}
+void CS247Card::apply(Player* caller, shared_ptr<Player> target, Board* b) {
+
+}
+bool CS247Card::requiresTarget() {
+    return false;
+}
+string CS247Card::getName() {
+    return "CS247";
+}
+
+// Predator Card
+PredatorCard::PredatorCard() {}
+void PredatorCard::apply(Player *caller, shared_ptr<Player> target, Board *b) {
+
+}
+bool PredatorCard::requiresTarget() {
+    return true;
+}
+string PredatorCard::getName() {
+    return "Predator";
+}

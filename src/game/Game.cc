@@ -100,6 +100,7 @@ bool Game::input(string c) {
                 int i = 0;
                 cin >> i;
                 if (i < 0 || i >= players.size()) {
+                    return true;
                 }
                 currPlayer->useCard(index, players[i], &b);
                 std::cout << "\x1B[2J\x1B[H";
