@@ -1,4 +1,4 @@
-#include "ability/GradeCurve.h"
+#include "player/ability/GradeCurve.h"
 #include <iostream>
 using namespace std;
 

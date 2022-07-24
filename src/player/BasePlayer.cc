@@ -72,3 +72,18 @@ void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
 bool BasePlayer::requiresTarget(int i) {
     return deck.at(i)->requiresTarget();
 }
+
+bool BasePlayer::alive() const {
+    return hp > 0;
+}
+
+void BasePlayer::takeDamage(int dmg) {
+    hp -= dmg;
+    if(hp <= 0){
+        cout << options->name << " has died." << endl;
+    }
+}
+
+void BasePlayer::reset() {
+    hp = 20;
+}

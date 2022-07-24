@@ -24,7 +24,7 @@ namespace utils {
         static std::unordered_set<std::string> playerAbilities;
     }
 
-    int roll(std::shared_ptr<Player> p, int c = 12);
+    int roll(int c = 0);
 
     void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
 

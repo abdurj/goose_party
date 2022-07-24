@@ -21,20 +21,20 @@
 
 
 #include "player/Player.h"
-#include "ability/GradeCurve.h"
-#include "ability/AllNighter.h"
-#include "ability/GoodSleep.h"
-#include "ability/TimeManagement.h"
-#include "ability/BonusMarks.h"
+#include "player/ability/GradeCurve.h"
+#include "player/ability/AllNighter.h"
+#include "player/ability/GoodSleep.h"
+#include "player/ability/TimeManagement.h"
+#include "player/ability/BonusMarks.h"
 
 using namespace std;
 
 namespace utils {
 
-    int roll(std::shared_ptr<Player> p, int c) {
+    int roll(int c) {
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         default_random_engine eng(seed);
-        int roll = (eng() + c - 12) % c;
+        int roll = (eng() % 12) + c;
         cout << "Rolled a: " << roll << endl;
         return roll;
     }

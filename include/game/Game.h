@@ -21,6 +21,12 @@ class Game{
     void play();
     void init();
     void notifyWinner(Player &);
+
+    std::shared_ptr<Player> getPlayer(const int &id);
+
+    void challenge(std::shared_ptr<Player> challenger, std::shared_ptr<Player> opponent);
+
+    void battle(std::shared_ptr<Player> challenger, std::shared_ptr<Player> opponent);
 };
 
 #endif // GAME_H
