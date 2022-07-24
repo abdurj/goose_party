@@ -34,7 +34,7 @@ void Game::init() {
     auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
     auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
     auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
-    players.insert(players.end(), {abdur, fei, kev, kp});
+    players.insert(players.end(), {abdur, fei, kev});
 
     // randomize player order
     utils::shufflePlayers(players);
@@ -72,7 +72,7 @@ void Game::play() {
 
                     int moves = utils::roll(players[curTurn]);
 
-                    b.move(players[curTurn], moves);
+                    b.move(players[curTurn], 1);
                     players[curTurn]->endTurn();
                     if(((curTurn + 1) % players.size())==0) {
                         for(auto p : players) {
@@ -109,10 +109,10 @@ void Game::play() {
                                 break;
                             }
                             players[curTurn]->useCard(index, players[i], &b);
-                            
-
+                        } else {
+                            players[curTurn]->useCard(index, players[curTurn], &b);                        
                         }
-                        players[curTurn]->useCard(index, players[curTurn], &b);                        
+                        b.update();
                         break;
                     }
                 case 'q':
@@ -126,7 +126,6 @@ void Game::play() {
             break;
         }
     }
-    
 }
 
 

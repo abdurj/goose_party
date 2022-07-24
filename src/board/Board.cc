@@ -5,6 +5,7 @@
 #include <iostream>
 #include <queue>
 #include <climits>
+#include <algorithm>
 
 #include "tiles/TrapTile.h"
 
@@ -199,12 +200,18 @@ Direction Board::handleIntersection(Direction dir) {
 }
 
 void Board::update() {
-    map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
+    //map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
     display->notify();
 }
 
 void Board::print() {
     display->print();
+}
+
+void Board::swapPositions(int p1, int p2) {
+    // I have no idea if this works
+    pair<Direction, pair<int, int>> k = positions[p1];
+    std::swap(positions[p1], positions[p2]);
 }
 
 // Getters
