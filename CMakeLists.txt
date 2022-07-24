@@ -24,10 +24,11 @@ project(goose_party
 
 add_executable(goose_party
         src/main.cc
+        src/game/Game.cc
+        src/game/DebugGame.cc
         src/cards/Card.cc
         src/cards/SpellCard.cc
         src/cards/TrapCard.cc
-        src/game/Game.cc
         src/tiles/Tile.cc
         src/tiles/BaseTile.cc
         src/tiles/DegreeTile.cc
