@@ -61,6 +61,7 @@ void Game::play() {
         try {
             cout << "It is " << players[curTurn]->Options()->name << "'s turn." << " (Player " << players[curTurn]->Options()->id << ")" << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
+            cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them 
             cin >> c; 
 
             switch (c) {
@@ -73,7 +74,46 @@ void Game::play() {
 
                     b.move(players[curTurn], moves);
                     players[curTurn]->endTurn();
+                    if(((curTurn + 1) % players.size())==0) {
+                        for(auto p : players) {
+                            p->endCycle();
+                        }
+                    }
+
+                    curTurn = (curTurn + 1) % players.size();
                     break;
+                    }
+                case 'c':
+                    {
+                        int size = players[curTurn]->listCards();
+                        if (size <= 0) {
+                            break;
+                        }
+                        cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
+                        int index;
+                        
+                        cin >> index;
+                        if (index < 0 || index >= size) {
+                            break;
+                        }
+                        if (players[curTurn]->requiresTarget(index)) {
+                            cout << "Available Players: ";
+                            for (auto i : players) {
+                                cout << " " << i->Options()->name << ",";
+                            }
+                            cout << endl;
+                            cout << "Enter a number from 0 to " << players.size() - 1 << " to pick a player, or -1 to exit" << endl;
+                            int i = 0;
+                            cin >> i;
+                            if (i < 0 || i >= players.size()) {
+                                break;
+                            }
+                            players[curTurn]->useCard(index, players[i], &b);
+                            
+
+                        }
+                        players[curTurn]->useCard(index, players[curTurn], &b);                        
+                        break;
                     }
                 case 'q':
                     playing = false;
@@ -85,14 +125,9 @@ void Game::play() {
         } catch (...) {
             break;
         }
-
-        if(((curTurn + 1) % players.size())==0) {
-            for(auto p : players) {
-                p->endCycle();
-            }
-        }
-
-        curTurn = (curTurn + 1) % players.size();
     }
     
 }
+
+
+

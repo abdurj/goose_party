@@ -246,7 +246,7 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     using namespace utils;
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), baseCell(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(true),  baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), cardTile(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(true),  baseCell(), baseCell(), baseCell(), baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
