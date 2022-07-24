@@ -46,6 +46,93 @@ void Game::init() {
     playing = true;
 }
 
+void Game::endCycle() {
+    for(auto p : players) {
+        p->endCycle();
+    }
+}
+
+bool Game::input(string c) {
+    if(c == "m") {
+        cout << "Moving Player: " << curTurn + 1 << "." << endl;
+        cout << "Rolling..." << endl;
+
+        int moves = utils::roll(players[curTurn]);
+
+        b.move(players[curTurn], moves);
+        players[curTurn]->endTurn();
+
+        if(((curTurn + 1) % players.size())==0) {
+            endCycle();
+        }
+
+        curTurn = (curTurn + 1) % players.size();
+
+    } else if(c == "c") {
+        int size = players[curTurn]->listCards();
+        if(size == 0) {
+            cout << "There are no cards in the player's deck!" << endl;
+            return;
+        }
+        cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
+
+        int index;
+        cin >> index;
+
+        if(index < 0) {
+            return true;
+        }
+        if (!(index >= size || size <= 0)) {
+            if (players[curTurn]->requiresTarget(index)) {
+                cout << "Available Players: ";
+                for (auto i : players) {
+                    cout << " " << i->Options()->name << ",";
+                }
+                cout << endl;
+                cout << "Enter a number from 0 to " << players.size() - 1 << " to pick a player, or -1 to exit" << endl;
+                int i = 0;
+                cin >> i;
+                if (i < 0 || i >= players.size()) {
+                }
+                players[curTurn]->useCard(index, players[i], &b);
+                
+
+            }
+            players[curTurn]->useCard(index, players[curTurn], &b); 
+        } 
+        else {
+            cout << "Chosen card index is out of range / doesn't exist." << endl;
+        }
+                
+    } else if (c == "q") {
+        playing = false;
+    } else {
+        cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
+        return false;
+    }
+
+    return true;
+}
+
+void Game::GameLoop() {
+    string c = "";
+    cin.exceptions(ios::eofbit|ios::failbit);
+
+    while (playing) {
+        cout << "It is " << players[curTurn]->Options()->name << "'s turn." << " (Player " << players[curTurn]->Options()->id << ")" << endl;
+        cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
+        cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them
+        try {
+            cin >> c; 
+            input(c);
+        } catch (...) {
+            cerr << "An error occured when processing command. Ending game." << endl;
+            playing = false;
+            break;
+        }
+    }
+}
+
 void Game::play() {
     init();
     b.print();
@@ -53,80 +140,8 @@ void Game::play() {
         cerr << "Somehow we have 0 players, terminate" << endl;
         return;
     }
-    unsigned int curTurn = 0;
-    char c = '0';
-    cin.exceptions(ios::eofbit|ios::failbit);
-
-    while (playing) {
-        try {
-            cout << "It is " << players[curTurn]->Options()->name << "'s turn." << " (Player " << players[curTurn]->Options()->id << ")" << endl;
-            cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
-            cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them 
-            cin >> c; 
-
-            switch (c) {
-                case 'm':
-                    {                
-                    cout << "Moving Player: " << curTurn + 1 << "." << endl;
-                    cout << "Rolling..." << endl;
-
-                    int moves = utils::roll(players[curTurn]);
-
-                    b.move(players[curTurn], moves);
-                    players[curTurn]->endTurn();
-                    if(((curTurn + 1) % players.size())==0) {
-                        for(auto p : players) {
-                            p->endCycle();
-                        }
-                    }
-
-                    curTurn = (curTurn + 1) % players.size();
-                    break;
-                    }
-                case 'c':
-                    {
-                        int size = players[curTurn]->listCards();
-                        if (size <= 0) {
-                            break;
-                        }
-                        cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
-                        int index;
-                        
-                        cin >> index;
-                        if (index < 0 || index >= size) {
-                            break;
-                        }
-                        if (players[curTurn]->requiresTarget(index)) {
-                            cout << "Available Players: ";
-                            for (auto i : players) {
-                                cout << " " << i->Options()->name << ",";
-                            }
-                            cout << endl;
-                            cout << "Enter a number from 0 to " << players.size() - 1 << " to pick a player, or -1 to exit" << endl;
-                            int i = 0;
-                            cin >> i;
-                            if (i < 0 || i >= players.size()) {
-                                break;
-                            }
-                            players[curTurn]->useCard(index, players[i], &b);
-                            
-
-                        }
-                        players[curTurn]->useCard(index, players[curTurn], &b);                        
-                        break;
-                    }
-                case 'q':
-                    playing = false;
-                    break;
-                default:
-                    cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
-            }
-            
-        } catch (...) {
-            break;
-        }
-    }
-    
+    curTurn = 0;
+    GameLoop();
 }
 
 
