@@ -96,11 +96,13 @@ bool Game::input(string c) {
                     return true;
                 }
                 players[curTurn]->useCard(index, players[i], &b);
+                std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
 
             } else {
                 players[curTurn]->useCard(index, players[curTurn], &b); 
+                std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
             }
