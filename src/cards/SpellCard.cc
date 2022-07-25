@@ -16,6 +16,10 @@ string JuiceCard::getName() {
     return "Juice Card";
 }
 
+string JuiceCard::getDescription() {
+    return "When used, provides a 1 in 4 chance to give the caller 30 grades. Else, a penalty is applied instead.";
+}
+
 void JuiceCard::apply(Player *caller, shared_ptr<Player> target, Board *b) {
     int roll = utils::roll();
     if (roll < 4) {
@@ -37,6 +41,10 @@ bool JuiceCard::requiresTarget() {
 PortalCard::PortalCard() {}
 string PortalCard::getName() {
     return "Portal Card";
+}
+
+string PortalCard::getDescription() {
+    return "Swap positions with a player of your choice.";
 }
 
 void PortalCard::apply(Player * caller, shared_ptr<Player> target, Board *b) {
@@ -65,15 +73,19 @@ string LazeezCard::getName() {
     return "Tactical Nutrition";
 }
 
+string LazeezCard::getDescription() {
+    return "Deal 8 damage to a player of your choice.";
+}
+
 // CS247
 CS247Card::CS247Card() {}
 void CS247Card::apply(Player* caller, shared_ptr<Player> target, Board* b) {
     int roll = utils::roll();
     if (roll < 4) {
         cout << "Success! Moving " << target->Options()->name << "10 spaces forward." << endl;
-        b->move(target, 20);
+        b->move(target, 10);
     } else {
-        cout << "Failure! " << caller->Options()->name << " takes 10 damage." << endl;
+        cout << "Failure! " << target->Options()->name << " takes 10 damage." << endl;
         caller->modifyHP(-10);
     }
 }
@@ -82,6 +94,10 @@ bool CS247Card::requiresTarget() {
 }
 string CS247Card::getName() {
     return "CS247";
+}
+
+string CS247Card::getDescription() {
+    return "When used, grants a 1 in 4 chance to move the target 10 spaces forward. Else, the target takes 10 damage.";
 }
 
 // Predator Card
@@ -96,4 +112,8 @@ bool PredatorCard::requiresTarget() {
 }
 string PredatorCard::getName() {
     return "Predator";
+}
+
+string PredatorCard::getDescription() {
+    return "Steals 15 grades from a target player.";
 }

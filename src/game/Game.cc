@@ -122,16 +122,20 @@ bool Game::input(string c) {
                 std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
+                cout << endl;
             } else {
                 currPlayer->useCard(index, currPlayer, &b); 
                 std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
+                cout << endl;
             }
         } 
         else {
             cout << "Chosen card index is out of range / doesn't exist." << endl;
         }
+    } else if (c == "ci") {
+        currPlayer->cardDescriptions();
     } else if (c == "q") {
         playing = false;
     } else {
@@ -210,7 +214,8 @@ void Game::GameLoop() {
             cout << name << " you have " << currPlayer->getHP() << "hp a " << currPlayer->Grades() << "\% average." << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
             cout << "Enter 'c' to list the cards you have."
-                << endl; // TODO: allow player to print card description if given an i first, tell them
+                << endl; 
+            cout << "Enter 'ci' to list the cards you have and their descriptions." << endl;
             try {
                 cin >> c;
                 input(c);

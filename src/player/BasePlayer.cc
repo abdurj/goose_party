@@ -64,6 +64,13 @@ int BasePlayer::listCards() const {
     return deck.size();
 }
 
+void BasePlayer::cardDescriptions() const {
+    cout << "Available Cards and their descriptions:" << endl;
+    for (int i = 0; i < deck.size(); ++i) {
+        cout << deck[i]->getName() << ": " << deck[i]->getDescription() << endl;
+    }
+}
+
 void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
     deck.at(i)->apply(this, p, b);
     deck.erase(next(deck.begin(), i));

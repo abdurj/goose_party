@@ -24,6 +24,7 @@ class BasePlayer : public Player {
     bool claimDegree() override;
     void addCard(std::unique_ptr<Card>) override;
     int listCards() const override;
+    void cardDescriptions() const override;
     void useCard(int, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget(int) override;
     int getHP() const override;

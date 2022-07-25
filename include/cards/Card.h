@@ -9,6 +9,7 @@ class Card {
     virtual void apply(Player*, std::shared_ptr<Player>, Board*) = 0;
     virtual bool requiresTarget() = 0;
     virtual std::string getName() = 0;
+    virtual std::string getDescription() = 0;
 };
 
 // Player will have a use() method which will call card->apply(Player), but how do we handle cases when a card effect does not need a player?

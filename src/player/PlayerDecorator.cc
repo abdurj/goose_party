@@ -37,6 +37,10 @@ int PlayerDecorator::listCards() const {
     return playerComponent->listCards();
 }
 
+void PlayerDecorator::cardDescriptions() const {
+    playerComponent->cardDescriptions();
+}
+
 void PlayerDecorator::useCard(int i, shared_ptr<Player> p, Board* b) {
     playerComponent->useCard(i, p, b);
 }
