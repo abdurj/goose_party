@@ -11,7 +11,8 @@
 #include "player/BasePlayer.h"
 #include "utils/Utils.h"
 #include "beacon/Beacon.h"
-#include "beacon/TutionBeacon.h"
+#include "beacon/TuitionBeacon.h"
+#include "beacon/ExamBeacon.h"
 
 using namespace std;
 
@@ -47,8 +48,9 @@ void Game::init() {
         b.addPlayer(i);
     }
     
-    beacons.emplace_back(make_shared<TutionBeacon>());
-    beacons[0]->activate(fei);
+    beacons.emplace_back(make_shared<TuitionBeacon>());
+    beacons.emplace_back(make_shared<ExamBeacon>());
+    //beacons[0]->activate(fei);
     playing = true;
 }
 
@@ -217,8 +219,9 @@ void Game::GameLoop() {
     }
 }
 
-void Game::activateBeacon(int i, shared_ptr<Player> &p) {
-    beacons[i]->activate(p);
+void Game::activateBeacon(shared_ptr<Player> &p) {
+    //int i = chrono::system_clock::now().time_since_epoch().count() % beacons.size();
+    beacons[1]->activate(p);
 }
 
 void Game::play() {

@@ -27,6 +27,7 @@ class Board{
     std::unordered_map<int, std::pair<Direction, std::pair<int, int>>> positions;
     std::unique_ptr<Display> display;
     std::pair<int, int> degreeSpot;
+    std::pair<int, int> beaconSpot;
     size_t x; // x dimension
     size_t y; // y dimension
     Game *game;

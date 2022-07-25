@@ -49,6 +49,9 @@ void DebugGame::debugInput(string c) {
         if(c == "grades") {
             cout << players.at(player)->Options()->name << "'s Grades: "
             << players.at(player)->Grades() << endl;
+        } else if (c == "hp") {
+            cout << players.at(player)->Options()->name << "'s HP: "
+            << players.at(player)->getHP() << endl;
         }
     } else if(c == "beacons") {
         for(auto &beacon : beacons) {

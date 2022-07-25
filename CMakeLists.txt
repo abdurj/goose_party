@@ -47,6 +47,7 @@ add_executable(goose_party
         src/player/PlayerDecorator.cc
         src/beacon/Beacon.cc
         src/beacon/TuitionBeacon.cc
+        src/beacon/ExamBeacon.cc
         src/player/ability/GradeCurve.cc
         src/player/ability/BonusMarks.cc
         src/player/ability/GoodSleep.cc

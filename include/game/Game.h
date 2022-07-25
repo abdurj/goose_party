@@ -26,7 +26,7 @@ class Game{
     void play();
     void init();
     void notifyWinner(Player &);
-    void activateBeacon(int, std::shared_ptr<Player> &);
+    void activateBeacon(std::shared_ptr<Player> &);
 
     std::shared_ptr<Player> getPlayer(const int &id);
 
