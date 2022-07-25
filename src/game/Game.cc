@@ -102,9 +102,15 @@ bool Game::input(string c) {
                 if (i < 0 || i >= players.size()) {
                 }
                 currPlayer->useCard(index, players[i], &b);
+                b.update();
+                b.print();
+            } else {
+                currPlayer->useCard(index, currPlayer, &b); 
+                b.update();
+                b.print();
             }
-            currPlayer->useCard(index, currPlayer, &b);
-        } else {
+        } 
+        else {
             cout << "Chosen card index is out of range / doesn't exist." << endl;
         }
 
