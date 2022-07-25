@@ -35,7 +35,7 @@ void Game::init() {
     //     cout << "Player " << i + 1 << " , please enter your name" << endl;
     // }
     auto abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
-    auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
+    shared_ptr<Player> fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
     auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
     auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
     players.insert(players.end(), {abdur, fei, kev, kp});
@@ -48,6 +48,7 @@ void Game::init() {
     }
     
     beacons.emplace_back(make_shared<TutionBeacon>());
+    beacons[0]->activate(fei);
     playing = true;
 }
 
@@ -83,6 +84,11 @@ bool Game::input(string c) {
             b.print();
         }
         currPlayer->endTurn();
+
+        curTurn = (curTurn + 1) % players.size();
+        if (curTurn == 0) {
+            endCycle();
+        }
     } else if (c == "c") {
         int size = currPlayer->listCards();
         if (size == 0) {
@@ -207,10 +213,6 @@ void Game::GameLoop() {
                 playing = false;
                 break;
             }
-        }
-        curTurn = (curTurn + 1) % players.size();
-        if (curTurn == 0) {
-            endCycle();
         }
     }
 }
