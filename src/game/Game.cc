@@ -72,31 +72,14 @@ void Game::setup() {
 }
 
 void Game::init() {
-    // TODO: On init, prompt the game maker to enter the number of players, the name of each player. 
-    // int n = 0;
-    // while (n < 2 || n > 8) {
-    //     cout << "Enter the number of players (2-8):" << endl;
-    //     cin >> n;
-    // }
-    // for (int i = 0; i < n; ++i) {
-    //     cout << "Player " << i + 1 << " , please enter your name" << endl;
-    // }
-    shared_ptr<Player> abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
-    shared_ptr<Player> fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
-    shared_ptr<Player> kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
-    shared_ptr<Player> kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
-    players.insert(players.end(), {abdur, fei, kev, kp});
+    setup();
 
     // randomize player order
     utils::shufflePlayers(players);
-    // add all the players.
-    for (auto &i: players) {
-        b.addPlayer(i);
-    }
     
     beacons.emplace_back(make_shared<TuitionBeacon>());
     beacons.emplace_back(make_shared<ExamBeacon>());
-    //beacons[0]->activate(fei);
+
     playing = true;
 }
 
