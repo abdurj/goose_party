@@ -1,4 +1,5 @@
 #include "player/PlayerDecorator.h"
+#include "cards/Card.h"
 #include <iostream>
 using namespace std;
 
@@ -12,7 +13,16 @@ void PlayerDecorator::doEndCycle() {
 void PlayerDecorator::doEndTurn() {
     playerComponent->endTurn();
 }
-void PlayerDecorator::listAbilities() const {}
+
+void PlayerDecorator::abilityDesc() const {
+}
+void PlayerDecorator::addAbility(string s) {
+    playerComponent->addAbility(s);
+}
+
+const unordered_set<string>& PlayerDecorator::Abilities() const {
+    return playerComponent->Abilities();
+}
 
 PlayerDecorator::PlayerDecorator(shared_ptr<Player> p) : playerComponent{p} {}
 

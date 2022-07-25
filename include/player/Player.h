@@ -2,15 +2,17 @@
 #define PLAYER_H
 
 #include <string>
+#include <unordered_set>
 
 #include "PlayerOptions.h"
 #include "ftxui/dom/elements.hpp"
-#include "cards/Card.h"
-class Card; // for some reason it won't compile if I don't do this, even if I have card.h included
+
+class Card;
 class Board;
+
 class Player { //Abstract base class
-    virtual void listAbilities() const = 0;
-    virtual void doEndTurn() = 0; //Better name suggestions?
+    virtual void abilityDesc() const = 0;
+    virtual void doEndTurn() = 0;
     virtual void doEndCycle() = 0;
 
     public:
@@ -27,7 +29,9 @@ class Player { //Abstract base class
     virtual void modifyHP(int) = 0;
     virtual void reset() = 0;
 
-    void Abilities() const;
+    virtual void addAbility(std::string) = 0;
+    virtual const std::unordered_set<std::string>& Abilities() const = 0;
+    void ListAbilities() const;
     void endTurn();
     void endCycle();
     virtual std::shared_ptr<PlayerOptions> Options() const = 0;

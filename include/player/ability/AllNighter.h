@@ -4,7 +4,7 @@
 #include "player/PlayerDecorator.h"
 
 class AllNighter : public PlayerDecorator {
-    void listAbilities() const override;
+    void abilityDesc() const override;
     public:
     AllNighter(std::shared_ptr<Player>);
 };

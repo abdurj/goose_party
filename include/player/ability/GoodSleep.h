@@ -4,7 +4,7 @@
 #include "player/PlayerDecorator.h"
 
 class GoodSleep : public PlayerDecorator {
-    void listAbilities() const override;
+    void abilityDesc() const override;
     public:
     GoodSleep(std::shared_ptr<Player>);
 };

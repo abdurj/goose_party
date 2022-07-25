@@ -8,7 +8,7 @@ AbilityTile::AbilityTile(bool intersection) : Tile(intersection) {};
 
 void AbilityTile::apply(shared_ptr<Player> &p) {
     cout << "landed on ability tile" << endl;
-    utils::drawAbility(p);
+    utils::generateAbiltiy(p);
 }
 
 Element AbilityTile::tileElement() {

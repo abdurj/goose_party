@@ -5,7 +5,7 @@
 
 class BonusMarks : public PlayerDecorator {
     void doEndTurn() override;
-    void listAbilities() const override;
+    void abilityDesc() const override;
     public:
     BonusMarks(std::shared_ptr<Player>);
 };

@@ -2,10 +2,12 @@
 #include <iostream>
 using namespace std;
 
-GradeCurve::GradeCurve(shared_ptr<Player> p) : PlayerDecorator{p} {}
+GradeCurve::GradeCurve(shared_ptr<Player> p) : PlayerDecorator{p} {
+    p->addAbility("GradeCurve");
+}
 
-void GradeCurve::listAbilities() const {
-    playerComponent->Abilities();
+void GradeCurve::abilityDesc() const {
+    playerComponent->ListAbilities();
     cout << "Grade Curve - Some of this player's finals were curved! +10 grades per cycle." << endl;
 }
 
