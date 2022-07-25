@@ -61,32 +61,32 @@ namespace utils {
         return make_unique<JuiceCard>();
     }
 
-    shared_ptr<Tile> baseCell(bool inter) {
-        return make_shared<BaseTile>(inter);
+    shared_ptr<Tile> baseCell(bool i, bool e) {
+        return make_shared<BaseTile>(i,e);
     }
 
-    shared_ptr<Tile> degreeTile(bool inter) {
-        return make_shared<DegreeTile>(inter);
+    shared_ptr<Tile> degreeTile(bool i, bool e) {
+        return make_shared<DegreeTile>(i,e);
     }
 
-    shared_ptr<Tile> gradeTile(bool inter) {
-        return make_shared<GradeTile>(inter);
+    shared_ptr<Tile> gradeTile(bool i, bool e) {
+        return make_shared<GradeTile>(i,e);
     }
 
-    shared_ptr<Tile> cardTile(bool inter) {
-        return make_shared<CardTile>(inter);
+    shared_ptr<Tile> cardTile(bool i, bool e) {
+        return make_shared<CardTile>(i,e);
     }
 
-    shared_ptr<Tile> healthTile(bool inter) {
-        return make_shared<HealthTile>(inter);
+    shared_ptr<Tile> healthTile(bool i, bool e) {
+        return make_shared<HealthTile>(i,e);
     }
 
-    shared_ptr<Tile> abilityTile(bool inter) {
-        return make_shared<AbilityTile>(inter);
+    shared_ptr<Tile> abilityTile(bool i, bool e) {
+        return make_shared<AbilityTile>(i,e);
     }
 
-    shared_ptr<Tile> beaconTile(bool inter) {
-        return make_shared<BeaconTile>(inter);
+    shared_ptr<Tile> beaconTile(bool i, bool e) {
+        return make_shared<BeaconTile>(i,e);
     }
 
     void drawAbility(shared_ptr<Player> &p) { 

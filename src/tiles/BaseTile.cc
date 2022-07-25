@@ -3,7 +3,7 @@
 using namespace ftxui;
 using namespace std;
 
-BaseTile::BaseTile(bool intersection) : Tile(intersection) {};
+BaseTile::BaseTile(bool intersection, bool elbow) : Tile(intersection, elbow) {};
 
 void BaseTile::apply(shared_ptr<Player> &p) {}
 

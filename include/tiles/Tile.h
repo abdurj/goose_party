@@ -9,7 +9,7 @@ class Tile{
   bool intersection;
   bool elbow;
   public:
-    Tile(bool, bool = false);
+    Tile(bool, bool);
     bool isIntersection() const;
     bool isElbow() const;
     virtual void apply(std::shared_ptr<Player> &) = 0;

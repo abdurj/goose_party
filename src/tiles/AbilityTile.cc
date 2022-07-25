@@ -4,7 +4,7 @@
 using namespace ftxui;
 using namespace std;
 
-AbilityTile::AbilityTile(bool intersection) : Tile(intersection) {};
+AbilityTile::AbilityTile(bool intersection, bool elbow) : Tile(intersection, elbow) {};
 
 void AbilityTile::apply(shared_ptr<Player> &p) {
     cout << "landed on ability tile" << endl;

@@ -3,7 +3,7 @@
 using namespace ftxui;
 using namespace std;
 
-DegreeTile::DegreeTile(bool intersection) : Tile(intersection) {};
+DegreeTile::DegreeTile(bool intersection, bool elbow) : Tile(intersection, elbow) {};
 
 void DegreeTile::apply(shared_ptr<Player> &p) {
     cout << "landed on degree tile" << endl;

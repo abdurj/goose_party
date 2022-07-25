@@ -4,7 +4,7 @@
 using namespace ftxui;
 using namespace std;
 
-GradeTile::GradeTile(bool intersection) : Tile(intersection) {};
+GradeTile::GradeTile(bool intersection, bool elbow) : Tile(intersection, elbow) {};
 
 void GradeTile::apply(shared_ptr<Player> &p) {
     cout << "landed on grade tile" << endl;

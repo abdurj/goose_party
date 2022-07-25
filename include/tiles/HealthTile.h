@@ -6,7 +6,7 @@
 
 class HealthTile : public Tile{
   public:
-    HealthTile(bool);
+    HealthTile(bool,bool);
     void apply(std::shared_ptr<Player> &) override;
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;

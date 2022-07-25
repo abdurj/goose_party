@@ -286,15 +286,15 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     using namespace utils;
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), cardTile(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(true),  baseCell(), baseCell(), baseCell(), baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), baseCell(), baseCell(), baseCell(true), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),   beaconTile(), healthTile(), cardTile(), abilityTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), cardTile(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),         baseCell(), baseCell(), baseCell(), baseCell(true),     baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,       baseCell(),         nullptr,    nullptr,    nullptr,    baseCell(),     nullptr,        nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,       baseCell(),         nullptr,    nullptr,    nullptr,    baseCell(),     nullptr,        nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(true), baseCell(), baseCell(), baseCell(), baseCell(),    baseCell(false,true),   nullptr,    nullptr,    nullptr,    baseCell(),     nullptr,        nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,       nullptr,            nullptr,    nullptr,    nullptr,    baseCell(false, true),baseCell(),    baseCell(),    baseCell(),    baseCell(),    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,       nullptr,            nullptr,    nullptr,    nullptr,    nullptr,        nullptr,     nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,       nullptr,            nullptr,    nullptr,    nullptr,    nullptr,        nullptr,     nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,       nullptr,            nullptr,    nullptr,    nullptr,    nullptr,        nullptr,     nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), baseCell(), baseCell(), baseCell(true), baseCell(), baseCell(), baseCell(), baseCell(),    baseCell(),         beaconTile(), healthTile(), cardTile(), abilityTile(), baseCell(),  baseCell(), baseCell(), baseCell(), baseCell(),},
     };
 
     return board;

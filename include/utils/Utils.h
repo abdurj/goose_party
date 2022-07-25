@@ -30,19 +30,19 @@ namespace utils {
 
     std::unique_ptr<Card> generateCard();
 
-    std::shared_ptr<Tile> baseCell(bool inter = false);
+    std::shared_ptr<Tile> baseCell(bool i = false, bool e = false);
 
-    std::shared_ptr<Tile> degreeTile(bool inter = false);
+    std::shared_ptr<Tile> degreeTile(bool i = false, bool e = false);
 
-    std::shared_ptr<Tile> gradeTile(bool inter = false);
+    std::shared_ptr<Tile> gradeTile(bool i = false, bool e = false);
 
-    std::shared_ptr<Tile> cardTile(bool inter = false);
+    std::shared_ptr<Tile> cardTile(bool i = false, bool e = false);
 
-    std::shared_ptr<Tile> healthTile(bool inter = false);
+    std::shared_ptr<Tile> healthTile(bool i = false, bool e = false);
 
-    std::shared_ptr<Tile> abilityTile(bool inter = false);
+    std::shared_ptr<Tile> abilityTile(bool i = false, bool e = false);
 
-    std::shared_ptr<Tile> beaconTile(bool inter = false);
+    std::shared_ptr<Tile> beaconTile(bool i = false, bool e = false);
 
     void drawAbility(std::shared_ptr<Player> &);
 }
