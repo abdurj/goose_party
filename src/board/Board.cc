@@ -159,18 +159,18 @@ void Board::generateNewDegree() {
 
         q.push({{p_i, p_j}, 0});
         while (!q.empty()) {
-            const auto &[pos, depth] = q.front();
+            const auto [pos, depth] = q.front();
             q.pop();
-            const auto &[pos_i, pos_j] = pos;
-            for (auto &[dir_i, dir_j]: dirs) {
+            const auto [pos_i, pos_j] = pos;
+            for (auto [dir_i, dir_j]: dirs) {
                 int ii = pos_i + dir_i;
                 int jj = pos_j + dir_j;
-                if (ii < 0 || ii >= y || jj < 0 || jj >= x || map[ii][jj] == nullptr || visited[ii][jj] ||
-                    dist[ii][jj] < depth + 1) {
+                if (ii < 0 || ii >= y || jj < 0 || jj >= x || visited.at(ii).at(jj) ||
+                    dist.at(ii).at(jj) < depth + 1) {
                     continue;
                 }
-                visited[ii][jj] = true;
-                dist[ii][jj] = depth + 1;
+                visited.at(ii).at(jj) = true;
+                dist.at(ii).at(jj) = depth + 1;
                 q.push({{ii, jj}, depth + 1});
             }
         }
