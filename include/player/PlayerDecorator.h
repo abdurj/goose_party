@@ -6,12 +6,14 @@
 class PlayerDecorator : public Player {
     void doEndTurn() override; //Better name suggestions?
     void doEndCycle() override;
-    void listAbilities() const override;
-
+    void abilityDesc() const override;
+    
     protected:
     std::shared_ptr<Player> playerComponent;
     public:
     PlayerDecorator(std::shared_ptr<Player>);
+    void addAbility(std::string) override;
+    const std::unordered_set<std::string>& Abilities() const override;
     int Grades() const override;
     int Degrees() const override;
     int modifyGrades(int) override;

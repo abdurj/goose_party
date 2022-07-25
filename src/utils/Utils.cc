@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <chrono>
 #include <random>
+#include <unordered_set>
 
 #include "cards/SpellCard.h"
 #include "cards/TrapCard.h"
@@ -26,6 +27,8 @@
 #include "player/ability/GoodSleep.h"
 #include "player/ability/TimeManagement.h"
 #include "player/ability/BonusMarks.h"
+#include "player/ability/Attendance.h"
+#include "player/ability/PerfectGpa.h"
 
 using namespace std;
 
@@ -104,63 +107,79 @@ namespace utils {
         return make_shared<BeaconTile>(t);
     }
 
-    void drawAbility(shared_ptr<Player> &p) { 
-        //TODO randomly generate n
-        int n = 0;
-        int abilityCount = 5; //Hard coded for now, is there a better way to do this?
-        string key = "";
+    void generateAbiltiy(shared_ptr<Player> &p) {    
+        int abilityCount = 7;
+        int n = eng() % (abilityCount+1);
+        unordered_set<string> playerAbilities = p->Abilities();
+        string ability;
 
+        if(playerAbilities.size() == abilityCount) {
+            cout << endl << "This player has every possible ability" << endl;
+            return;
+        }
         for(int i = 0; i < abilityCount; ++i) {
              switch((n+i) % abilityCount) {
                 case 0:
-                    key = to_string(p->Options()->id) + "GradeCurve";
-                    if(!playerAbilities.count(key)) {
+                    ability = "GradeCurve";
+                    if(!playerAbilities.count(ability)) {
                         p = make_shared<GradeCurve>(p);
-                        playerAbilities.insert(key);
-                        cout << p->Options()->name << " now has the ability: " << "GradeCurve" << endl;
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
                         return;
                     }  
                 break;
                 case 1:
-                    key = to_string(p->Options()->id) + "AllNighter";
-                    if(!playerAbilities.count(key)) {
+                    ability = "AllNighter";
+                    if(!playerAbilities.count(ability)) {
+                        
                         p = make_shared<AllNighter>(p);
-                        playerAbilities.insert(key);
-                        cout << p->Options()->name << " now has the ability: " << "AllNighter" << endl;
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
                         return;
                     }  
                 break;
                 case 2:
-                    key = to_string(p->Options()->id) + "BonusMarks";
-                    if(!playerAbilities.count(key)) {
+                    ability = "BonusMarks";                
+                    if(!playerAbilities.count(ability)) {
+
                         p = make_shared<BonusMarks>(p);
-                        playerAbilities.insert(key);
-                        cout << p->Options()->name << " now has the ability: " << "BonusMarks" << endl;
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
                         return;
                     }  
                 break;
                 case 3:
-                    key = to_string(p->Options()->id) + "GoodSleep";
-                    if(!playerAbilities.count(key)) {
+                    ability = "GoodSleep";
+                    if(!playerAbilities.count(ability)) {
                         p = make_shared<GoodSleep>(p);
-                        playerAbilities.insert(key);
-                        cout << p->Options()->name << " now has the ability: " << "GoodSleep" << endl;
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
                         return;
                     }  
                 break;
                 case 4:
-                    key = to_string(p->Options()->id) + "TimeManagement";
-                    if(!playerAbilities.count(key)) {
+                    ability = "TimeManagement";
+                    if(!playerAbilities.count(ability)) {
                         p = make_shared<TimeManagement>(p);
-                        playerAbilities.insert(key);
-                        cout << p->Options()->name << " now has the ability: " << "TimeManagement" << endl;
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
                         return;
                     }  
                 break;
+                case 5:
+                    ability = "Attendance";
+                    if(!playerAbilities.count(ability)) {
+                        p = make_shared<Attendance>(p);
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
+                        return;
+                    }  
+                break;
+                case 6:
+                    ability = "PerfectGpa";
+                    if(!playerAbilities.count(ability)) {
+                        p = make_shared<PerfectGpa>(p);
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
+                        return;
+                    }  
+                break;                              
                 default:
-                cout << "Shouldn't be here" << endl;
+                cout << "Shouldn't be here" << endl;//TODO delete this
             } 
         }
-        cout << "already has" << endl;
     }
 }
