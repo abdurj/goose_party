@@ -26,7 +26,7 @@ class Game{
 
     void challenge(std::shared_ptr<Player> challenger, std::shared_ptr<Player> opponent);
 
-    void battle(std::shared_ptr<Player> challenger, std::shared_ptr<Player> opponent);
+    void battle(const std::shared_ptr<Player>& challenger, const std::shared_ptr<Player>& opponent);
 };
 
 #endif // GAME_H

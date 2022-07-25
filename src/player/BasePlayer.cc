@@ -82,9 +82,12 @@ bool BasePlayer::alive() const {
 }
 
 void BasePlayer::takeDamage(int dmg) {
+    cout << options->name << " has taken " << dmg << " damage!" << endl;
     hp -= dmg;
     if(hp <= 0){
         cout << options->name << " has died." << endl;
+    }else{
+        cout << options->name << " has " << hp << " hp" << endl;
     }
 }
 

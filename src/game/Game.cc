@@ -59,23 +59,21 @@ bool Game::input(string c) {
             cout << currPlayer->Options()->name << " is being resurrected. " << endl;
             b.resurrect(currPlayer);
         }
-        cout << "Moving Player: " << curTurn + 1 << "." << endl;
-        cout << "Rolling..." << endl;
 
+        cout << "Rolling..." << endl;
         int moves = utils::roll();
 
         b.move(currPlayer, moves);
 
         vector<int> potentialBattles = b.checkCollision(currPlayer);
         if (!potentialBattles.empty()) {
-            for (const auto &id: potentialBattles) {
+            for (const int &id: potentialBattles) {
                 shared_ptr<Player> opponent = getPlayer(id);
                 if (opponent) {
                     challenge(currPlayer, opponent);
                 }
             }
         }
-
         currPlayer->endTurn();
         curTurn = (curTurn + 1) % players.size();
         if (curTurn == 0) {
@@ -140,7 +138,7 @@ void Game::challenge(std::shared_ptr<Player> challenger, std::shared_ptr<Player>
     }
 }
 
-void Game::battle(std::shared_ptr<Player> challenger, std::shared_ptr<Player> opponent){
+void Game::battle(const std::shared_ptr<Player>& challenger, const std::shared_ptr<Player>& opponent){
     if (!challenger->alive() || !opponent->alive()) {
         return;
     }
@@ -158,7 +156,6 @@ void Game::battle(std::shared_ptr<Player> challenger, std::shared_ptr<Player> op
         cout << opponentName << " chose to defend! " << endl;
         int defend = utils::roll(opponent->Options()->defence);
         int damage = max(0, attack-defend);
-        cout << opponentName << " took " << damage << " damage!" << endl;
         opponent->takeDamage(damage);
     }else{
         cout << opponentName << " chose to evade! " << endl;
@@ -167,7 +164,6 @@ void Game::battle(std::shared_ptr<Player> challenger, std::shared_ptr<Player> op
         if(evade >= attack){
             damage = 0;
         }
-        cout << opponentName << " took " << damage << " damage!" << endl;
         opponent->takeDamage(damage);
     }
 }
