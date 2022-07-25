@@ -12,6 +12,27 @@
 
 using namespace std;
 
+namespace {
+    void helpCmd() {
+        //move
+        cout << "move - Rolls two die to determine how far a player"
+        " is going to move." << endl;
+        //cards
+        cout << "cards - Displays all cards the current player owns "
+        "with a short descriptions of what each card does." << endl;
+        //abiltiies
+        cout << "abiltiies - Lists all passive abilities the current player has"
+        " along with a short description of their effects." << endl;
+        //use
+
+        //board
+        cout << "board - Prints the current state of the board." << endl;
+        //beacons
+        cout << "beacons - Description of their effects and whether"
+        " they are active (and for how long)" << endl << endl;
+    }
+}
+
 void Game::notifyWinner(Player &p) {
     cout << p.Options()->name << " has won the game!" << endl;
     playing = false;
@@ -152,6 +173,8 @@ bool Game::input(string c) { //Returns false when command (c) is an invalid comm
         else {
             cout << "Chosen card index is out of range / doesn't exist." << endl;
         }
+    } else if(c == "help") {
+        helpCmd();
     } else if (c == "q") {
         playing = false;
     } else {
