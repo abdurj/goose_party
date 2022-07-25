@@ -90,7 +90,9 @@ void BasePlayer::modifyHP(int amt) {
 
     hp += amt;
     if(hp <= 0){
-        cout << options->name << " has died." << endl;
+        int grades_lost = grades * 0.15;
+        cout << options->name << " has died and lost " << grades_lost << " grades!" << endl;
+        modifyGrades(-grades_lost);
     }else{
         cout << options->name << " has " << hp << " hp" << endl;
     }
@@ -98,4 +100,8 @@ void BasePlayer::modifyHP(int amt) {
 
 void BasePlayer::reset() {
     hp = 20;
+}
+
+int BasePlayer::getGrades() const {
+    return grades;
 }

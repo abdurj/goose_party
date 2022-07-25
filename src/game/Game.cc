@@ -203,7 +203,7 @@ void Game::GameLoop() {
             auto id = currPlayer->Options()->id;
             cout << "It is " << name << "'s turn." << " (Player "
                 << id << ")" << endl;
-            cout << name << " you have " << currPlayer->getHP() << "hp." << endl;
+            cout << name << " you have " << currPlayer->getHP() << "hp and " << currPlayer->getGrades() << " grades." << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
             cout << "Enter 'c' to list the cards you have."
                 << endl; // TODO: allow player to print card description if given an i first, tell them

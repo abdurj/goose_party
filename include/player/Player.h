@@ -17,6 +17,7 @@ class Player { //Abstract base class
     virtual int Grades() const = 0;
     virtual int Degrees() const = 0;
     virtual int modifyGrades(int) = 0;
+    virtual int getGrades() const = 0;
     virtual bool claimDegree() = 0;
     virtual void addCard(std::unique_ptr<Card>) = 0;
     virtual int listCards() const = 0;

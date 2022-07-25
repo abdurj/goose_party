@@ -15,6 +15,7 @@ class PlayerDecorator : public Player {
     int Grades() const override;
     int Degrees() const override;
     int modifyGrades(int) override;
+    int getGrades() const override;
     bool claimDegree() override;
     void addCard(std::unique_ptr<Card>) override;
     int listCards() const override;
