@@ -25,32 +25,61 @@ Game::Game() : b{Board()} {
     b.attach(this);
 }
 
+void Game::setup() {
+    bool settingUp = true;
+    string name;
+    int id = 1;
+    while(settingUp) {
+        if(id == 9) break; //8 players max
+        cout << 
+        "To add a player to the game, enter the player's name. To finish setup, type \"done\"." 
+        << endl;
+        try{
+            cin >> name;
+            if(name == "done") break;
+
+            cout << "What class is " << name << "?"<<endl;
+            PlayerClass playerClass;
+            cout << "1. Fighter" << endl << "2. Defender" << endl
+            << "3. Messenger" << endl << "4. Rogue" << endl;
+
+            int i = 0;
+            cin >> i;
+            if(i == 1) {
+                playerClass = PlayerClass::FIGHTER;
+            } else if( i == 2) {
+                playerClass = PlayerClass::DEFENDER;
+            } else if( i == 3) {
+                playerClass = PlayerClass::MESSENGER;
+            } else if( i == 4) {
+                playerClass = PlayerClass::ROGUE;
+            }
+
+            if(i >= 1 && i <= 4) {
+                players.emplace_back(
+                make_shared<BasePlayer>(
+                    make_shared<PlayerOptions>(playerClass, name, id++)
+                    )
+                );
+            } else {
+                cout << "Invalid class." << endl;
+            }
+            
+        } catch (...) {
+            cerr << "An error occured when adding a player." << endl;
+        }
+    }
+}
+
 void Game::init() {
-    // TODO: On init, prompt the game maker to enter the number of players, the name of each player. 
-    // int n = 0;
-    // while (n < 2 || n > 8) {
-    //     cout << "Enter the number of players (2-8):" << endl;
-    //     cin >> n;
-    // }
-    // for (int i = 0; i < n; ++i) {
-    //     cout << "Player " << i + 1 << " , please enter your name" << endl;
-    // }
-    shared_ptr<Player> abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
-    shared_ptr<Player> fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
-    shared_ptr<Player> kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
-    shared_ptr<Player> kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
-    players.insert(players.end(), {abdur, fei, kev, kp});
+    setup();
 
     // randomize player order
     utils::shufflePlayers(players);
-    // add all the players.
-    for (auto &i: players) {
-        b.addPlayer(i);
-    }
     
     beacons.emplace_back(make_shared<TuitionBeacon>());
     beacons.emplace_back(make_shared<ExamBeacon>());
-    //beacons[0]->activate(fei);
+
     playing = true;
 }
 
@@ -230,11 +259,11 @@ void Game::activateBeacon(shared_ptr<Player> &p) {
 
 void Game::play() {
     init();
-    b.print();
-    if (players.empty()) {
-        cerr << "Somehow we have 0 players, terminate" << endl;
+    if (players.size() < 2) {
+        cerr << "Not enough players to start the game. At least 2 player are required." << endl;
         return;
     }
+    b.print();
     curTurn = 0;
     GameLoop();
 }

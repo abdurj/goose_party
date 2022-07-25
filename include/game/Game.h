@@ -14,7 +14,7 @@ class Game{
   int curTurn;
   std::vector<std::shared_ptr<Player>> players;
   std::vector<std::shared_ptr<Beacon>> beacons;
-
+  void setup();
   virtual void GameLoop();
   void endCycle();
 

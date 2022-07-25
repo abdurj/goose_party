@@ -6,7 +6,7 @@
 using namespace ftxui;
 using namespace std;
 
-BasePlayer::BasePlayer(shared_ptr<PlayerOptions> p): degrees{0}, grades{100}, options{std::move(p)} {
+BasePlayer::BasePlayer(shared_ptr<PlayerOptions> p): degrees{0}, grades{0}, options{std::move(p)} {
 }
 
 //Getters
