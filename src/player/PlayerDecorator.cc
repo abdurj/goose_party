@@ -51,3 +51,19 @@ shared_ptr<PlayerOptions> PlayerDecorator::Options() const {
 ftxui::Element PlayerDecorator::getPlayerTile() {
     return playerComponent->getPlayerTile();
 }
+
+int PlayerDecorator::getHP() const{
+    return playerComponent->getHP();
+}
+
+bool PlayerDecorator::alive() const {
+    return playerComponent->alive();
+}
+
+void PlayerDecorator::modifyHP(int dmg) {
+    playerComponent->modifyHP(dmg);
+}
+
+void PlayerDecorator::reset() {
+    playerComponent->reset();
+}

@@ -1,8 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+
+#include <string>
+
 #include "PlayerOptions.h"
 #include "ftxui/dom/elements.hpp"
-#include <string.h>
 #include "cards/Card.h"
 class Card; // for some reason it won't compile if I don't do this, even if I have card.h included
 class Board;
@@ -20,6 +22,11 @@ class Player { //Abstract base class
     virtual int listCards() const = 0;
     virtual void useCard(int, std::shared_ptr<Player>, Board*) = 0;
     virtual bool requiresTarget(int) = 0;
+    virtual int getHP() const = 0;
+    virtual bool alive() const = 0;
+    virtual void modifyHP(int) = 0;
+    virtual void reset() = 0;
+
     void Abilities() const;
     void endTurn();
     void endCycle();

@@ -20,20 +20,20 @@ Board::Board() {
     x = map.at(0).size();
     y = map.size();
     // set a marker for the degreetile (hard coded initially for now)
-    degreeSpot = {0,6};
+    degreeSpot = {0, 6};
     game = nullptr;
     display = make_unique<Display>(this, x, y);
 }
 
-void Board::attach(Game *g) {game = g;}
+void Board::attach(Game *g) { game = g; }
 
-void Board::addPlayer(std::shared_ptr<Player> &p){
+void Board::addPlayer(std::shared_ptr<Player> &p) {
     positions[p->Options()->id] = {::Direction::RIGHT, {0, 0}};
     display->notify();
 }
 
 void Board::move(std::shared_ptr<Player> &p, int roll) {
-    if(roll == 0){
+    if (roll == 0) {
         return;
     }
 
@@ -91,10 +91,10 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
             }
         }
 
-        if(pos == degreeSpot) { 
+        if (pos == degreeSpot) {
             map[i][j]->apply(p);
-            if(p->claimDegree()) {
-                if(p->Degrees() >= 3) {
+            if (p->claimDegree()) {
+                if (p->Degrees() >= 3) {
                     game->notifyWinner(*p);
                 } else {
                     generateNewDegree();
@@ -104,26 +104,32 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
         }
 
         if (update) {
+            cout << "\x1B[2K";  // CLEAR_LINE
+            cout << "\x1B[1A";  // MOVE_UP
+            cout << "\x1B[1A";  // MOVE_UP
             display->notify();
             display->print();
+            cout << endl;
+            cout << p->Options()->name << " rolled a: " << roll << endl;
             this_thread::sleep_for(chrono::milliseconds(50));
         }
     }
-    
+
     cout << endl;
     map[i][j]->apply(p);
 }
 
+
 void Board::generateNewDegree() {
-    using intPair = pair<int,int>;
+    using intPair = pair<int, int>;
 
     intPair oldDegree = degreeSpot;
 
     vector<vector<int>> dist{y, vector<int>(x, INT_MAX)};
     vector<vector<bool>> visited;
-    for(int i = 0; i < y; ++i){
-        for(int j = 0; j < x; ++j){
-            if(map[i][j] == nullptr){
+    for (int i = 0; i < y; ++i) {
+        for (int j = 0; j < x; ++j) {
+            if (map[i][j] == nullptr) {
                 dist[i][j] = -1;
             }
         }
@@ -131,40 +137,42 @@ void Board::generateNewDegree() {
 
     queue<pair<intPair, int>> q; // coord, depth
 
-    const vector<intPair> dirs = {  {0,-1},
-                                    {-1,0},
-                                    {1,0},
-                                    {0,1}};
+    const vector<intPair> dirs = {{0,  -1},
+                                  {-1, 0},
+                                  {1,  0},
+                                  {0,  1}};
 
-    for(const auto& [p, playerPos] : positions){
+    for (const auto &[p, playerPos]: positions) {
         visited.clear();
         visited.resize(y, vector<bool>(x, false));
-        const auto& [p_i,p_j] = playerPos.second;
+        const auto &[p_i, p_j] = playerPos.second;
         dist[p_i][p_j] = 0;
 
         q.push({{p_i, p_j}, 0});
-        while(!q.empty()){
-            const auto& [pos, depth] = q.front(); q.pop();
-            const auto& [pos_i,pos_j] = pos;
-            for(auto& [dir_i, dir_j] : dirs){
+        while (!q.empty()) {
+            const auto &[pos, depth] = q.front();
+            q.pop();
+            const auto &[pos_i, pos_j] = pos;
+            for (auto &[dir_i, dir_j]: dirs) {
                 int ii = pos_i + dir_i;
                 int jj = pos_j + dir_j;
-                if(ii < 0 || ii >= y || jj < 0 || jj >= x || map[ii][jj] == nullptr || visited[ii][jj] || dist[ii][jj] < depth + 1){
+                if (ii < 0 || ii >= y || jj < 0 || jj >= x || map[ii][jj] == nullptr || visited[ii][jj] ||
+                    dist[ii][jj] < depth + 1) {
                     continue;
                 }
                 visited[ii][jj] = true;
-                dist[ii][jj] = depth+1;
-                q.push({{ii,jj}, depth+1});
+                dist[ii][jj] = depth + 1;
+                q.push({{ii, jj}, depth + 1});
             }
         }
     }
 
     int maxDist = -1;
-    for(int i = 0; i < y; ++i){
-        for(int j = 0; j < x; ++j){
-            if(dist[i][j] > maxDist){
+    for (int i = 0; i < y; ++i) {
+        for (int j = 0; j < x; ++j) {
+            if (dist[i][j] > maxDist) {
                 maxDist = dist[i][j];
-                degreeSpot = {i,j};
+                degreeSpot = {i, j};
             }
         }
     }
@@ -198,12 +206,35 @@ Direction Board::handleIntersection(Direction dir) {
     return dir;
 }
 
+void Board::resurrect(std::shared_ptr<Player> player) {
+    player->reset();
+    positions[player->Options()->id] = {Direction::RIGHT, {0,0}};
+}
+
+vector<int> Board::checkCollision(const std::shared_ptr<Player>& player) const {
+    const int id = player->Options()->id;
+    const auto &[i, j] = positions.at(id).second;
+
+    vector<int> ids;
+    for (const auto &[pid, pos]: positions) {
+        if (pid == id) {
+            continue;
+        }
+        const auto &[ii, jj] = pos.second;
+        if (ii == i && jj == j) {
+            ids.emplace_back(pid);
+        }
+    }
+    return ids;
+}
+
 void Board::update() {
     map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
     display->notify();
 }
 
 void Board::print() {
+    std::cout << "\x1B[2J\x1B[H";
     display->print();
 }
 

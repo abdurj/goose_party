@@ -5,7 +5,7 @@
 
 class DebugGame : public Game {
     void debugInput(std::string);
-    void GameLoop() override;
+    bool input(std::string) override;
     public:
         DebugGame();
 };

@@ -6,6 +6,13 @@ using namespace std;
 
 DebugGame::DebugGame() {};
 
+bool DebugGame::input(string c){
+    if(!Game::input(c)){
+        debugInput(c);
+    }
+    return true;
+}
+
 void DebugGame::debugInput(string c) {
     int player, amt;
     if(c == "move") {
@@ -31,27 +38,9 @@ void DebugGame::debugInput(string c) {
                 players.at(player)->claimDegree();
             }
         }
-    }
-}
-
-void DebugGame::GameLoop() {
-    string c = "";
-    cin.exceptions(ios::eofbit|ios::failbit);
-
-    while (playing) {
-        cout << "It is " << players[curTurn]->Options()->name << "'s turn." << " (Player " << players[curTurn]->Options()->id << ")" << endl;
-        cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
-        cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them
-        try {
-            cin >> c; 
-            if(!input(c)) {
-                debugInput(c);
-            }
-            
-        } catch (...) {
-            cerr << "An error occured when processing command. Ending game." << endl;
-            playing = false;
-            break;
-        }
+    } else if (c == "damage"){
+        cin >> player;
+        cin >> amt;
+        players.at(player)->modifyHP(amt);
     }
 }

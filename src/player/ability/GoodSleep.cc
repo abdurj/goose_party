@@ -1,4 +1,4 @@
-#include "ability/GoodSleep.h"
+#include "player/ability/GoodSleep.h"
 #include <iostream>
 using namespace std;
 

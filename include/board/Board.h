@@ -46,6 +46,10 @@ public:
     void update();
 
     void print();
+
+    std::vector<int> checkCollision(const std::shared_ptr<Player>&) const;
+
+    void resurrect(std::shared_ptr<Player>);
 };
 
 #endif // BOARD_H;
