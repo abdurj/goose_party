@@ -11,7 +11,7 @@ class BasePlayer : public Player {
     void listAbilities() const override;
     int degrees;
     int grades;
-    int hp = 5;
+    int hp = 20;
     std::shared_ptr<PlayerOptions> options;
     std::vector<std::unique_ptr<Card>> deck;
 

@@ -1,6 +1,9 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+#include <chrono>
+#include <thread>
+
 
 #include "game/Game.h"
 #include "board/Board.h"
@@ -55,10 +58,6 @@ void Game::endCycle() {
 bool Game::input(string c) {
     auto currPlayer = players[curTurn];
     if (c == "m") {
-        if(!currPlayer->alive()){
-            cout << currPlayer->Options()->name << " is being resurrected. " << endl;
-            b.resurrect(currPlayer);
-        }
 
         cout << "Rolling..." << endl;
         int moves = utils::roll();
@@ -73,12 +72,9 @@ bool Game::input(string c) {
                     challenge(currPlayer, opponent);
                 }
             }
+            b.print();
         }
         currPlayer->endTurn();
-        curTurn = (curTurn + 1) % players.size();
-        if (curTurn == 0) {
-            endCycle();
-        }
     } else if (c == "c") {
         int size = currPlayer->listCards();
         if (size == 0) {
@@ -135,6 +131,9 @@ void Game::challenge(std::shared_ptr<Player> challenger, std::shared_ptr<Player>
     if (option == 'y') {
         battle(challenger, opponent);
         battle(opponent, challenger);
+        char _;
+        cout << "Enter any character to continue" << endl;
+        cin >> _;
     }
 }
 
@@ -173,21 +172,33 @@ void Game::GameLoop() {
     cin.exceptions(ios::eofbit | ios::failbit);
 
     while (playing) {
-        auto name = players[curTurn]->Options()->name;
-        auto id = players[curTurn]->Options()->id;
-        cout << "It is " << name << "'s turn." << " (Player "
-             << id << ")" << endl;
-        cout << name << " you have " << players[curTurn]->getHP() << "hp." << endl;
-        cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
-        cout << "Enter 'c' to list the cards you have."
-             << endl; // TODO: allow player to print card description if given an i first, tell them
-        try {
-            cin >> c;
-            input(c);
-        } catch (...) {
-            cerr << "An error occured when processing command. Ending game." << endl;
-            playing = false;
-            break;
+        auto currPlayer = players[curTurn];
+        if(!currPlayer->alive()){
+            b.resurrect(currPlayer);
+            b.update();
+            b.print();
+            cout << currPlayer->Options()->name << " is being resurrected. " << endl;
+        }else{
+            auto name = currPlayer->Options()->name;
+            auto id = currPlayer->Options()->id;
+            cout << "It is " << name << "'s turn." << " (Player "
+                << id << ")" << endl;
+            cout << name << " you have " << currPlayer->getHP() << "hp." << endl;
+            cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
+            cout << "Enter 'c' to list the cards you have."
+                << endl; // TODO: allow player to print card description if given an i first, tell them
+            try {
+                cin >> c;
+                input(c);
+            } catch (...) {
+                cerr << "An error occured when processing command. Ending game." << endl;
+                playing = false;
+                break;
+            }
+        }
+        curTurn = (curTurn + 1) % players.size();
+        if (curTurn == 0) {
+            endCycle();
         }
     }
 }

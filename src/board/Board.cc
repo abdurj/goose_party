@@ -114,9 +114,6 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
     map[i][j]->apply(p);
 }
 
-int Board::getHP(int id) const{
-    return 0;
-}
 
 void Board::generateNewDegree() {
     using intPair = pair<int, int>;
@@ -232,6 +229,7 @@ void Board::update() {
 }
 
 void Board::print() {
+    std::cout << "\x1B[2J\x1B[H";
     display->print();
 }
 

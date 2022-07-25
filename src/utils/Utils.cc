@@ -30,10 +30,10 @@
 using namespace std;
 
 namespace utils {
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine eng(seed);
 
     int roll(int c) {
-        unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-        default_random_engine eng(seed);
         int roll = (eng() % 12) + c;
         cout << "Rolled a: " << roll << endl;
         return roll;
@@ -41,13 +41,11 @@ namespace utils {
 
     void shufflePlayers(vector<shared_ptr<Player>> &players) {
         // randomize order of the players. 
-        unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-        shuffle (players.begin(), players.end(), default_random_engine(seed));
+        shuffle (players.begin(), players.end(), eng);
     }
 
     unique_ptr<Card> generateCard() {
-        unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-        default_random_engine eng(seed);
+        // unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         int rand = (eng()) % 10;
         switch (rand) {
             case 0: {

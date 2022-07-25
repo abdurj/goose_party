@@ -12,10 +12,12 @@ class Game{
   int curTurn;
   std::vector<std::shared_ptr<Player>> players;
 
-  bool input(std::string);
   virtual void GameLoop();
   void endCycle();
 
+  protected:
+    virtual bool input(std::string);
+  
   public:
     Game();
     void play();
