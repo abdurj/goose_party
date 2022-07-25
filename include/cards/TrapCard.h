@@ -18,5 +18,12 @@ class ExplosiveMine : public TrapCard {
     std::string getName() override;
 };
 
+class Policy71 : public TrapCard {
+    void activate(Player*) override;
+    void apply(Player*, std::shared_ptr<Player>, Board*) override;
+    bool requiresTarget() override;
+    std::string getName() override;
+};
+
 
 #endif

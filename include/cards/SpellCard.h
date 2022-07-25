@@ -18,6 +18,7 @@ class PortalCard : public SpellCard {
         std::string getName() override;
 };
 
+// Deal 8 Damage to a player of your choice. 
 class LazeezCard: public SpellCard {
     public:
         LazeezCard();
@@ -26,6 +27,7 @@ class LazeezCard: public SpellCard {
         std::string getName() override;
 };
 
+// grants a 25% chance to move the target forward 10 spaces. Else, caller take 10 damage.
 class CS247Card: public SpellCard {
     public:
         CS247Card();
@@ -34,6 +36,7 @@ class CS247Card: public SpellCard {
         std::string getName() override;
 };
 
+// Steal 15 grades from a player of your choice. 
 class PredatorCard: public SpellCard {
     public: 
         PredatorCard();

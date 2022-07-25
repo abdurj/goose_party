@@ -1,5 +1,6 @@
 #include "cards/SpellCard.h"
 #include "player/Player.h"
+#include "utils/Utils.h"
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -45,23 +46,31 @@ bool PortalCard::requiresTarget() {
 // Lazeez
 
 LazeezCard::LazeezCard() {}
-void LazeezCard::apply(Player *, std::shared_ptr<Player>, Board*) {
-
+void LazeezCard::apply(Player *caller, std::shared_ptr<Player> p, Board* b) {
+    cout << "Dealing 8 damage to " << p->Options()->name << "." << endl;
+    p->modifyHP(-8);
 }
 bool LazeezCard::requiresTarget() {
-    return false;
+    return true;
 }
 string LazeezCard::getName() {
-    return "Lazeez";
+    return "Tactical Nutrition";
 }
 
 // CS247
 CS247Card::CS247Card() {}
 void CS247Card::apply(Player* caller, shared_ptr<Player> target, Board* b) {
-
+    int roll = utils::roll();
+    if (roll < 4) {
+        cout << "Success! Moving " << target->Options()->name << "10 spaces forward." << endl;
+        b->move(target, 20);
+    } else {
+        cout << "Failure! " << caller->Options()->name << " takes 10 damage." << endl;
+        caller->modifyHP(-10);
+    }
 }
 bool CS247Card::requiresTarget() {
-    return false;
+    return true;
 }
 string CS247Card::getName() {
     return "CS247";
@@ -70,7 +79,9 @@ string CS247Card::getName() {
 // Predator Card
 PredatorCard::PredatorCard() {}
 void PredatorCard::apply(Player *caller, shared_ptr<Player> target, Board *b) {
-
+    cout << "Stealing 15 grades from " << target->Options()->name << "." << endl;
+    caller->modifyGrades(15);
+    target->modifyGrades(-15);
 }
 bool PredatorCard::requiresTarget() {
     return true;
