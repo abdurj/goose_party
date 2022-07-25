@@ -4,7 +4,7 @@
 #include "player/PlayerDecorator.h"
 
 class TimeManagement : public PlayerDecorator {
-    void listAbilities() const override;
+    void listAbilities(std::unordered_set<std::string>&) const override;
     public:
     TimeManagement(std::shared_ptr<Player>);
 };

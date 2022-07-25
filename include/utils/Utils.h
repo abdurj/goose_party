@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <utility>
-#include <unordered_set>
 #include <vector>
 #include "player/Player.h"
 #include "tiles/Tile.h"
@@ -19,10 +18,6 @@ namespace utils {
      * @param p the Player class
      * @return int The dice roll the player got
      */
-
-    namespace {
-        static std::unordered_set<std::string> playerAbilities;
-    }
 
     int roll(int c = 0);
 
@@ -44,7 +39,7 @@ namespace utils {
 
     std::shared_ptr<Tile> beaconTile(bool inter = false);
 
-    void drawAbility(std::shared_ptr<Player> &);
+    void generateAbiltiy(std::shared_ptr<Player> &);
 }
 
 #endif //GOOSE_PARTY_UTILS_H

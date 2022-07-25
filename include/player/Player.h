@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <string>
+#include <unordered_set>
 
 #include "PlayerOptions.h"
 #include "ftxui/dom/elements.hpp"
@@ -9,7 +10,7 @@
 class Card; // for some reason it won't compile if I don't do this, even if I have card.h included
 class Board;
 class Player { //Abstract base class
-    virtual void listAbilities() const = 0;
+    virtual void listAbilities(std::unordered_set<std::string>&) const = 0;
     virtual void doEndTurn() = 0; //Better name suggestions?
     virtual void doEndCycle() = 0;
 
@@ -27,7 +28,7 @@ class Player { //Abstract base class
     virtual void modifyHP(int) = 0;
     virtual void reset() = 0;
 
-    void Abilities() const;
+    std::unordered_set<std::string> Abilities() const;
     void endTurn();
     void endCycle();
     virtual std::shared_ptr<PlayerOptions> Options() const = 0;

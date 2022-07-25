@@ -8,7 +8,7 @@
 class BasePlayer : public Player {
     void doEndTurn() override; //Better name suggestions?
     void doEndCycle() override;
-    void listAbilities() const override;
+    void listAbilities(std::unordered_set<std::string>&) const override;
     int degrees;
     int grades;
     int hp = 20;

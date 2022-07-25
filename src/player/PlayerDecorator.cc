@@ -1,5 +1,6 @@
 #include "player/PlayerDecorator.h"
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 PlayerDecorator::~PlayerDecorator() {}
@@ -12,7 +13,8 @@ void PlayerDecorator::doEndCycle() {
 void PlayerDecorator::doEndTurn() {
     playerComponent->endTurn();
 }
-void PlayerDecorator::listAbilities() const {}
+
+void PlayerDecorator::listAbilities(unordered_set<string> &set) const {}
 
 PlayerDecorator::PlayerDecorator(shared_ptr<Player> p) : playerComponent{p} {}
 

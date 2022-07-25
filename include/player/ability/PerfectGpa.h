@@ -1,13 +1,14 @@
-#ifndef GRADECURVE_H
-#define GRADECURVE_H
+#ifndef PERFECTGPA_H
+#define PERFECTGPA_H
 
 #include "player/PlayerDecorator.h"
 
-class GradeCurve : public PlayerDecorator {
+class PerfectGpa : public PlayerDecorator {
+    int count;
     void doEndCycle() override;
     void listAbilities(std::unordered_set<std::string>&) const override;
     public:
-    GradeCurve(std::shared_ptr<Player>);
+    PerfectGpa(std::shared_ptr<Player>);
 };
 
 

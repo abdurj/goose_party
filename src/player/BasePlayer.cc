@@ -51,8 +51,9 @@ void BasePlayer::doEndTurn() {}
 void BasePlayer::doEndCycle() {}
 
 
-void BasePlayer::listAbilities() const {
+void BasePlayer::listAbilities(unordered_set<string> &set) const {
     cout << options->name << "\'s abilities: " << endl;
+    ;
 }
 
 int BasePlayer::listCards() const {

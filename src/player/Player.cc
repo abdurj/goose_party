@@ -1,9 +1,12 @@
 #include "player/Player.h"
+using namespace std;
 
 Player::~Player() {}
 
-void Player::Abilities() const {
-    listAbilities();
+unordered_set<string> Player::Abilities() const {
+    unordered_set<string> playerAbilties;
+    listAbilities(playerAbilties);
+    return playerAbilties;
 }
 
 void Player::endTurn() {

@@ -6,7 +6,7 @@
 class PlayerDecorator : public Player {
     void doEndTurn() override; //Better name suggestions?
     void doEndCycle() override;
-    void listAbilities() const override;
+    void listAbilities(std::unordered_set<std::string>&) const override;
 
     protected:
     std::shared_ptr<Player> playerComponent;
