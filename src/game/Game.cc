@@ -10,7 +10,9 @@
 #include "player/Player.h"
 #include "player/BasePlayer.h"
 #include "utils/Utils.h"
-
+#include "beacon/Beacon.h"
+#include "beacon/TuitionBeacon.h"
+#include "beacon/ExamBeacon.h"
 
 using namespace std;
 
@@ -33,10 +35,10 @@ void Game::init() {
     // for (int i = 0; i < n; ++i) {
     //     cout << "Player " << i + 1 << " , please enter your name" << endl;
     // }
-    auto abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
-    auto fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
-    auto kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
-    auto kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
+    shared_ptr<Player> abdur = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::FIGHTER, "Abdur", 1));
+    shared_ptr<Player> fei = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::DEFENDER, "Fei", 2));
+    shared_ptr<Player> kev = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::MESSENGER, "Kev", 3));
+    shared_ptr<Player> kp = make_shared<BasePlayer>(make_shared<PlayerOptions>(PlayerClass::ROGUE, "KP", 4));
     players.insert(players.end(), {abdur, fei, kev, kp});
 
     // randomize player order
@@ -45,13 +47,22 @@ void Game::init() {
     for (auto &i: players) {
         b.addPlayer(i);
     }
-
+    
+    beacons.emplace_back(make_shared<TuitionBeacon>());
+    beacons.emplace_back(make_shared<ExamBeacon>());
+    //beacons[0]->activate(fei);
     playing = true;
 }
 
 void Game::endCycle() {
-    for (auto p: players) {
+    for(auto &p : players) {
         p->endCycle();
+    }
+    for(auto &beacon : beacons) {
+        if(beacon->period() == PeriodType::Cycle && beacon->Duration() > 0) {
+            beacon->effect(players, b);
+            beacon->decrementDuration();
+        }
     }
 }
 
@@ -75,6 +86,11 @@ bool Game::input(string c) {
             b.print();
         }
         currPlayer->endTurn();
+
+        curTurn = (curTurn + 1) % players.size();
+        if (curTurn == 0) {
+            endCycle();
+        }
     } else if (c == "c") {
         int size = currPlayer->listCards();
         if (size == 0) {
@@ -113,11 +129,9 @@ bool Game::input(string c) {
         else {
             cout << "Chosen card index is out of range / doesn't exist." << endl;
         }
-
     } else if (c == "q") {
         playing = false;
     } else {
-        cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
         return false;
     }
 
@@ -202,11 +216,12 @@ void Game::GameLoop() {
                 break;
             }
         }
-        curTurn = (curTurn + 1) % players.size();
-        if (curTurn == 0) {
-            endCycle();
-        }
     }
+}
+
+void Game::activateBeacon(shared_ptr<Player> &p) {
+    //int i = chrono::system_clock::now().time_since_epoch().count() % beacons.size();
+    beacons[1]->activate(p);
 }
 
 void Game::play() {

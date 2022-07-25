@@ -2,8 +2,10 @@
 #define GAME_H
 #include <vector>
 #include <string>
-#include "player/Player.h"
 #include "board/Board.h"
+
+class Player;
+class Beacon;
 
 class Game{
   protected:
@@ -11,6 +13,7 @@ class Game{
   bool playing;
   int curTurn;
   std::vector<std::shared_ptr<Player>> players;
+  std::vector<std::shared_ptr<Beacon>> beacons;
 
   virtual void GameLoop();
   void endCycle();
@@ -23,6 +26,7 @@ class Game{
     void play();
     void init();
     void notifyWinner(Player &);
+    void activateBeacon(std::shared_ptr<Player> &);
 
     std::shared_ptr<Player> getPlayer(const int &id);
 

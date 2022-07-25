@@ -14,14 +14,13 @@
 
 using namespace std;
 
-Board::Board() {
+Board::Board() : degreeSpot{0, 6}, beaconSpot{8,9}, game{nullptr} {
     map = Board::getMapTwo();
 
     x = map.at(0).size();
     y = map.size();
     // set a marker for the degreetile (hard coded initially for now)
-    degreeSpot = {0, 6};
-    game = nullptr;
+
     display = make_unique<Display>(this, x, y);
 }
 
@@ -103,6 +102,14 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
                 print();
                 return;
             }
+        }
+
+        if (pos == beaconSpot) {
+            map[i][j]->apply(p);
+            game->activateBeacon(p);
+            display->notify();
+            print();
+            return;
         }
 
         if (update) {
