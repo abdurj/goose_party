@@ -7,7 +7,14 @@ using namespace std;
 
 DebugGame::DebugGame() {};
 
-bool DebugGame::debugInput(string c) {
+bool DebugGame::input(string c){
+    if(!Game::input(c)){
+        debugInput(c);
+    }
+    return true;
+}
+
+void DebugGame::debugInput(string c) {
     int player, amt;
     if(c == "move") {
         try {
@@ -32,6 +39,10 @@ bool DebugGame::debugInput(string c) {
                 players.at(player)->claimDegree();
             }
         }
+    } else if (c == "damage"){
+        cin >> player;
+        cin >> amt;
+        players.at(player)->modifyHP(amt);
     } else if (c == "show") {
         cin >> c;
         cin >> player;
@@ -49,32 +60,6 @@ bool DebugGame::debugInput(string c) {
         cout << "Player Ordering:" << endl;
         for(int i = 0; i < players.size(); i++) {
             cout << i << ": " << players.at(i)->Options()->name << endl;
-        }
-    } else {
-        return false;
-    }
-
-    return true;
-}
-
-void DebugGame::GameLoop() {
-    string c = "";
-    cin.exceptions(ios::eofbit|ios::failbit);
-
-    while (playing) {
-        cout << "It is " << players[curTurn]->Options()->name << "'s turn." << " (Player " << players[curTurn]->Options()->id << ")" << endl;
-        cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
-        cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them
-        try {
-            cin >> c; 
-            if(!input(c)) {
-                if(!debugInput(c)) cout << "Invalid move. If you want a list of possible commands, type \"h\"" << endl;
-            }
-            
-        } catch (...) {
-            cerr << "An error occured when processing command. Ending game." << endl;
-            playing = false;
-            break;
         }
     }
 }
