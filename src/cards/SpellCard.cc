@@ -1,6 +1,7 @@
 #include "cards/SpellCard.h"
 #include "player/Player.h"
 #include "utils/Utils.h"
+#include "board/Board.h"
 #include <memory>
 #include <vector>
 #include <iostream>

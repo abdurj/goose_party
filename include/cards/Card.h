@@ -1,9 +1,9 @@
 #ifndef CARD_H
 #define CARD_H
-
-#include "player/Player.h"
-#include "board/Board.h"
-
+#include <memory>
+#include <string>
+class Player;
+class Board;
 class Card {
     public:
     virtual void apply(Player*, std::shared_ptr<Player>, Board*) = 0;
@@ -30,7 +30,7 @@ class TrapCard : public Card {
     protected:
     TrapCard();
     public:
-        virtual void activate(Player*) = 0;
+        virtual void activate(std::shared_ptr<Player>) = 0;
         //virtual void apply(std::shared_ptr<Player>, Board*) = 0;
         //virtual bool requiresTarget() = 0;
 };

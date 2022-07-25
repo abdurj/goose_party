@@ -3,7 +3,7 @@
 
 #include "tiles/TileDecorator.h"
 #include "ftxui/dom/elements.hpp"
-
+#include "cards/TrapCard.h"
 class TrapTile : public TileDecorator{
   std::unique_ptr<TrapCard> trap;
   bool activated;

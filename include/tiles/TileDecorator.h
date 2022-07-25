@@ -3,7 +3,6 @@
 
 #include "tiles/Tile.h"
 #include "ftxui/dom/elements.hpp"
-#include "cards/TrapCard.h"
 
 class TileDecorator : public Tile{
   

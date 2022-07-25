@@ -10,8 +10,8 @@ TrapTile::TrapTile(std::shared_ptr<Tile> t, std::unique_ptr<TrapCard> trap) : Ti
 
 void TrapTile::apply(shared_ptr<Player> &p) {
     if (!activated) {
-        cout << "landed on trap tile, trap activated" << endl;
-        trap->activate(p.get());
+        cout << "Landed on trap tile, trap activated." << endl;
+        trap->activate(p);
         activated = true;
     }
 

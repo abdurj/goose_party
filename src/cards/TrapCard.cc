@@ -1,11 +1,13 @@
 #include "cards/TrapCard.h"
+#include "board/Board.h"
+#include "player/Player.h"
 #include <memory>
 #include <vector>
 #include <iostream>
 
 using namespace std;
 
-void BossCard::activate(Player *p) {
+void BossCard::activate(std::shared_ptr<Player> p) {
 
 }
 
@@ -22,7 +24,7 @@ string BossCard::getName() {
 }
 
 // Explosive Mine
-void ExplosiveMine::activate(Player *p) {
+void ExplosiveMine::activate(std::shared_ptr<Player> p) {
     cout << "explosive mine activated. Lose 10 HP." << endl;
     p->modifyHP(-10);
 }
@@ -40,7 +42,7 @@ string ExplosiveMine::getName() {
 }
 
 // Policy 71 definition
-void Policy71::activate(Player *victim) {
+void Policy71::activate(std::shared_ptr<Player> victim) {
     victim->modifyGrades(INT32_MIN);
 }
 
