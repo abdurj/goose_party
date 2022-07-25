@@ -9,6 +9,7 @@ class JuiceCard : public SpellCard {
     void apply(Player*, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget() override;
     std::string getName() override;
+    std::string getDescription() override;
 };
 
 class PortalCard : public SpellCard {
@@ -17,6 +18,8 @@ class PortalCard : public SpellCard {
         void apply(Player*, std::shared_ptr<Player>, Board*) override;
         bool requiresTarget() override;
         std::string getName() override;
+        std::string getDescription() override;
+
 };
 
 // Deal 8 Damage to a player of your choice. 
@@ -26,6 +29,8 @@ class LazeezCard: public SpellCard {
         void apply(Player*, std::shared_ptr<Player>, Board*) override;
         bool requiresTarget() override;
         std::string getName() override;
+        std::string getDescription() override;
+
 };
 
 // grants a 25% chance to move the target forward 10 spaces. Else, caller take 10 damage.
@@ -35,6 +40,8 @@ class CS247Card: public SpellCard {
         void apply(Player*, std::shared_ptr<Player>, Board*) override;
         bool requiresTarget() override;
         std::string getName() override;
+        std::string getDescription() override;
+
 };
 
 // Steal 15 grades from a player of your choice. 
@@ -44,6 +51,7 @@ class PredatorCard: public SpellCard {
         void apply(Player*, std::shared_ptr<Player>, Board*) override;
         bool requiresTarget() override;
         std::string getName() override;
+        std::string getDescription() override;
 };
 
 

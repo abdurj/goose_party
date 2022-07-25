@@ -7,6 +7,7 @@ class BossCard : public TrapCard {
     void apply(Player*, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget() override;
     std::string getName() override;
+    std::string getDescription() override;
 };
 
 // Other TRAP cards defined here
@@ -16,6 +17,7 @@ class ExplosiveMine : public TrapCard {
     void apply(Player*, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget() override;
     std::string getName() override;
+    std::string getDescription() override;
 };
 
 class Policy71 : public TrapCard {
@@ -23,6 +25,7 @@ class Policy71 : public TrapCard {
     void apply(Player*, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget() override;
     std::string getName() override;
+    std::string getDescription() override;
 };
 
 

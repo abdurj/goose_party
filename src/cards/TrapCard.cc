@@ -23,6 +23,10 @@ string BossCard::getName() {
     return "Boss Trap";
 }
 
+string BossCard::getDescription() {
+    return "Leaked Info!";
+}
+
 // Explosive Mine
 void ExplosiveMine::activate(std::shared_ptr<Player> p) {
     cout << "explosive mine activated. Lose 10 HP." << endl;
@@ -41,6 +45,10 @@ string ExplosiveMine::getName() {
     return "Explosive Mine";
 }
 
+string ExplosiveMine::getDescription() {
+    return "Places a trap at current tile. If a player steps on this tile, they will take 10 damage.";
+}
+
 // Policy 71 definition
 void Policy71::activate(std::shared_ptr<Player> victim) {
     victim->modifyGrades(INT32_MIN);
@@ -57,4 +65,8 @@ bool Policy71::requiresTarget() {
 
 string Policy71::getName() {
     return "Policy71 Trap";
+}
+
+string Policy71::getDescription() {
+    return "Places a trap at current tile when used. If a player steps on this tile, they will lose ALL of their grades.";
 }
