@@ -6,7 +6,7 @@
 
 class AbilityTile : public Tile{
   public:
-    AbilityTile(bool,bool);
+    AbilityTile(int);
     void apply(std::shared_ptr<Player> &) override;
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;

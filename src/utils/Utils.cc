@@ -49,44 +49,59 @@ namespace utils {
         int rand = (eng()) % 10;
         switch (rand) {
             case 0: {
-                return make_unique<JuiceCard>();
+                return make_unique<ExplosiveMine>();
             }
             case 1: {
-                break;
+                return make_unique<Policy71>();
             }
-            default: {
+            case 2: {
+                return make_unique<PortalCard>();
+            }
+            case 3: {
+                return make_unique<LazeezCard>();
+            }
+            case 4: {
+                return make_unique<CS247Card>();
+            }
+            case 5: {
+                return make_unique<PredatorCard>();
+            }
+            case 6: {
                 return make_unique<JuiceCard>();
             }
+            default: {
+                return make_unique<ExplosiveMine>();
+            }
         }
-        return make_unique<JuiceCard>();
+        return make_unique<LazeezCard>();
     }
 
-    shared_ptr<Tile> baseCell(bool i, bool e) {
-        return make_shared<BaseTile>(i,e);
+    shared_ptr<Tile> baseCell(int t) {
+        return make_shared<BaseTile>(t);
     }
 
-    shared_ptr<Tile> degreeTile(bool i, bool e) {
-        return make_shared<DegreeTile>(i,e);
+    shared_ptr<Tile> degreeTile(int t) {
+        return make_shared<DegreeTile>(t);
     }
 
-    shared_ptr<Tile> gradeTile(bool i, bool e) {
-        return make_shared<GradeTile>(i,e);
+    shared_ptr<Tile> gradeTile(int t) {
+        return make_shared<GradeTile>(t);
     }
 
-    shared_ptr<Tile> cardTile(bool i, bool e) {
-        return make_shared<CardTile>(i,e);
+    shared_ptr<Tile> cardTile(int t) {
+        return make_shared<CardTile>(t);
     }
 
-    shared_ptr<Tile> healthTile(bool i, bool e) {
-        return make_shared<HealthTile>(i,e);
+    shared_ptr<Tile> healthTile(int t) {
+        return make_shared<HealthTile>(t);
     }
 
-    shared_ptr<Tile> abilityTile(bool i, bool e) {
-        return make_shared<AbilityTile>(i,e);
+    shared_ptr<Tile> abilityTile(int t) {
+        return make_shared<AbilityTile>(t);
     }
 
-    shared_ptr<Tile> beaconTile(bool i, bool e) {
-        return make_shared<BeaconTile>(i,e);
+    shared_ptr<Tile> beaconTile(int t) {
+        return make_shared<BeaconTile>(t);
     }
 
     void drawAbility(shared_ptr<Player> &p) { 

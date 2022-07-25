@@ -8,13 +8,10 @@
 #include "tiles/Tile.h"
 #include "display/Display.h"
 #include "player/Player.h"
-
-#define DIRECTION_RIGHT 0
-#define DIRECTION_DOWN 1
-#define DIRECTION_LEFT 2
-#define DIRECTION_UP 3
+#include "cards/Card.h"
 
 class Game;
+class TrapCard;
 
 class Board{
     static int handleIntersection(int);
@@ -44,11 +41,15 @@ public:
 
     void update();
 
+    void placeTrap(int, std::unique_ptr<TrapCard>);
+
     void print();
 
     std::vector<int> checkCollision(const std::shared_ptr<Player>&) const;
 
     void resurrect(const std::shared_ptr<Player>&);
+    // Swap the positions of two players. yt
+    void swapPositions(int, int);
 };
 
 #endif // BOARD_H;
