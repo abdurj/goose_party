@@ -266,8 +266,6 @@ void Board::print() {
 }
 
 void Board::swapPositions(int p1, int p2) {
-    // I have no idea if this works
-    auto& k = positions[p1];
     std::swap(positions[p1], positions[p2]);
 }
 
