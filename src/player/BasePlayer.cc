@@ -83,14 +83,16 @@ bool BasePlayer::alive() const {
 
 void BasePlayer::modifyHP(int amt) {
     if(amt <= 0){
-        cout << options->name << " has taken " << amt << " damage!" << endl;
+        cout << options->name << " has taken " << -amt << " damage!" << endl;
     }else{
         cout << options->name << " has healed for " << amt << " HP!" << endl;
     }
 
     hp += amt;
     if(hp <= 0){
-        cout << options->name << " has died." << endl;
+        int grades_lost = grades * 0.15;
+        cout << options->name << " has died and lost " << grades_lost << " grades!" << endl;
+        modifyGrades(-grades_lost);
     }else{
         cout << options->name << " has " << hp << " hp" << endl;
     }
@@ -99,3 +101,4 @@ void BasePlayer::modifyHP(int amt) {
 void BasePlayer::reset() {
     hp = 20;
 }
+
