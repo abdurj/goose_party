@@ -11,7 +11,7 @@ class BasePlayer : public Player {
     void listAbilities() const override;
     int degrees;
     int grades;
-    int hp = 20;
+    int hp = 5;
     std::shared_ptr<PlayerOptions> options;
     std::vector<std::unique_ptr<Card>> deck;
 
@@ -25,6 +25,7 @@ class BasePlayer : public Player {
     int listCards() const override;
     void useCard(int, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget(int) override;
+    int getHP() const override;
     bool alive() const override;
     void takeDamage(int) override;
     void reset() override;

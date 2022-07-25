@@ -20,6 +20,7 @@ class PlayerDecorator : public Player {
     int listCards() const override;
     void useCard(int, std::shared_ptr<Player>, Board*) override;
     bool requiresTarget(int) override;
+    int getHP() const override;
     bool alive() const override;
     void takeDamage(int) override;
     void reset() override;

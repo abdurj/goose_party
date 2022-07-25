@@ -52,6 +52,10 @@ ftxui::Element PlayerDecorator::getPlayerTile() {
     return playerComponent->getPlayerTile();
 }
 
+int PlayerDecorator::getHP() const{
+    return playerComponent->getHP();
+}
+
 bool PlayerDecorator::alive() const {
     return playerComponent->alive();
 }

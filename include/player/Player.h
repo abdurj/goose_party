@@ -22,6 +22,7 @@ class Player { //Abstract base class
     virtual int listCards() const = 0;
     virtual void useCard(int, std::shared_ptr<Player>, Board*) = 0;
     virtual bool requiresTarget(int) = 0;
+    virtual int getHP() const = 0;
     virtual bool alive() const = 0;
     virtual void takeDamage(int) = 0;
     virtual void reset() = 0;

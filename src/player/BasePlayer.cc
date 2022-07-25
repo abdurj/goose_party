@@ -73,6 +73,10 @@ bool BasePlayer::requiresTarget(int i) {
     return deck.at(i)->requiresTarget();
 }
 
+int BasePlayer::getHP() const{
+    return max(0, hp);
+}
+
 bool BasePlayer::alive() const {
     return hp > 0;
 }
