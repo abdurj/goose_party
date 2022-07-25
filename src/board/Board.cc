@@ -104,8 +104,13 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
         }
 
         if (update) {
+            cout << "\x1B[2K";  // CLEAR_LINE
+            cout << "\x1B[1A";  // MOVE_UP
+            cout << "\x1B[1A";  // MOVE_UP
             display->notify();
             display->print();
+            cout << endl;
+            cout << p->Options()->name << " rolled a: " << roll << endl;
             this_thread::sleep_for(chrono::milliseconds(50));
         }
     }
