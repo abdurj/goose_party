@@ -7,9 +7,11 @@ class Player;
 
 class Tile{
   bool intersection;
+  bool elbow;
   public:
-    Tile(bool);
-    bool isIntersection();
+    Tile(bool, bool = false);
+    bool isIntersection() const;
+    bool isElbow() const;
     virtual void apply(std::shared_ptr<Player> &) = 0;
     virtual ftxui::Element tileElement() = 0;
     virtual ftxui::Element getElement() = 0;

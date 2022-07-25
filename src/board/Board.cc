@@ -27,7 +27,7 @@ Board::Board() : degreeSpot{0, 6}, beaconSpot{8,9}, game{nullptr} {
 void Board::attach(Game *g) { game = g; }
 
 void Board::addPlayer(std::shared_ptr<Player> &p) {
-    positions[p->Options()->id] = {::Direction::RIGHT, {0, 0}};
+    positions[p->Options()->id] = {DIRECTION_RIGHT, {0, 0}};
     display->notify();
 }
 
@@ -45,46 +45,48 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
         bool update = false;
         if (map[i][j]->isIntersection()) {
             dir = handleIntersection(dir);
+        }else if(map[i][j]->isElbow()){
+            dir = (dir - 1) % 4;
         }
 
         switch (dir) {
-            case Direction::RIGHT: {
+            case DIRECTION_RIGHT: {
                 if (j + 1 < map[i].size() && map[i][j + 1]) {
                     ++j;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::DOWN;
+                    dir = DIRECTION_DOWN;
                 }
                 break;
             }
-            case Direction::DOWN: {
+            case DIRECTION_DOWN: {
                 if (i + 1 < map.size() && map[i + 1][j]) {
                     ++i;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::LEFT;
+                    dir = DIRECTION_LEFT;
                 }
                 break;
             }
-            case Direction::LEFT: {
+            case DIRECTION_LEFT: {
                 if (j - 1 >= 0 && map[i][j - 1]) {
                     --j;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::UP;
+                    dir = DIRECTION_UP;
                 }
                 break;
             }
-            case Direction::UP: {
+            case DIRECTION_UP: {
                 if (i - 1 >= 0 && map[i - 1][j]) {
                     --i;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::RIGHT;
+                    dir = DIRECTION_RIGHT;
                 }
                 break;
             }
@@ -192,7 +194,7 @@ void Board::generateNewDegree() {
     map[new_y][new_x] = utils::degreeTile(map[new_y][new_x]->isIntersection());
 }
 
-Direction Board::handleIntersection(Direction dir) {
+int Board::handleIntersection(int dir) {
     cout << endl;
     cout << "This tile is an intersection. Press 1 to continue on your path, or 2 to take a new path." << endl;
     int op = 0;
@@ -202,22 +204,24 @@ Direction Board::handleIntersection(Direction dir) {
     cout << "\x1B[2J\x1B[H";
     if (op == 2) {
         switch (dir) {
-            case Direction::UP:
-                return Direction::RIGHT;
-            case Direction::RIGHT:
-                return Direction::DOWN;
-            case Direction::LEFT:
-                return Direction::UP;
-            case Direction::DOWN:
-                return Direction::LEFT;
+            case DIRECTION_UP:
+                return DIRECTION_RIGHT;
+            case DIRECTION_RIGHT:
+                return DIRECTION_DOWN;
+            case DIRECTION_LEFT:
+                return DIRECTION_UP;
+            case DIRECTION_DOWN:
+                return DIRECTION_LEFT;
+            default:
+                return dir;
         }
     }
     return dir;
 }
 
-void Board::resurrect(std::shared_ptr<Player> player) {
+void Board::resurrect(const std::shared_ptr<Player>& player) {
     player->reset();
-    positions[player->Options()->id] = {Direction::RIGHT, {0,0}};
+    positions[player->Options()->id] = {DIRECTION_RIGHT, {0,0}};
 }
 
 vector<int> Board::checkCollision(const std::shared_ptr<Player>& player) const {
@@ -252,7 +256,7 @@ vector<vector<shared_ptr<Tile>>> Board::getState() {
     return map;
 }
 
-unordered_map<int, pair<::Direction, pair<int, int>>> Board::getPositions() {
+unordered_map<int, pair<int, pair<int, int>>> Board::getPositions() {
     return positions;
 }
 
