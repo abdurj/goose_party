@@ -197,13 +197,14 @@ void Game::GameLoop() {
             b.resurrect(currPlayer);
             b.update();
             b.print();
-            cout << currPlayer->Options()->name << " is being resurrected. " << endl;
+            cout << endl << currPlayer->Options()->name << " is being resurrected. " << endl;
+            curTurn = curTurn + 1 % players.size();
         }else{
             auto name = currPlayer->Options()->name;
             auto id = currPlayer->Options()->id;
             cout << "It is " << name << "'s turn." << " (Player "
                 << id << ")" << endl;
-            cout << name << " you have " << currPlayer->getHP() << "hp and " << currPlayer->getGrades() << " grades." << endl;
+            cout << name << " you have " << currPlayer->getHP() << "hp a " << currPlayer->getGrades() << "\% average." << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
             cout << "Enter 'c' to list the cards you have."
                 << endl; // TODO: allow player to print card description if given an i first, tell them
