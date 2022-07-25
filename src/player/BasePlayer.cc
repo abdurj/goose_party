@@ -102,6 +102,3 @@ void BasePlayer::reset() {
     hp = 20;
 }
 
-int BasePlayer::getGrades() const {
-    return grades;
-}

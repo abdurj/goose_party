@@ -67,7 +67,3 @@ void PlayerDecorator::modifyHP(int dmg) {
 void PlayerDecorator::reset() {
     playerComponent->reset();
 }
-
-int PlayerDecorator::getGrades() const {
-    return playerComponent->getGrades();
-}

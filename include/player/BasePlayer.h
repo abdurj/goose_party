@@ -20,7 +20,6 @@ class BasePlayer : public Player {
     int Grades() const override;
     int Degrees() const override;
     int modifyGrades(int) override; //Maybe doesn't need to be virtual? Will we have stuff that lets them get more gold?
-    int getGrades() const override;
     bool claimDegree() override;
     void addCard(std::unique_ptr<Card>) override;
     int listCards() const override;
