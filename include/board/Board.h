@@ -8,9 +8,10 @@
 #include "tiles/Tile.h"
 #include "display/Display.h"
 #include "player/Player.h"
+#include "cards/Card.h"
 
 class Game;
-
+class TrapCard;
 enum class Direction{
     UP,
     RIGHT,
@@ -46,11 +47,15 @@ public:
 
     void update();
 
+    void placeTrap(int, std::unique_ptr<TrapCard>);
+
     void print();
 
     std::vector<int> checkCollision(const std::shared_ptr<Player>&) const;
 
     void resurrect(std::shared_ptr<Player>);
+    // Swap the positions of two players. yt
+    void swapPositions(int, int);
 };
 
 #endif // BOARD_H;

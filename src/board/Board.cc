@@ -5,6 +5,7 @@
 #include <iostream>
 #include <queue>
 #include <climits>
+#include <algorithm>
 
 #include "tiles/TrapTile.h"
 
@@ -238,13 +239,24 @@ vector<int> Board::checkCollision(const std::shared_ptr<Player>& player) const {
 }
 
 void Board::update() {
-    map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
+    //map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
     display->notify();
+}
+
+void Board::placeTrap(int ID, unique_ptr<TrapCard> trap) {
+    auto[row, col] = positions.at(ID).second;
+    map[row][col] = make_shared<TrapTile>(std::move(map[row][col]), std::move(trap));
 }
 
 void Board::print() {
     std::cout << "\x1B[2J\x1B[H";
     display->print();
+}
+
+void Board::swapPositions(int p1, int p2) {
+    // I have no idea if this works
+    pair<Direction, pair<int, int>> k = positions[p1];
+    std::swap(positions[p1], positions[p2]);
 }
 
 // Getters

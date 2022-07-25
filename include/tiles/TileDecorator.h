@@ -5,16 +5,17 @@
 #include "ftxui/dom/elements.hpp"
 
 class TileDecorator : public Tile{
-  std::shared_ptr<Tile> tile;
   
   virtual ftxui::Element stylize(ftxui::Element) = 0;
+  protected:
+    std::shared_ptr<Tile> tile;
+
 
   public:
     TileDecorator(std::shared_ptr<Tile>);
-
+    void apply(std::shared_ptr<Player> &) override;
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
-
     virtual ~TileDecorator();
 };
 
