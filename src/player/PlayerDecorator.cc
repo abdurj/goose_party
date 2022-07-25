@@ -60,8 +60,8 @@ bool PlayerDecorator::alive() const {
     return playerComponent->alive();
 }
 
-void PlayerDecorator::takeDamage(int dmg) {
-    playerComponent->takeDamage(dmg);
+void PlayerDecorator::modifyHP(int dmg) {
+    playerComponent->modifyHP(dmg);
 }
 
 void PlayerDecorator::reset() {

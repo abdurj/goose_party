@@ -41,38 +41,6 @@ void DebugGame::debugInput(string c) {
     } else if (c == "damage"){
         cin >> player;
         cin >> amt;
-        players.at(player)->takeDamage(amt);
+        players.at(player)->modifyHP(amt);
     }
 }
-
-// void DebugGame::GameLoop() {
-//     string c = "";
-//     cin.exceptions(ios::eofbit|ios::failbit);
-
-//     while (playing) {
-//         auto currPlayer = players[curTurn];
-//         cout << endl;
-//         if(!currPlayer->alive()){
-//             cout << currPlayer->Options()->name << " is being resurrected. " << endl;
-//             b.resurrect(currPlayer);
-//         }
-//         auto name = players[curTurn]->Options()->name;
-//         auto id = players[curTurn]->Options()->id;
-//         cout << "It is " << name << "'s turn." << " (Player "
-//              << id << ")" << endl;
-//         cout << name << " you have " << players[curTurn]->getHP() << " hp." << endl;
-//         cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
-//         cout << "Enter 'c' to list the cards you have." << endl; // TODO: allow player to print card description if given an i first, tell them
-//         try {
-//             cin >> c; 
-//             if(!input(c)) {
-//                 debugInput(c);
-//             }
-            
-//         } catch (...) {
-//             cerr << "An error occured when processing command. Ending game." << endl;
-//             playing = false;
-//             break;
-//         }
-//     }
-// }

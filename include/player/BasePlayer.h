@@ -27,7 +27,7 @@ class BasePlayer : public Player {
     bool requiresTarget(int) override;
     int getHP() const override;
     bool alive() const override;
-    void takeDamage(int) override;
+    void modifyHP(int) override;
     void reset() override;
 
 

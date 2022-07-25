@@ -161,7 +161,7 @@ void Game::battle(const std::shared_ptr<Player>& challenger, const std::shared_p
         cout << opponentName << " chose to defend! " << endl;
         int defend = utils::roll(opponent->Options()->defence);
         int damage = max(0, attack-defend);
-        opponent->takeDamage(damage);
+        opponent->modifyHP(-damage);
     }else{
         cout << opponentName << " chose to evade! " << endl;
         int evade = utils::roll(opponent->Options()->luck);
@@ -169,7 +169,7 @@ void Game::battle(const std::shared_ptr<Player>& challenger, const std::shared_p
         if(evade >= attack){
             damage = 0;
         }
-        opponent->takeDamage(damage);
+        opponent->modifyHP(-damage);
     }
 }
 

@@ -24,7 +24,7 @@ class Player { //Abstract base class
     virtual bool requiresTarget(int) = 0;
     virtual int getHP() const = 0;
     virtual bool alive() const = 0;
-    virtual void takeDamage(int) = 0;
+    virtual void modifyHP(int) = 0;
     virtual void reset() = 0;
 
     void Abilities() const;
