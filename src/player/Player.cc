@@ -1,10 +1,7 @@
 #include "player/Player.h"
+using namespace std;
 
 Player::~Player() {}
-
-void Player::Abilities() const {
-    listAbilities();
-}
 
 void Player::endTurn() {
     doEndTurn();
@@ -12,4 +9,8 @@ void Player::endTurn() {
 
 void Player::endCycle() {
     doEndCycle();
+}
+
+void Player::ListAbilities() const {
+    abilityDesc();
 }

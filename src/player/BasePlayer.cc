@@ -47,11 +47,17 @@ void BasePlayer::addCard(unique_ptr<Card> p) {
     deck.emplace_back(move(p));
 }
 
+void BasePlayer::addAbility(string s) {
+    abilities.insert(s);
+}
+
+const unordered_set<std::string>& BasePlayer::Abilities() const {return abilities;}
+
 void BasePlayer::doEndTurn() {}
 void BasePlayer::doEndCycle() {}
 
 
-void BasePlayer::listAbilities() const {
+void BasePlayer::abilityDesc() const {
     cout << options->name << "\'s abilities: " << endl;
 }
 
@@ -72,3 +78,33 @@ void BasePlayer::useCard(int i, shared_ptr<Player> p, Board* b) {
 bool BasePlayer::requiresTarget(int i) {
     return deck.at(i)->requiresTarget();
 }
+
+int BasePlayer::getHP() const{
+    return max(0, hp);
+}
+
+bool BasePlayer::alive() const {
+    return hp > 0;
+}
+
+void BasePlayer::modifyHP(int amt) {
+    if(amt <= 0){
+        cout << options->name << " has taken " << -amt << " damage!" << endl;
+    }else{
+        cout << options->name << " has healed for " << amt << " HP!" << endl;
+    }
+
+    hp += amt;
+    if(hp <= 0){
+        int grades_lost = grades * 0.15;
+        cout << options->name << " has died and lost " << grades_lost << " grades!" << endl;
+        modifyGrades(-grades_lost);
+    }else{
+        cout << options->name << " has " << hp << " hp" << endl;
+    }
+}
+
+void BasePlayer::reset() {
+    hp = 20;
+}
+

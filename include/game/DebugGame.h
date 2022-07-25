@@ -4,8 +4,8 @@
 #include <string>
 
 class DebugGame : public Game {
-    bool debugInput(std::string);
-    void GameLoop() override;
+    void debugInput(std::string);
+    bool input(std::string) override;
     public:
         DebugGame();
 };

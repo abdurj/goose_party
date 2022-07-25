@@ -4,11 +4,11 @@
 using namespace ftxui;
 using namespace std;
 
-GradeTile::GradeTile(bool intersection) : Tile(intersection) {};
+GradeTile::GradeTile(int type) : Tile(type) {};
 
 void GradeTile::apply(shared_ptr<Player> &p) {
     cout << "landed on grade tile" << endl;
-    int roll = utils::roll(p, 20);
+    int roll = utils::roll(20);
     p->modifyGrades(roll); //TODO: adds amt based on a roll
 }
 

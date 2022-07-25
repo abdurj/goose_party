@@ -1,4 +1,5 @@
 #include "player/PlayerDecorator.h"
+#include "cards/Card.h"
 #include <iostream>
 using namespace std;
 
@@ -12,7 +13,16 @@ void PlayerDecorator::doEndCycle() {
 void PlayerDecorator::doEndTurn() {
     playerComponent->endTurn();
 }
-void PlayerDecorator::listAbilities() const {}
+
+void PlayerDecorator::abilityDesc() const {
+}
+void PlayerDecorator::addAbility(string s) {
+    playerComponent->addAbility(s);
+}
+
+const unordered_set<string>& PlayerDecorator::Abilities() const {
+    return playerComponent->Abilities();
+}
 
 PlayerDecorator::PlayerDecorator(shared_ptr<Player> p) : playerComponent{p} {}
 
@@ -50,4 +60,20 @@ shared_ptr<PlayerOptions> PlayerDecorator::Options() const {
 }
 ftxui::Element PlayerDecorator::getPlayerTile() {
     return playerComponent->getPlayerTile();
+}
+
+int PlayerDecorator::getHP() const{
+    return playerComponent->getHP();
+}
+
+bool PlayerDecorator::alive() const {
+    return playerComponent->alive();
+}
+
+void PlayerDecorator::modifyHP(int dmg) {
+    playerComponent->modifyHP(dmg);
+}
+
+void PlayerDecorator::reset() {
+    playerComponent->reset();
 }
