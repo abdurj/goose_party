@@ -99,6 +99,8 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
                 } else {
                     generateNewDegree();
                 }
+                display->notify();
+                print();
                 return;
             }
         }
