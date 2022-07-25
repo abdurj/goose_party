@@ -12,7 +12,7 @@ class TileDecorator : public Tile{
 
   public:
     TileDecorator(std::shared_ptr<Tile>);
-
+    void apply(std::shared_ptr<Player> &) override;
     ftxui::Element tileElement() override;
     ftxui::Element getElement() override;
 
