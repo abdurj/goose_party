@@ -1,10 +1,10 @@
 #include "tiles/Tile.h"
 using namespace ftxui;
 
-Tile::Tile(bool inter) : intersection{inter} {};
+Tile::Tile(int type) : type{type} {};
 
-bool Tile::isIntersection(){
-    return intersection;
+int Tile::Type() const{
+    return type;
 }
 
 Tile::~Tile(){

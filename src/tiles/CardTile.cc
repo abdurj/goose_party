@@ -6,7 +6,7 @@
 using namespace ftxui;
 using namespace std;
 
-CardTile::CardTile(bool intersection) : Tile(intersection) {};
+CardTile::CardTile(int type) : Tile(type) {};
 
 void CardTile::apply(shared_ptr<Player> &p) {
     cout << "landed on card tile" << endl;

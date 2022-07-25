@@ -5,12 +5,21 @@
 #include <iostream>
 #include <queue>
 #include <climits>
+#include <algorithm>
 
 #include "tiles/TrapTile.h"
 
 #include "display/Display.h"
 #include "utils/Utils.h"
 #include "game/Game.h"
+
+#define DIRECTION_RIGHT 0
+#define DIRECTION_DOWN 1
+#define DIRECTION_LEFT 2
+#define DIRECTION_UP 3
+
+#define TYPE_INTERSECTION 1
+#define TYPE_ELBOW 2
 
 using namespace std;
 
@@ -27,7 +36,7 @@ Board::Board() : degreeSpot{0, 6}, beaconSpot{8,9}, game{nullptr} {
 void Board::attach(Game *g) { game = g; }
 
 void Board::addPlayer(std::shared_ptr<Player> &p) {
-    positions[p->Options()->id] = {::Direction::RIGHT, {0, 0}};
+    positions[p->Options()->id] = {DIRECTION_RIGHT, {0, 0}};
     display->notify();
 }
 
@@ -43,48 +52,50 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
     int moves = 0;
     while (moves < roll) {
         bool update = false;
-        if (map[i][j]->isIntersection()) {
+        if (map[i][j]->Type() == TYPE_INTERSECTION) {
             dir = handleIntersection(dir);
+        }else if(map[i][j]->Type() == TYPE_ELBOW){
+            dir = (dir - 1) % 4;
         }
 
         switch (dir) {
-            case Direction::RIGHT: {
+            case DIRECTION_RIGHT: {
                 if (j + 1 < map[i].size() && map[i][j + 1]) {
                     ++j;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::DOWN;
+                    dir = DIRECTION_DOWN;
                 }
                 break;
             }
-            case Direction::DOWN: {
+            case DIRECTION_DOWN: {
                 if (i + 1 < map.size() && map[i + 1][j]) {
                     ++i;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::LEFT;
+                    dir = DIRECTION_LEFT;
                 }
                 break;
             }
-            case Direction::LEFT: {
+            case DIRECTION_LEFT: {
                 if (j - 1 >= 0 && map[i][j - 1]) {
                     --j;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::UP;
+                    dir = DIRECTION_UP;
                 }
                 break;
             }
-            case Direction::UP: {
+            case DIRECTION_UP: {
                 if (i - 1 >= 0 && map[i - 1][j]) {
                     --i;
                     ++moves;
                     update = true;
                 } else {
-                    dir = Direction::RIGHT;
+                    dir = DIRECTION_RIGHT;
                 }
                 break;
             }
@@ -187,12 +198,12 @@ void Board::generateNewDegree() {
     }
 
     auto [old_y, old_x] = oldDegree;
-    map[old_y][old_x] = utils::baseCell(map[old_y][old_x]->isIntersection());
+    map[old_y][old_x] = utils::baseCell(map[old_y][old_x]->Type());
     auto [new_y, new_x] = degreeSpot;
-    map[new_y][new_x] = utils::degreeTile(map[new_y][new_x]->isIntersection());
+    map[new_y][new_x] = utils::degreeTile(map[new_y][new_x]->Type());
 }
 
-Direction Board::handleIntersection(Direction dir) {
+int Board::handleIntersection(int dir) {
     cout << endl;
     cout << "This tile is an intersection. Press 1 to continue on your path, or 2 to take a new path." << endl;
     int op = 0;
@@ -202,22 +213,24 @@ Direction Board::handleIntersection(Direction dir) {
     cout << "\x1B[2J\x1B[H";
     if (op == 2) {
         switch (dir) {
-            case Direction::UP:
-                return Direction::RIGHT;
-            case Direction::RIGHT:
-                return Direction::DOWN;
-            case Direction::LEFT:
-                return Direction::UP;
-            case Direction::DOWN:
-                return Direction::LEFT;
+            case DIRECTION_UP:
+                return DIRECTION_RIGHT;
+            case DIRECTION_RIGHT:
+                return DIRECTION_DOWN;
+            case DIRECTION_LEFT:
+                return DIRECTION_UP;
+            case DIRECTION_DOWN:
+                return DIRECTION_LEFT;
+            default:
+                return dir;
         }
     }
     return dir;
 }
 
-void Board::resurrect(std::shared_ptr<Player> player) {
+void Board::resurrect(const std::shared_ptr<Player>& player) {
     player->reset();
-    positions[player->Options()->id] = {Direction::RIGHT, {0,0}};
+    positions[player->Options()->id] = {DIRECTION_RIGHT, {0,0}};
 }
 
 vector<int> Board::checkCollision(const std::shared_ptr<Player>& player) const {
@@ -238,8 +251,13 @@ vector<int> Board::checkCollision(const std::shared_ptr<Player>& player) const {
 }
 
 void Board::update() {
-    map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
+    //map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
     display->notify();
+}
+
+void Board::placeTrap(int ID, unique_ptr<TrapCard> trap) {
+    auto[row, col] = positions.at(ID).second;
+    map[row][col] = make_shared<TrapTile>(std::move(map[row][col]), std::move(trap));
 }
 
 void Board::print() {
@@ -247,12 +265,16 @@ void Board::print() {
     display->print();
 }
 
+void Board::swapPositions(int p1, int p2) {
+    std::swap(positions[p1], positions[p2]);
+}
+
 // Getters
 vector<vector<shared_ptr<Tile>>> Board::getState() {
     return map;
 }
 
-unordered_map<int, pair<::Direction, pair<int, int>>> Board::getPositions() {
+unordered_map<int, pair<int, pair<int, int>>> Board::getPositions() {
     return positions;
 }
 
@@ -282,15 +304,15 @@ vector<vector<shared_ptr<Tile>>> Board::getMapOne() {
 vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     using namespace utils;
     vector<vector<shared_ptr<Tile>>> board = {
-            {baseCell(), cardTile(), baseCell(), baseCell(),     gradeTile(), baseCell(), degreeTile(), baseCell(), baseCell(),baseCell(), baseCell(), baseCell(), baseCell(), baseCell(true),  baseCell(), baseCell(), baseCell(), baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    nullptr,      nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),      nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), baseCell(), baseCell(), baseCell(true), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),   beaconTile(), healthTile(), cardTile(), abilityTile(), baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), cardTile(), baseCell(), baseCell(),    gradeTile(),baseCell(), degreeTile(),   baseCell(), baseCell(), baseCell(),     baseCell(1),    baseCell(), baseCell(1),    baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    baseCell(), nullptr,        baseCell(),     nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    baseCell(), nullptr,        baseCell(),     nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(1),   baseCell(), baseCell(), baseCell(),     baseCell(), baseCell(2),nullptr,        baseCell(),     nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        baseCell(),     nullptr,    baseCell(2),    baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        baseCell(),     nullptr,    nullptr,        nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        baseCell(),     nullptr,    nullptr,        nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        baseCell(),     nullptr,    nullptr,        nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
+            {baseCell(), baseCell(), baseCell(), baseCell(1),   baseCell(), baseCell(), baseCell(),     baseCell(), baseCell(), beaconTile(),   healthTile(),   cardTile(), abilityTile(),  baseCell(), baseCell(), baseCell(), baseCell(), baseCell(),},
     };
 
     return board;
