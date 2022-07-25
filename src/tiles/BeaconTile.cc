@@ -3,7 +3,7 @@
 using namespace ftxui;
 using namespace std;
 
-BeaconTile::BeaconTile(bool intersection) : Tile(intersection) {};
+BeaconTile::BeaconTile(int type) : Tile(type) {};
 
 void BeaconTile::apply(shared_ptr<Player> &p) {
     cout << "landed on beacon tile" << endl;

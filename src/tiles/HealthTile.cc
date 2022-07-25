@@ -3,7 +3,7 @@
 using namespace ftxui;
 using namespace std;
 
-HealthTile::HealthTile(bool intersection) : Tile(intersection) {};
+HealthTile::HealthTile(int type) : Tile(type){};
 
 void HealthTile::apply(shared_ptr<Player> &p) {
     cout << "landed on health tile" << endl;

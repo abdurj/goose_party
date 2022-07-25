@@ -76,32 +76,32 @@ namespace utils {
         return make_unique<LazeezCard>();
     }
 
-    shared_ptr<Tile> baseCell(bool inter) {
-        return make_shared<BaseTile>(inter);
+    shared_ptr<Tile> baseCell(int t) {
+        return make_shared<BaseTile>(t);
     }
 
-    shared_ptr<Tile> degreeTile(bool inter) {
-        return make_shared<DegreeTile>(inter);
+    shared_ptr<Tile> degreeTile(int t) {
+        return make_shared<DegreeTile>(t);
     }
 
-    shared_ptr<Tile> gradeTile(bool inter) {
-        return make_shared<GradeTile>(inter);
+    shared_ptr<Tile> gradeTile(int t) {
+        return make_shared<GradeTile>(t);
     }
 
-    shared_ptr<Tile> cardTile(bool inter) {
-        return make_shared<CardTile>(inter);
+    shared_ptr<Tile> cardTile(int t) {
+        return make_shared<CardTile>(t);
     }
 
-    shared_ptr<Tile> healthTile(bool inter) {
-        return make_shared<HealthTile>(inter);
+    shared_ptr<Tile> healthTile(int t) {
+        return make_shared<HealthTile>(t);
     }
 
-    shared_ptr<Tile> abilityTile(bool inter) {
-        return make_shared<AbilityTile>(inter);
+    shared_ptr<Tile> abilityTile(int t) {
+        return make_shared<AbilityTile>(t);
     }
 
-    shared_ptr<Tile> beaconTile(bool inter) {
-        return make_shared<BeaconTile>(inter);
+    shared_ptr<Tile> beaconTile(int t) {
+        return make_shared<BeaconTile>(t);
     }
 
     void drawAbility(shared_ptr<Player> &p) { 

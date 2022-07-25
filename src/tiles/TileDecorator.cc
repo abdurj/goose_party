@@ -2,7 +2,7 @@
 
 using namespace ftxui;
 
-TileDecorator::TileDecorator(std::shared_ptr<Tile> t) : Tile(t->isIntersection()), tile{t} {};
+TileDecorator::TileDecorator(std::shared_ptr<Tile> t) : Tile(t->Type()), tile{t} {};
 
 void TileDecorator::apply(std::shared_ptr<Player> &p) {
     tile->apply(p);
