@@ -52,13 +52,28 @@ namespace utils {
                 return make_unique<ExplosiveMine>();
             }
             case 1: {
-                break;
+                return make_unique<Policy71>();
+            }
+            case 2: {
+                return make_unique<PortalCard>();
+            }
+            case 3: {
+                return make_unique<LazeezCard>();
+            }
+            case 4: {
+                return make_unique<CS247Card>();
+            }
+            case 5: {
+                return make_unique<PredatorCard>();
+            }
+            case 6: {
+                return make_unique<JuiceCard>();
             }
             default: {
                 return make_unique<ExplosiveMine>();
             }
         }
-        return make_unique<JuiceCard>();
+        return make_unique<LazeezCard>();
     }
 
     shared_ptr<Tile> baseCell(bool inter) {

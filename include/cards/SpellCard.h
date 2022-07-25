@@ -2,6 +2,7 @@
 #define SPELL_CARD_H
 #include "cards/Card.h"
 
+// 25% Chance to give the player 30 grades. Else, lose 10 grades. 
 class JuiceCard : public SpellCard {
     public:
     JuiceCard();

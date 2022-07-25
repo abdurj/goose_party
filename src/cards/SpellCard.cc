@@ -16,7 +16,14 @@ string JuiceCard::getName() {
 }
 
 void JuiceCard::apply(Player *caller, shared_ptr<Player> target, Board *b) {
-    cout << "juice card effect applied" << endl;
+    int roll = utils::roll();
+    if (roll < 4) {
+        cout << "Success! Giving 30 grades to " << caller->Options()->name << endl;
+        caller->modifyGrades(30);
+    } else {
+        cout << "Unlucky. Deducting 10 grades from " << caller->Options()->name << endl;
+        caller->modifyGrades(-10);
+    }
     // apply its effect
 }
 
