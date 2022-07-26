@@ -31,6 +31,7 @@
 #include "player/ability/PerfectGpa.h"
 #include "player/ability/CopyCat.h"
 #include "player/ability/Distracting.h"
+#include "player/ability/Overloading.h"
 
 using namespace std;
 
@@ -38,10 +39,14 @@ namespace utils {
     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
     default_random_engine eng(seed);
 
-    int roll(int c) {
-        int roll = (eng() % 12) + c;
-        cout << "Rolled a: " << roll << endl;
-        return roll;
+    int roll(int rolls) {
+        int sum = 0;
+        for(int i = 0; i < rolls; ++i) {
+            int roll = (eng() % 7);
+            sum += roll;
+            cout << "Rolled a " << roll << " on roll " << i+1 << endl;
+        }
+        return sum;
     }
 
     int roll2(int c){
@@ -121,7 +126,7 @@ namespace utils {
     }
 
     void generateAbility(shared_ptr<Player> &p) {    
-        int abilityCount = 9;
+        int abilityCount = 10;
         int n = eng() % (abilityCount+1);
         unordered_set<string> playerAbilities = p->Abilities();
         string ability;
@@ -205,7 +210,15 @@ namespace utils {
                         cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
                         return;
                     }  
-                break;                         
+                break;
+                case 9:
+                    ability = "Overloading";
+                    if(!playerAbilities.count(ability)) {
+                        p = make_shared<Overloading>(p);
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
+                        return;
+                    }  
+                break;                       
                 default:
                 cout << "Shouldn't be here" << endl;//TODO delete this
             } 

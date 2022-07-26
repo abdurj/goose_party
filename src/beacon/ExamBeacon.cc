@@ -15,6 +15,8 @@ void ExamBeacon::doActivate(shared_ptr<Player>& p) {
 }
 
 void ExamBeacon::doEffect(vector<shared_ptr<Player>> &players, Board &board) {
+    cout << "Exam Beacon Action - Everyone except " << activator->Options()->name <<
+    " takes 5 damage!" << endl;
     for(auto &p : players) {
         if(p != activator) {
             p->modifyHP(-5);
