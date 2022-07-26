@@ -58,7 +58,6 @@ add_executable(goose_party
         src/player/ability/CopyCat.cc
         src/player/ability/Distracting.cc
         src/player/ability/Overloading.cc
-        src/utils/Observer.cc
         src/utils/Utils.cc include/utils/Utils.h)
 target_include_directories(goose_party PRIVATE include)
 

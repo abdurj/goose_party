@@ -6,11 +6,9 @@
 
 #include "ftxui/dom/elements.hpp"
 
-#include "utils/Observer.h"
-
 class Board;
 
-class Display : public Observer{
+class Display{
     Board* board;
     int x;
     int y;
@@ -24,7 +22,7 @@ class Display : public Observer{
 
   public:
     Display(Board*, int, int);
-    void notify() override;
+    void notify();
     void print();
 
     void clear();
