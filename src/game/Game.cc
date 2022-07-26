@@ -23,7 +23,6 @@ void Game::notifyWinner(Player &p) {
 
 Game::Game() : b{Board()} {
     b.attach(this);
-    init();
 }
 
 void Game::setup() {
@@ -271,6 +270,7 @@ void Game::activateBeacon(shared_ptr<Player> &p) {
 }
 
 void Game::play() {
+    init();
     if (players.size() < 2) {
         cerr << "Not enough players to start the game. At least 2 player are required." << endl;
         return;
