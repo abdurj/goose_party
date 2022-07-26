@@ -209,7 +209,10 @@ int Board::handleIntersection(int dir) {
     cout << "This tile is an intersection. Press 1 to continue on your path, or 2 to take a new path." << endl;
     int op = 0;
     while (op != 1 && op != 2) {
-        cin >> op;
+        if(!(cin >> op)){
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
     }
     cout << "\x1B[2J\x1B[H";
     if (op == 2) {
