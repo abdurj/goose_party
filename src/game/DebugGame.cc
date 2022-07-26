@@ -106,7 +106,8 @@ void DebugGame::debugInput(string c) {
         } else if (c == "turn") {
             try {
                 cin >> player;
-                players.at(player)->endTurn(players);
+                int index = getPlayerIndex(player);
+                players.at(index)->endTurn(players);
             } catch (...) {
                 cout << "invalid player" << endl;
                 cin.clear();
