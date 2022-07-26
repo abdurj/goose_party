@@ -33,6 +33,7 @@ public:
     void activateBeacon(const std::shared_ptr<Player> &);
 
     std::shared_ptr<Player> getPlayer(const int &id);
+    int getPlayerIndex(const int id); // returns player index in order
 };
 
 #endif // GAME_H
