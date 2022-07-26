@@ -77,10 +77,6 @@ void DebugGame::debugInput(string c) {
                 cin.clear();
                 cin.ignore();
             }
-        } else if(c == "beacons") {
-            for(auto &beacon : beacons) {
-                beacon->Desc();
-            }
         } else if(c == "clear") {
             system("clear");
         } else if(c == "ordering") {
@@ -88,9 +84,6 @@ void DebugGame::debugInput(string c) {
             for(int i = 0; i < players.size(); i++) {
                 cout << i << ": " << players.at(i)->Options()->name << endl;
             }
-        } else if(c == "inspect") {
-            cin >> player;
-            players.at(player)->info();
         }
     } catch(...) {
         cerr << "Invalid debug command." << endl;
