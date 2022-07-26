@@ -7,7 +7,7 @@ using namespace std;
 
 
 DebugGame::DebugGame() {
-    cout << "******* IN DEBUG MODE ******" << endl;
+    cout << "******* IN DEBUG MODE *******" << endl;
 };
 
 bool DebugGame::input(string c) {
@@ -23,16 +23,18 @@ void DebugGame::debugInput(string c) {
         if (c == "move") {
             cin >> player;
             cin >> amt;
-            b.move(players.at(player), amt);
+            auto p = getPlayer(player);
+            b.move(p, amt);
         } else if (c == "battle") {
             string cmd;
             cin >> cmd;
             if (cmd == "check") {
                 cin >> player;
-                vector<int> potentialBattles = b.checkCollision(players.at(player));
+                auto p = getPlayer(player);
+                vector<int> potentialBattles = b.checkCollision(p);
                 if (!potentialBattles.empty()) {
                     for (const int &id: potentialBattles)
-                        challenge(getPlayer(player), getPlayer(id));
+                        challenge(p, getPlayer(id));
                 }
                 b.print();
             } else if (cmd == "force") {
@@ -46,24 +48,24 @@ void DebugGame::debugInput(string c) {
         } else if (c == "add") {
             cin >> c;
             cin >> player;
-
+            auto p = getPlayer(player);
             if (c == "grades") {
                 cin >> amt;
-                players.at(player)->modifyGrades(amt);
+                p->modifyGrades(amt);
             } else if (c == "degrees") {
                 cin >> amt;
                 for (int i = 0; i < amt; ++i) {
-                    players.at(player)->modifyGrades(30);
-                    players.at(player)->claimDegree();
+                    p->modifyGrades(30);
+                    p->claimDegree();
                 }
             } else if (c == "card") {
                 int card;
                 cin >> card;
-                players.at(player)->addCard(utils::generateCard(card));
+                p->addCard(utils::generateCard(card));
             } else if (c == "abilities") {
                 int ability;
                 cin >> ability;
-                utils::generateAbility(players.at(player), ability);
+                utils::generateAbility(p, ability);
             } else {
                 cin.clear();
                 cin.ignore();
@@ -71,18 +73,20 @@ void DebugGame::debugInput(string c) {
         } else if (c == "damage") {
             cin >> player;
             cin >> amt;
-            players.at(player)->modifyHP(amt);
+            auto p = getPlayer(player);
+            p->modifyHP(amt);
         } else if (c == "show") {
             cin >> c;
             cin >> player;
+            auto p = getPlayer(player);
             if (c == "grades") {
-                cout << players.at(player)->Options()->name << "'s Grades: "
-                     << players.at(player)->Grades() << endl;
+                cout << p->Options()->name << "'s Grades: "
+                     << p->Grades() << endl;
             } else if (c == "hp") {
-                cout << players.at(player)->Options()->name << "'s HP: "
-                     << players.at(player)->getHP() << endl;
+                cout << p->Options()->name << "'s HP: "
+                     << p->getHP() << endl;
             } else if (c == "abilities") {
-                players.at(player)->ListAbilities();
+                p->ListAbilities();
             } else {
                 cin.clear();
                 cin.ignore();
@@ -92,7 +96,7 @@ void DebugGame::debugInput(string c) {
         } else if (c == "ordering") {
             cout << "Player Ordering:" << endl;
             for (int i = 0; i < players.size(); i++) {
-                cout << i << ": " << players.at(i)->Options()->name << endl;
+                cout << i << ": " << getPlayer(i)->Options()->name << endl;
             }
         }
     } catch (...) {
