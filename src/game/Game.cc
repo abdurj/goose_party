@@ -168,6 +168,19 @@ bool Game::input(string c) {
         }
     } else if (c == "ci") {
         currPlayer->cardDescriptions();
+    } else if(c == "beacons") {
+        for(auto &beacon : beacons) {
+            beacon->Desc();
+        }
+    } else if(c == "inspect") {
+        int player;
+        cin >> player;
+        if(player > 0 && player <= players.size()) {
+            getPlayer(player)->info();
+            getPlayer(player)->ListAbilities();
+        } else {
+            cout << "Invalid Player" << endl;
+        }
     } else if (c == "q") {
         playing = false;
     } else {

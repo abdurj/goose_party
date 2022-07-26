@@ -6,7 +6,9 @@
 using namespace std;
 
 
-DebugGame::DebugGame() {};
+DebugGame::DebugGame() {
+    cout << "******* IN DEBUG MODE ******" << endl;
+};
 
 bool DebugGame::input(string c) {
     if (!Game::input(c)) {
@@ -81,20 +83,13 @@ void DebugGame::debugInput(string c) {
                 cin.clear();
                 cin.ignore();
             }
-        } else if (c == "beacons") {
-            for (auto &beacon: beacons) {
-                beacon->Desc();
-            }
-        } else if (c == "clear") {
-            system("clear");
+        } else if(c == "clear") {
+            cout << "\x1B[2J\x1B[H";
         } else if (c == "ordering") {
             cout << "Player Ordering:" << endl;
             for (int i = 0; i < players.size(); i++) {
                 cout << i << ": " << players.at(i)->Options()->name << endl;
             }
-        } else if (c == "inspect") {
-            cin >> player;
-            players.at(player)->info();
         }
     } catch (...) {
         cerr << "Invalid debug command." << endl;
