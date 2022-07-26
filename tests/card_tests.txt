@@ -13,14 +13,14 @@ add card 0 4 ci
 add card 0 5 ci
 add card 0 6 ci
 add card 0 7 ci
-move 0 2
+move 1 2
 ci
 c 0 
 c 0 
-move 0 1
+move 1 1
 move 1 2
 inspect 2
-move 0 3
+move 1 3
 add grades 1 50
 ci
 c 0 1

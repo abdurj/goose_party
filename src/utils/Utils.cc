@@ -7,9 +7,18 @@
 #include <random>
 #include <unordered_set>
 
-#include "cards/SpellCard.h"
-#include "cards/TrapCard.h"
-#include "cards/Card.h"
+// #include "cards/SpellCard.h"
+// #include "cards/TrapCard.h"
+// #include "cards/Card.h"
+#include "cards/spells/CS247Card.h"
+#include "cards/spells/HealthCard.h"
+#include "cards/spells/JuiceCard.h"
+#include "cards/spells/LazeezCard.h"
+#include "cards/spells/PortalCard.h"
+#include "cards/spells/PredatorCard.h"
+#include "cards/traps/Boss.h"
+#include "cards/traps/Explosive.h"
+#include "cards/traps/Policy71.h"
 
 #include "tiles/BaseTile.h"
 #include "tiles/TrapTile.h"

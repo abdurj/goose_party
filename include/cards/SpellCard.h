@@ -1,68 +1,25 @@
 #ifndef SPELL_CARD_H
 #define SPELL_CARD_H
 #include "cards/Card.h"
+// Player will have a use() method which will call card->apply(Player), but how do we handle cases when a card effect does not need a player?
+// Option 1 - Must always pass in a player. Spell cards that don't need a player will pass in the player calling it. But this would require that we know the type of the card, breaking polymorphism
+// Option 2 - We can distinguish between cards using a function that tells the caller whether it requires a target, and work polymorphically with the spell and trap cards. 
 
-// 25% Chance to give the player 30 grades. Else, lose 10 grades. 
-class JuiceCard : public SpellCard {
+class SpellCard : public Card {
+    protected:
+    SpellCard();
     public:
-    JuiceCard();
-    void apply(Player*, std::shared_ptr<Player>, Board*) override;
-    bool requiresTarget() override;
-    std::string getName() override;
-    std::string getDescription() override;
-};
-
-class PortalCard : public SpellCard {
-    public:
-        PortalCard();
-        void apply(Player*, std::shared_ptr<Player>, Board*) override;
-        bool requiresTarget() override;
-        std::string getName() override;
-        std::string getDescription() override;
+    //virtual void apply(std::shared_ptr<Player>, Board*) = 0;
+    //virtual bool requiresTarget() = 0;
 
 };
 
-// Deal 8 Damage to a player of your choice. 
-class LazeezCard: public SpellCard {
-    public:
-        LazeezCard();
-        void apply(Player*, std::shared_ptr<Player>, Board*) override;
-        bool requiresTarget() override;
-        std::string getName() override;
-        std::string getDescription() override;
 
-};
 
-// grants a 25% chance to move the target forward 10 spaces. Else, caller take 10 damage.
-class CS247Card: public SpellCard {
-    public:
-        CS247Card();
-        void apply(Player*, std::shared_ptr<Player>, Board*) override;
-        bool requiresTarget() override;
-        std::string getName() override;
-        std::string getDescription() override;
 
-};
 
-// Steal 15 grades from a player of your choice. 
-class PredatorCard: public SpellCard {
-    public: 
-        PredatorCard();
-        void apply(Player*, std::shared_ptr<Player>, Board*) override;
-        bool requiresTarget() override;
-        std::string getName() override;
-        std::string getDescription() override;
-};
 
-// Heal for 10 HP. 
-class HealthCard : public SpellCard {
-    public:
-        HealthCard();
-        void apply(Player*, std::shared_ptr<Player>, Board*) override;
-        bool requiresTarget() override;
-        std::string getName() override;
-        std::string getDescription() override;
-};
+
 
 
 // Other spell cards defined here
