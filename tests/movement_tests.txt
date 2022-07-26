@@ -1,0 +1,43 @@
+kev
+1
+abdur
+2
+fei
+3
+done
+move 1 2
+inspect 1  
+move 1 2 
+move 1 2 
+inspect 1 
+move 1 9
+1
+2
+inspect 1 
+damage 1 -10
+move 1 23
+inspect 1 
+move 1 1 
+inspect 1 
+move 1 4
+1
+move 1 4
+inspect 1 
+move 1 1
+move 1 25
+inspect 1
+move 1 25
+1
+1
+inspect 1 
+move 1 25
+2
+2
+inspect 1
+move 1 25
+2
+2
+1
+inspect 1
+q
+
