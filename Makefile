@@ -1,2 +1,2 @@
 all : 
-	cd build && $(MAKE)
+	mkdir build && cd build && cmake .. && $(MAKE)
