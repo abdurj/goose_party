@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Attendance::Attendance(shared_ptr<Player> p) : count{1}, PlayerDecorator{p} {
+Attendance::Attendance(shared_ptr<Player> p) : count{0}, PlayerDecorator{p} {
     p->addAbility("Attendance");
 }
 
@@ -13,7 +13,7 @@ void Attendance::abilityDesc() const {
 
 void Attendance::doEndTurn(vector<shared_ptr<Player>>& players) {
     playerComponent->endTurn(players);
-    count = (count+1)%4;
+    count = (count+1)%2;
     if(count == 0) {
         cout << playerComponent->Options()->name << "'s Attendance ability has activated. They will now get 8 grades." << endl;
         playerComponent->modifyGrades(8);

@@ -20,7 +20,7 @@ void CopyCat::doEndCycle(vector<shared_ptr<Player>>& players) {
     int victim;
     try {
         cin >> victim;
-        playerComponent->modifyGrades(abs(players.at(victim)->modifyGrades(-5))); 
+        playerComponent->modifyGrades(abs(players.at(victim)->modifyGrades(-10))); 
     } catch(...) {
         cout << "Error stealing grades from chosen player." << endl;
         cin.clear();
