@@ -1,5 +1,6 @@
 #include "game/DebugGame.h"
 #include "beacon/Beacon.h"
+#include "utils/Utils.h"
 #include <iostream>
 
 using namespace std;
@@ -36,14 +37,18 @@ void DebugGame::debugInput(string c) {
     } else if (c == "add") {
         cin >> c;
         cin >> player;
-        cin >> amt;
+        
         if(c == "grades") {
+            cin >> amt;
             players.at(player)->modifyGrades(amt);
         } else if (c == "degrees") {
+            cin >> amt;
             for(int i = 0; i < amt; ++i) {
                 players.at(player)->modifyGrades(30);
                 players.at(player)->claimDegree();
             }
+        } else if (c == "card") {
+            players.at(player)->addCard(utils::generateCard());
         }
     } else if (c == "damage"){
         cin >> player;
@@ -58,6 +63,8 @@ void DebugGame::debugInput(string c) {
         } else if (c == "hp") {
             cout << players.at(player)->Options()->name << "'s HP: "
             << players.at(player)->getHP() << endl;
+        } else if (c == "abilities") {
+            players.at(player)->ListAbilities();
         }
     } else if(c == "beacons") {
         for(auto &beacon : beacons) {
