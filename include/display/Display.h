@@ -22,7 +22,7 @@ class Display{
 
   public:
     Display(Board*, int, int);
-    void notify() override;
+    void notify();
     void print();
 
     void clear();
