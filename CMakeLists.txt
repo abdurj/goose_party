@@ -29,6 +29,15 @@ add_executable(goose_party
         src/cards/Card.cc
         src/cards/SpellCard.cc
         src/cards/TrapCard.cc
+        src/cards/spells/CS247Card.cc
+        src/cards/spells/HealthCard.cc
+        src/cards/spells/JuiceCard.cc
+        src/cards/spells/LazeezCard.cc
+        src/cards/spells/PortalCard.cc
+        src/cards/spells/PredatorCard.cc
+        src/cards/traps/Boss.cc
+        src/cards/traps/Explosive.cc
+        src/cards/traps/Policy71.cc 
         src/tiles/Tile.cc
         src/tiles/BaseTile.cc
         src/tiles/DegreeTile.cc
