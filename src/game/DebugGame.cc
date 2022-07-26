@@ -21,7 +21,7 @@ void DebugGame::debugInput(string c) {
         cin >> amt;
         b.move(players.at(player), amt);
 
-        vector<int> potentialBattles = b.checkCollision(getPlayer(player));
+        vector<int> potentialBattles = b.checkCollision(players.at(player));
         if (!potentialBattles.empty()) {
             for (const int &id: potentialBattles) {
                 shared_ptr<Player> opponent = getPlayer(id);

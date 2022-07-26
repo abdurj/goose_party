@@ -269,8 +269,8 @@ void Game::GameLoop() {
 }
 
 void Game::activateBeacon(shared_ptr<Player> &p) {
-    //int i = chrono::system_clock::now().time_since_epoch().count() % beacons.size();
-    beacons[1]->activate(p);
+    int i = utils::rng(beacons.size()-1);
+    beacons.at(i)->activate(p);
 }
 
 void Game::play() {

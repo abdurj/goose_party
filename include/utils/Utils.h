@@ -22,6 +22,15 @@ namespace utils {
     int roll(int c = 0);
     int roll2(int c = 0);
 
+    /**
+     * @brief Generates a random number
+     *
+     * @param u upper bound inclusive
+     * @param l lower bound inclusive, default 0
+     * @return random number
+     */
+    int rng(int u, int l = 0);
+
     void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
 
     std::unique_ptr<Card> generateCard();

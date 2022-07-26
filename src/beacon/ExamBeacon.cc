@@ -17,11 +17,11 @@ void ExamBeacon::doActivate(shared_ptr<Player>& p) {
 void ExamBeacon::doEffect(vector<shared_ptr<Player>> &players, Board &board) {
     for(auto &p : players) {
         if(p != activator) {
-            p->modifyHP(-2);
+            p->modifyHP(-5);
         }
     }
 }
 
 string ExamBeacon::getDesc() const {
-    return "Exam Beacon - At the end of every cycle for 2 cycles, every player except the activator takes 2 damage.";
+    return "Exam Beacon - At the end of every cycle for 2 cycles, every player except the activator takes 5 damage.";
 }

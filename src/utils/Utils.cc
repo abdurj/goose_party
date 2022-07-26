@@ -50,6 +50,11 @@ namespace utils {
         return roll;
     }
 
+    int rng(int u, int l) {
+        int n = (eng() % (u+1)) + l;
+        return min(n , u);
+    }
+
     void shufflePlayers(vector<shared_ptr<Player>> &players) {
         // randomize order of the players. 
         shuffle (players.begin(), players.end(), eng);
