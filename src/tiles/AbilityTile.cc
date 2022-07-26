@@ -7,8 +7,8 @@ using namespace std;
 AbilityTile::AbilityTile(int type) : Tile(type) {};
 
 void AbilityTile::apply(shared_ptr<Player> &p) {
-    cout << "landed on ability tile" << endl;
-    utils::generateAbility(p);
+    cout << "Landed on ability tile!" << endl;
+    utils::generateAbiltiy(p);
 }
 
 Element AbilityTile::tileElement() {
