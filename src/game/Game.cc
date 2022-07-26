@@ -131,7 +131,11 @@ bool Game::input(string c) {
         cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
 
         int index;
-        cin >> index;
+        if(!(cin >> index)){
+            cout << "Invalid cmd" << endl;
+            cin.clear();
+            return true;
+        }
 
         if (index < 0) {
             return true;
@@ -256,8 +260,7 @@ void Game::GameLoop() {
                 input(c);
             } catch (...) {
                 cerr << "An error occured when processing command" << endl;
-                // playing = false;
-                // break;
+                cin.clear();
             }
         }
     }

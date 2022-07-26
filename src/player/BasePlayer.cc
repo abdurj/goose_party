@@ -25,7 +25,7 @@ Element BasePlayer::getPlayerTile() {
 int BasePlayer::modifyGrades(int amt) { //Returns int because we can re-use this for "stealing" grades
     int tmp = grades;
     grades = max(0, grades + amt);
-    return min(|amt|, tmp);
+    return min(abs(amt), tmp);
 }
 
 bool BasePlayer::claimDegree() { //Returns true if a degree was claimed
