@@ -9,8 +9,10 @@ using namespace std;
 CardTile::CardTile(int type) : Tile(type) {};
 
 void CardTile::apply(shared_ptr<Player> &p) {
-    cout << "landed on card tile" << endl;
-    p->addCard(move(utils::generateCard()));
+    cout << "Landed on card tile" << endl;
+    unique_ptr<Card> card = utils::generateCard();
+    cout << p->Options()->name << " has obtained a " << card->getName() << " card!" << endl;
+    p->addCard(move(card));
 }
 
 Element CardTile::tileElement() {

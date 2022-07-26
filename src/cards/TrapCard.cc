@@ -29,9 +29,8 @@ string BossCard::getDescription() {
 
 // Explosive Mine
 void ExplosiveMine::activate(std::shared_ptr<Player> p) {
-    cout << "explosive mine activated. Lose 10 HP." << endl;
+    cout << "EXPLOSIVE MINE ACTIVATED. Lose 10 HP." << endl;
     p->modifyHP(-10);
-    t
 }
 
 void ExplosiveMine::apply(Player *caller, shared_ptr<Player> target, Board *b) {
@@ -52,6 +51,7 @@ string ExplosiveMine::getDescription() {
 
 // Policy 71 definition
 void Policy71::activate(std::shared_ptr<Player> victim) {
+    cout << "Policy 71 TRAP ACTIVATED." << victim->Options()->name << " loses ALL their grades!" << endl;
     victim->modifyGrades(INT32_MIN);
 }
 
