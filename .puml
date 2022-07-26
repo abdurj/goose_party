@@ -1,0 +1,534 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class AbilityTile {
+	+AbilityTile(int)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	+apply(Player) : void
+}
+
+
+class AllNighter {
+	+AllNighter(Player)
+}
+
+
+class Attendance {
+	+Attendance(Player)
+}
+
+
+class BasePlayer {
+	+BasePlayer(PlayerOptions)
+	+alive() : bool
+	+claimDegree() : bool
+	+requiresTarget(int) : bool
+	+Degrees() : int
+	+Grades() : int
+	+getHP() : int
+	+listCards() : int
+	+modifyGrades(int) : int
+	+Options() : PlayerOptions
+	+Abilities() : unordered_set<string>
+	+addAbility(string) : void
+	+addCard(Card) : void
+	+cardDescriptions() : void
+	+info() : void
+	+modifyHP(int) : void
+	+reset() : void
+	+useCard(int, Player, Board) : void
+}
+
+
+class BaseTile {
+	+BaseTile(int)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	+apply(Player) : void
+}
+
+
+abstract class Beacon {
+	+Beacon()
+	+Duration() : int
+	+{abstract} period() : PeriodType
+	+Desc() : void
+	+activate(Player) : void
+	+decrementDuration() : void
+	+effect(vector<Player>, Board) : void
+}
+
+
+class BeaconTile {
+	+BeaconTile(int)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	+apply(Player) : void
+}
+
+
+class Board {
+	+Board()
+	+getPositions() : unordered_map<int , pair<int , pair<int , int>>>
+	+checkCollision(Player) : vector<int>
+	+getState() : vector<vector<Tile>>
+	+addPlayer(Player) : void
+	+attach(Game) : void
+	+move(Player, int) : void
+	+placeTrap(int, TrapCard) : void
+	+print() : void
+	+resurrect(Player) : void
+	+swapPositions(int, int) : void
+	+update() : void
+}
+
+
+class BonusMarks {
+    + BonusMarks(Player)
+}
+
+
+class BossCard {
+    + apply(Player) : void
+}
+
+
+class CS247Card {
+	+requiresTarget() : bool
+	+getDescription() : string
+	+getName() : string
+	+apply(Player, Player, Board) : void
+}
+
+
+abstract class Card {
+	+{abstract} requiresTarget() : bool
+	+{abstract} getDescription() : string
+	+{abstract} getName() : string
+	+{abstract} apply(Player, Player, Board) : void
+}
+
+
+class CardTile {
+	+CardTile(int)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	+apply(Player) : void
+}
+
+
+class CopyCat {
+	+CopyCat(Player)
+}
+
+
+class DebugGame {
+	+DebugGame()
+	-input(string) : bool
+	-debugInput(string) : void
+}
+
+
+class DegreeTile {
+	+DegreeTile(int)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	+apply(Player) : void
+}
+
+
+class Display {
+	+Display(Board, int, int)
+	+clear() : void
+	+notify() : void
+	+print() : void
+}
+
+
+class Distracting {
+	+Distracting(Player)
+}
+
+
+class ExamBeacon {
+	+ExamBeacon()
+	+period() : PeriodType
+}
+
+
+class ExplosiveMine {
+    + apply(Player) : void
+}
+
+
+class Game {
+	-input(string) : bool
+	+Game()
+	+getPlayer(int) : Player
+	+activateBeacon(Player) : void
+	+notifyWinner(Player) : void
+	+play() : void
+}
+
+
+class GoodSleep {
+	+GoodSleep(Player)
+}
+
+
+class GradeCurve {
+	+GradeCurve(Player)
+}
+
+
+class GradeTile {
+	+GradeTile(int)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	+apply(Player) : void
+}
+
+
+class HealthTile {
+	+HealthTile(int)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	+apply(Player) : void
+}
+
+
+class JuiceCard {
+	+requiresTarget() : bool
+	+getDescription() : std::string
+	+getName() : std::string
+	+apply(Player, Player, Board) : void
+}
+
+
+class LazeezCard {
+	+requiresTarget() : bool
+	+getDescription() : std::string
+	+getName() : std::string
+	+apply(Player, Player, Board) : void
+}
+
+class Overloading {
+	+Overloading(Player)
+}
+
+
+class PerfectGpa {
+	+PerfectGpa(Player)
+}
+
+
+abstract class Player {
+	+{abstract} alive() : bool
+	+{abstract} claimDegree() : bool
+	+{abstract} requiresTarget(int) : bool
+	+{abstract} Degrees() : int
+	+{abstract} Grades() : int
+	+Rolls() : int
+	+{abstract} getHP() : int
+	+{abstract} listCards() : int
+	+{abstract} modifyGrades(int) : int
+	+{abstract} Options() : PlayerOptions
+	+{abstract} Abilities() : unordered_set<string>
+	+ListAbilities() : void
+	+{abstract} addAbility(string) : void
+	+{abstract} addCard(Card) : void
+	+{abstract} cardDescriptions() : void
+	+endCycle(vector<Player>) : void
+	+endTurn(vector<Player>) : void
+	+{abstract} info() : void
+	+{abstract} modifyHP(int) : void
+	+{abstract} reset() : void
+	+{abstract} useCard(int, Player, Board) : void
+}
+
+
+abstract class PlayerDecorator {
+	+PlayerDecorator(Player)
+	+alive() : bool
+	+claimDegree() : bool
+	+requiresTarget(int) : bool
+	+Degrees() : int
+	+Grades() : int
+	+getHP() : int
+	+listCards() : int
+	+modifyGrades(int) : int
+	+Options() : PlayerOptions
+	+Abilities() : unordered_set<string>
+	+addAbility(string) : void
+	+addCard(Card) : void
+	+cardDescriptions() : void
+	+info() : void
+	+modifyHP(int) : void
+	+reset() : void
+	+useCard(int, Player, Board) : void
+}
+
+
+class Policy71 {
+    + apply(Player) : void
+}
+
+
+class PortalCard {
+	+requiresTarget() : bool
+	+getDescription() : std::string
+	+getName() : std::string
+	+apply(Player, Player>, Board) : void
+}
+
+class HealthCard {
+	+HealthCard()
+	+requiresTarget() : bool
+	+getDescription() : std::string
+	+getName() : std::string
+	+apply(Player, Player>, Board) : void
+}
+
+class PredatorCard {
+	+requiresTarget() : bool
+	+getDescription() : std::string
+	+getName() : std::string
+	+apply(Player, Player, Board) : void
+}
+
+
+abstract class SpellCard {
+}
+
+
+abstract class Tile {
+	+Tile(int)
+	+{abstract} getElement() : ftxui::Element
+	+{abstract} tileElement() : ftxui::Element
+	+Type() : int
+	+{abstract} apply(Player) : void
+}
+
+
+abstract class TileDecorator {
+	+TileDecorator(Tile)
+	+getElement() : ftxui::Element
+	+tileElement() : ftxui::Element
+	#tile : Tile
+	+apply(Player) : void
+}
+
+
+class TimeManagement {
+	+TimeManagement(Player)
+}
+
+
+abstract class TrapCard {
+	+{abstract} activate(Player) : void
+}
+
+
+class TrapTile {
+	+TrapTile(Tile)
+	+TrapTile(Tile, TrapCard)
+	+apply(Player) : void
+}
+
+
+class TuitionBeacon {
+	+TuitionBeacon()
+	+period() : PeriodType
+}
+
+
+enum PeriodType {
+	Cycle
+	Turn
+}
+
+
+enum PlayerClass {
+	DEFENDER
+	FIGHTER
+	MESSENGER
+	ROGUE
+}
+
+
+class PlayerOptions {
+	+PlayerOptions(PlayerClass, std::string, int)
+	+pClass : const PlayerClass
+	+id : const int
+	+name : const string
+	+attack : int
+	+defence : int
+	+luck : int
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+.Beacon <|-- .ExamBeacon
+
+
+.Beacon <|-- .TuitionBeacon
+
+
+.Card <|-- .SpellCard
+
+
+.Card <|-- .TrapCard
+
+
+.Game <|-- .DebugGame
+
+
+
+.Player <|-- .BasePlayer
+
+
+.Player <|-- .PlayerDecorator
+
+
+.PlayerDecorator <|-- .AllNighter
+
+
+.PlayerDecorator <|-- .Attendance
+
+
+.PlayerDecorator <|-- .BonusMarks
+
+
+.PlayerDecorator <|-- .CopyCat
+
+
+.PlayerDecorator <|-- .Distracting
+
+
+.PlayerDecorator <|-- .GoodSleep
+
+
+.PlayerDecorator <|-- .GradeCurve
+
+
+.PlayerDecorator <|-- .Overloading
+
+
+.PlayerDecorator <|-- .PerfectGpa
+
+
+.PlayerDecorator <|-- .TimeManagement
+
+
+.SpellCard <|-- .CS247Card
+
+
+.SpellCard <|-- .JuiceCard
+
+
+.SpellCard <|-- .LazeezCard
+
+
+.SpellCard <|-- .PortalCard
+
+
+.SpellCard <|-- .PredatorCard
+
+.SpellCard <|-- .HealthCard
+
+.Tile <|-- .AbilityTile
+
+
+.Tile <|-- .BaseTile
+
+
+.Tile <|-- .BeaconTile
+
+
+.Tile <|-- .CardTile
+
+
+.Tile <|-- .DegreeTile
+
+
+.Tile <|-- .GradeTile
+
+
+.Tile <|-- .HealthTile
+
+
+.Tile <|-- .TileDecorator
+
+
+.TileDecorator <|-- .TrapTile
+
+
+.TrapCard <|-- .BossCard
+
+
+.TrapCard <|-- .ExplosiveMine
+
+
+.TrapCard <|-- .Policy71
+
+
+
+
+
+/' Aggregation relationships '/
+
+.BasePlayer *-- .Card
+
+
+.BasePlayer *-- .PlayerOptions
+
+
+.Beacon *-- .Player
+
+
+.Board *-- .Display
+
+
+.Board o-- .Game
+
+
+.Board *-- .Tile
+
+
+.Display o-- .Board
+
+
+.Game *-- .Beacon
+
+
+.Game *-- .Board
+
+
+.Game *-- .Player
+
+
+.PlayerDecorator *-- .Player
+
+
+.PlayerOptions *-- .PlayerClass
+
+
+.TileDecorator *-- .Tile
+
+.TrapTile *-- .TrapCard
+
+.Beacon::period -- PeriodType
+
+/' Nested objects '/
+
+@enduml
