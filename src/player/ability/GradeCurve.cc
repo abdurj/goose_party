@@ -12,7 +12,7 @@ void GradeCurve::abilityDesc() const {
 }
 
 void GradeCurve::doEndCycle(vector<shared_ptr<Player>>& players) {
-    playerComponent->endCycle(players);\
+    playerComponent->endCycle(players);
     cout << playerComponent->Options()->name << "'s Grade Curve ability has activated. They will now get 10 grades." << endl;
     playerComponent->modifyGrades(10);
 }

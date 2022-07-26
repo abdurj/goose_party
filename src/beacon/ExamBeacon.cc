@@ -10,8 +10,7 @@ PeriodType ExamBeacon::period() const {return PeriodType::Cycle;}
 
 void ExamBeacon::doActivate(shared_ptr<Player>& p) {
     duration = 2;
-    cout << "Exam Beacon has been activated by " << p->Options()->name << ". ";
-    
+    cout << "Exam Beacon has been activated by " << p->Options()->name << ". " << endl;
 }
 
 void ExamBeacon::doEffect(vector<shared_ptr<Player>> &players, Board &board) {

@@ -110,6 +110,7 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
             if (p->claimDegree()) {
                 if (p->Degrees() >= 3) {
                     game->notifyWinner(*p);
+                    return;
                 } else {
                     generateNewDegree();
                 }
