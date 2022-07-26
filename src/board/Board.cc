@@ -309,14 +309,14 @@ vector<vector<shared_ptr<Tile>>> Board::getMapTwo() {
     using namespace utils;
     vector<vector<shared_ptr<Tile>>> board = {
             {cardTile(), abilityTile(), cardTile(), baseCell(),    gradeTile(),baseCell(), degreeTile(),   cardTile(), baseCell(), gradeTile(),     baseCell(1),    cardTile(), baseCell(1),    baseCell(), healthTile(), baseCell(), cardTile(), baseCell(),},
-            {cardTile(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    baseCell(), nullptr,        gradeTile(),     nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    gradeTile(),},
-            {cardTile(), nullptr,    nullptr,    abilityTile(),    nullptr,    nullptr,    nullptr,        nullptr,    cardTile(), nullptr,        baseCell(),     nullptr,    cardTile(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    cardTile(1),   abilityTile(), baseCell(), beaconTile(),   baseCell(), baseCell(2),nullptr,        cardTile(),     nullptr,    cardTile(),     nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
-            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        cardTile(),     nullptr,    baseCell(2),    gradeTile(), baseCell(), abilityTile(), baseCell(), abilityTile(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    baseCell(), nullptr,        gradeTile(),     nullptr,    baseCell(),     nullptr,    nullptr,    nullptr,    nullptr,    gradeTile(),},
+            {cardTile(), nullptr,    nullptr,    abilityTile(),    nullptr,    nullptr,    nullptr,        nullptr,    cardTile(), nullptr,        baseCell(),     nullptr,    cardTile(),     nullptr,    nullptr,    nullptr,    nullptr,    healthTile(),},
+            {gradeTile(), nullptr,    nullptr,    cardTile(1),   abilityTile(), baseCell(), beaconTile(),   baseCell(), baseCell(2),nullptr,        cardTile(),     nullptr,    abilityTile(),     nullptr,    nullptr,    nullptr,    nullptr,    cardTile(),},
+            {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        cardTile(),     nullptr,    baseCell(2),    gradeTile(), baseCell(), abilityTile(), baseCell(), baseCell(),},
             {healthTile(), nullptr,    nullptr,  healthTile(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        healthTile(),     nullptr,    nullptr,        nullptr,    nullptr,    nullptr,    nullptr,    cardTile(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        baseCell(),     nullptr,    nullptr,        nullptr,    nullptr,    nullptr,    nullptr,    gradeTile(),},
             {baseCell(), nullptr,    nullptr,    baseCell(),    nullptr,    nullptr,    nullptr,        nullptr,    nullptr,    nullptr,        cardTile(),     nullptr,    nullptr,        nullptr,    nullptr,    nullptr,    nullptr,    baseCell(),},
-            {cardTile(), cardTile(), baseCell(), gradeTile(1),   baseCell(), gradeTile(), baseCell(),     cardTile(), cardTile(), baseCell(),   baseCell(),   cardTile(), abilityTile(),  baseCell(), baseCell(), cardTile(), cardTile(), baseCell(),},
+            {cardTile(), cardTile(), baseCell(), gradeTile(1),   baseCell(), gradeTile(), baseCell(),     cardTile(), baseCell(), cardTile(),   baseCell(),   cardTile(), abilityTile(),  baseCell(), cardTile(), baseCell(), cardTile(), baseCell(),},
     };
 
     return board;

@@ -6,7 +6,7 @@ using namespace std;
 BeaconTile::BeaconTile(int type) : Tile(type) {};
 
 void BeaconTile::apply(shared_ptr<Player> &p) {
-    cout << "landed on beacon tile" << endl;
+    cout << "Landed on beacon tile!" << endl;
 }
 
 Element BeaconTile::tileElement() {
