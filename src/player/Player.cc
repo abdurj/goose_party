@@ -14,3 +14,7 @@ void Player::endCycle(vector<shared_ptr<Player>>& players) {
 void Player::ListAbilities() const {
     abilityDesc();
 }
+
+int Player::Rolls() const {
+    return getRolls();
+}

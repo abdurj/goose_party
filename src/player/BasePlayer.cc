@@ -17,10 +17,6 @@ shared_ptr<PlayerOptions> BasePlayer::Options() const {
 int BasePlayer::Grades() const {return grades;}
 int BasePlayer::Degrees() const {return degrees;}
 
-Element BasePlayer::getPlayerTile() {
-    return text( "P" + to_string(options->id)) | border | center;
-}
-
 //Setters
 int BasePlayer::modifyGrades(int amt) { //Returns int because we can re-use this for "stealing" grades
     int tmp = grades;
@@ -99,10 +95,10 @@ void BasePlayer::modifyHP(int amt) {
     if(amt <= 0){
         cout << options->name << " has taken " << -amt << " damage!" << endl;
     }else{
-        cout << options->name << " has healed for " << amt << " HP!" << endl;
+        cout << options->name << " has healed for " << min(20-hp, amt) << " HP!" << endl;
     }
 
-    hp += amt;
+    hp = min(hp+amt, 20);
     if(hp <= 0){
         int grades_lost = grades * 0.15;
         cout << options->name << " has died and lost " << grades_lost << " grades!" << endl;
@@ -116,3 +112,17 @@ void BasePlayer::reset() {
     hp = 20;
 }
 
+void BasePlayer::info() const {
+    cout << "Name: " << options->name << endl;
+    cout << "ID: " << options->id << endl;
+    cout << "HP: " << getHP()  << endl;
+    cout << "Attack: " << options->attack << endl;
+    cout << "Defence: " << options->defence << endl;
+    cout << "Luck: " << options->luck << endl;
+    cout << "Grades: " << Grades() << endl;
+    cout << "Degrees: " << Degrees() << endl;
+}
+
+int BasePlayer::getRolls() const {
+    return 2;
+}

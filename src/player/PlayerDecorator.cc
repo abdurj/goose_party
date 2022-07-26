@@ -62,9 +62,6 @@ bool PlayerDecorator::requiresTarget(int i) {
 shared_ptr<PlayerOptions> PlayerDecorator::Options() const {
     return playerComponent->Options();
 }
-ftxui::Element PlayerDecorator::getPlayerTile() {
-    return playerComponent->getPlayerTile();
-}
 
 int PlayerDecorator::getHP() const{
     return playerComponent->getHP();
@@ -80,4 +77,12 @@ void PlayerDecorator::modifyHP(int dmg) {
 
 void PlayerDecorator::reset() {
     playerComponent->reset();
+}
+
+void PlayerDecorator::info() const{
+    playerComponent->info();
+}
+
+int PlayerDecorator::getRolls() const {
+    return playerComponent->Rolls();
 }

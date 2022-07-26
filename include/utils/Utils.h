@@ -13,13 +13,13 @@
 namespace utils {
 
     /**
-     * @brief Makes a dice roll for a given player @param p
+     * @brief rolls x number of 6 sided die
      *
-     * @param p the Player class
-     * @return int The dice roll the player got
+     * @param rolls the number of times we roll the dice
+     * @return sum of dice rolls
      */
-
-    int roll(int c = 0);
+    int roll(int rolls = 1);
+    
     int roll2(int c = 0);
 
     /**
