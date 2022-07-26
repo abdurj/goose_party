@@ -14,6 +14,7 @@ void TrapTile::apply(shared_ptr<Player> &p) {
         trap->activate(p);
         activated = true;
     }
+    tile->apply(p);
 
 }
 

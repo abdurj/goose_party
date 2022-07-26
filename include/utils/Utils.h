@@ -20,6 +20,7 @@ namespace utils {
      */
 
     int roll(int c = 0);
+    int roll2(int c = 0);
 
     void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
 
