@@ -23,18 +23,20 @@ void DebugGame::debugInput(string c) {
         if (c == "move") {
             cin >> player;
             cin >> amt;
-            auto p = getPlayer(player);
-            b.move(p, amt);
+            int index = getPlayerIndex(player);
+            if (index == - 1) return;
+            b.move(players.at(index), amt);
         } else if (c == "battle") {
             string cmd;
             cin >> cmd;
             if (cmd == "check") {
                 cin >> player;
-                auto p = getPlayer(player);
-                vector<int> potentialBattles = b.checkCollision(p);
+                int index = getPlayerIndex(player);
+                if (index == - 1) return;
+                vector<int> potentialBattles = b.checkCollision(players.at(index));
                 if (!potentialBattles.empty()) {
                     for (const int &id: potentialBattles)
-                        challenge(p, getPlayer(id));
+                        challenge(players.at(index), getPlayer(id));
                 }
                 b.print();
             } else if (cmd == "force") {
@@ -48,24 +50,25 @@ void DebugGame::debugInput(string c) {
         } else if (c == "add") {
             cin >> c;
             cin >> player;
-            auto p = getPlayer(player);
+            int index = getPlayerIndex(player);
+            if (index == - 1) return;
             if (c == "grades") {
                 cin >> amt;
-                p->modifyGrades(amt);
+                players.at(index)->modifyGrades(amt);
             } else if (c == "degrees") {
                 cin >> amt;
                 for (int i = 0; i < amt; ++i) {
-                    p->modifyGrades(30);
-                    p->claimDegree();
+                    players.at(index)->modifyGrades(30);
+                    players.at(index)->claimDegree();
                 }
             } else if (c == "card") {
                 int card;
                 cin >> card;
-                p->addCard(utils::generateCard(card));
+                players.at(index)->addCard(utils::generateCard(card));
             } else if (c == "abilities") {
                 int ability;
                 cin >> ability;
-                utils::generateAbility(p, ability);
+                utils::generateAbility(players.at(index), ability);
             } else {
                 cin.clear();
                 cin.ignore();
@@ -73,20 +76,22 @@ void DebugGame::debugInput(string c) {
         } else if (c == "damage") {
             cin >> player;
             cin >> amt;
-            auto p = getPlayer(player);
-            p->modifyHP(amt);
+            int index = getPlayerIndex(player);
+            if (index == - 1) return;
+            players.at(index)->modifyHP(amt);
         } else if (c == "show") {
             cin >> c;
             cin >> player;
-            auto p = getPlayer(player);
+            int index = getPlayerIndex(player);
+            if (index == - 1) return;
             if (c == "grades") {
-                cout << p->Options()->name << "'s Grades: "
-                     << p->Grades() << endl;
+                cout << players.at(index)->Options()->name << "'s Grades: "
+                     << players.at(index)->Grades() << endl;
             } else if (c == "hp") {
-                cout << p->Options()->name << "'s HP: "
-                     << p->getHP() << endl;
+                cout << players.at(index)->Options()->name << "'s HP: "
+                     << players.at(index)->getHP() << endl;
             } else if (c == "abilities") {
-                p->ListAbilities();
+                players.at(index)->ListAbilities();
             } else {
                 cin.clear();
                 cin.ignore();
