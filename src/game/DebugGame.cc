@@ -6,7 +6,9 @@
 using namespace std;
 
 
-DebugGame::DebugGame() {};
+DebugGame::DebugGame() {
+    cout << "******* IN DEBUG MODE ******" << endl;
+};
 
 bool DebugGame::input(string c) {
     if (!Game::input(c)) {
@@ -82,7 +84,7 @@ void DebugGame::debugInput(string c) {
                 cin.ignore();
             }
         } else if(c == "clear") {
-            system("clear");
+            cout << "\x1B[2J\x1B[H";
         } else if (c == "ordering") {
             cout << "Player Ordering:" << endl;
             for (int i = 0; i < players.size(); i++) {

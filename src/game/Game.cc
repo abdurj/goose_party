@@ -177,6 +177,7 @@ bool Game::input(string c) {
         cin >> player;
         if(player > 0 && player <= players.size()) {
             getPlayer(player)->info();
+            getPlayer(player)->ListAbilities();
         } else {
             cout << "Invalid Player" << endl;
         }
