@@ -304,6 +304,15 @@ shared_ptr<Player> Game::getPlayer(const int &id) {
     return nullptr;
 }
 
+int Game::getPlayerIndex(const int id) {
+    for (int i = 0; i < players.size(); ++i) {
+        if (players.at(i)->Options()->id == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 
 
 
