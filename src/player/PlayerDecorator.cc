@@ -5,13 +5,13 @@ using namespace std;
 
 PlayerDecorator::~PlayerDecorator() {}
 
-void PlayerDecorator::doEndCycle() {
-    playerComponent->endCycle();
+void PlayerDecorator::doEndCycle(vector<shared_ptr<Player>>& players) {
+    playerComponent->endCycle(players);
 
 }
 
-void PlayerDecorator::doEndTurn() {
-    playerComponent->endTurn();
+void PlayerDecorator::doEndTurn(vector<shared_ptr<Player>>& players) {
+    playerComponent->endTurn(players);
 }
 
 void PlayerDecorator::abilityDesc() const {

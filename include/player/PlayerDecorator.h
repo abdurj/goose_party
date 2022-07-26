@@ -4,8 +4,8 @@
 #include "player/Player.h"
 
 class PlayerDecorator : public Player {
-    void doEndTurn() override; //Better name suggestions?
-    void doEndCycle() override;
+    void doEndTurn(std::vector<std::shared_ptr<Player>>&) override; //Better name suggestions?
+    void doEndCycle(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
     
     protected:

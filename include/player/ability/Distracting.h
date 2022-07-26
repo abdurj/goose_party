@@ -1,14 +1,13 @@
-#ifndef PERFECTGPA_H
-#define PERFECTGPA_H
+#ifndef DISTRACTING_H
+#define DISTRACTING_H
 
 #include "player/PlayerDecorator.h"
 
-class PerfectGpa : public PlayerDecorator {
-    int count;
+class Distracting : public PlayerDecorator {
     void doEndCycle(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
     public:
-    PerfectGpa(std::shared_ptr<Player>);
+    Distracting(std::shared_ptr<Player>);
 };
 
 

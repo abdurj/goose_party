@@ -3,12 +3,12 @@ using namespace std;
 
 Player::~Player() {}
 
-void Player::endTurn() {
-    doEndTurn();
+void Player::endTurn(vector<shared_ptr<Player>>& players) {
+    doEndTurn(players);
 }
 
-void Player::endCycle() {
-    doEndCycle();
+void Player::endCycle(vector<shared_ptr<Player>>& players) {
+    doEndCycle(players);
 }
 
 void Player::ListAbilities() const {

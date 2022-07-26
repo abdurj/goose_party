@@ -11,10 +11,11 @@ void PerfectGpa::abilityDesc() const {
     cout << "Perfect GPA - After a long grind, this player has maintained an impressive 4.0 GPA! +16 grades every 4 cycles" << endl;
 }
 
-void PerfectGpa::doEndCycle() {
-    playerComponent->endCycle();
+void PerfectGpa::doEndCycle(vector<shared_ptr<Player>>& players) {
+    playerComponent->endCycle(players);
     count = (count+1)%4;
     if(count == 0) {
+        cout << playerComponent->Options()->name << "'s Perfect Gpa ability has activated. They will now get 10 grades." << endl;
         playerComponent->modifyGrades(10);
     }
 }

@@ -29,6 +29,8 @@
 #include "player/ability/BonusMarks.h"
 #include "player/ability/Attendance.h"
 #include "player/ability/PerfectGpa.h"
+#include "player/ability/CopyCat.h"
+#include "player/ability/Distracting.h"
 
 using namespace std;
 
@@ -113,8 +115,8 @@ namespace utils {
         return make_shared<BeaconTile>(t);
     }
 
-    void generateAbiltiy(shared_ptr<Player> &p) {    
-        int abilityCount = 7;
+    void generateAbility(shared_ptr<Player> &p) {    
+        int abilityCount = 9;
         int n = eng() % (abilityCount+1);
         unordered_set<string> playerAbilities = p->Abilities();
         string ability;
@@ -182,7 +184,23 @@ namespace utils {
                         cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
                         return;
                     }  
-                break;                              
+                break;       
+                case 7:
+                    ability = "CopyCat";
+                    if(!playerAbilities.count(ability)) {
+                        p = make_shared<CopyCat>(p);
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
+                        return;
+                    }  
+                break;
+                case 8:
+                    ability = "Distracting";
+                    if(!playerAbilities.count(ability)) {
+                        p = make_shared<Distracting>(p);
+                        cout << endl << p->Options()->name << " now has the ability: " << ability << endl;
+                        return;
+                    }  
+                break;                         
                 default:
                 cout << "Shouldn't be here" << endl;//TODO delete this
             } 

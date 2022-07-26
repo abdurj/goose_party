@@ -54,8 +54,8 @@ void BasePlayer::addAbility(string s) {
 
 const unordered_set<std::string>& BasePlayer::Abilities() const {return abilities;}
 
-void BasePlayer::doEndTurn() {}
-void BasePlayer::doEndCycle() {}
+void BasePlayer::doEndTurn(vector<shared_ptr<Player>>&) {}
+void BasePlayer::doEndCycle(vector<shared_ptr<Player>>&) {}
 
 
 void BasePlayer::abilityDesc() const {

@@ -40,7 +40,7 @@ namespace utils {
 
     std::shared_ptr<Tile> beaconTile(int t = 0);
 
-    void generateAbiltiy(std::shared_ptr<Player> &);
+    void generateAbility(std::shared_ptr<Player> &);
 }
 
 #endif //GOOSE_PARTY_UTILS_H

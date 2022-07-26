@@ -11,8 +11,9 @@ void BonusMarks::abilityDesc() const {
     cout << "Bonus Marks - Some of this player's assignments have bonus marks! 50\% chance of +4 grades per turn." << endl;
 }
 
-void BonusMarks::doEndTurn() {
-    playerComponent->endTurn();
+void BonusMarks::doEndTurn(vector<shared_ptr<Player>>& players) {
+    playerComponent->endTurn(players);
+    cout << playerComponent->Options()->name << "'s Bonus Marks ability has activated. They will now get 4 grades." << endl;
     playerComponent->modifyGrades(4); //TODO: 50% chance
 }
 

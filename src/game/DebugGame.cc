@@ -18,17 +18,23 @@ bool DebugGame::input(string c){
 void DebugGame::debugInput(string c) {
     int player, amt;
     if(c == "move") {
-        try {
-            cin >> player;
-            cin >> amt;
-            b.move(players.at(player), amt);
-        } catch(...) {
-            cerr << "an error occured" << endl;
+        cin >> player;
+        cin >> amt;
+        b.move(players.at(player), amt);
+
+        vector<int> potentialBattles = b.checkCollision(players.at(player));
+        if (!potentialBattles.empty()) {
+            for (const int &id: potentialBattles) {
+                shared_ptr<Player> opponent = getPlayer(id);
+                if (opponent) {
+                    challenge(getPlayer(player), opponent);
+                }
+            }
+            b.print();
         }
     } else if (c == "cycle") {
         endCycle();
     } else if (c == "add") {
-        //going to assume that if someone types add, they provide all params
         cin >> c;
         cin >> player;
         
