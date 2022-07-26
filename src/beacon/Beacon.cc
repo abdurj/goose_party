@@ -17,7 +17,7 @@ void Beacon::activate(shared_ptr<Player> &p) {
     activator = p;
     doActivate(p);
     string periodStr = (period() == PeriodType::Cycle) ? "cycles" : "turns";
-    cout << "This beacon will last " << duration << " " << periodStr << ".";
+    cout << "This beacon will last " << duration << " " << periodStr << "." << endl;
 }
 
 void Beacon::effect(vector<shared_ptr<Player>> &players, Board &board) {

@@ -135,6 +135,7 @@ namespace utils {
             cout << endl << "This player has every possible ability" << endl;
             return;
         }
+
         for(int i = 0; i < abilityCount; ++i) {
              switch((n+i) % abilityCount) {
                 case 0:

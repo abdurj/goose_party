@@ -152,12 +152,14 @@ bool Game::input(string c) {
                     return true;
                 }
                 currPlayer->useCard(index, players[i], &b);
+                this_thread::sleep_for(chrono::milliseconds(750));
                 std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
                 cout << endl;
             } else {
                 currPlayer->useCard(index, currPlayer, &b);
+                this_thread::sleep_for(chrono::milliseconds(750));
                 std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
@@ -221,17 +223,17 @@ void Game::battle(const std::shared_ptr<Player> &challenger, const std::shared_p
     cin >> option;
 
     cout << challengerName << " is attacking. " << endl;
-    int attack = utils::roll() + challenger->Options()->attack;
+    int attack = utils::roll2(challenger->Options()->attack);
     this_thread::sleep_for(chrono::milliseconds(750));
     if (option == 'd') {
         cout << opponentName << " chose to defend! " << endl;
-        int defend = utils::roll() + opponent->Options()->defence;
+        int defend = utils::roll2(opponent->Options()->defence);
         this_thread::sleep_for(chrono::milliseconds(500));
         int damage = max(0, attack - defend);
         opponent->modifyHP(-damage);
     } else {
         cout << opponentName << " chose to evade! " << endl;
-        int evade = utils::roll() + opponent->Options()->luck;
+        int evade = utils::roll2(opponent->Options()->luck);
         this_thread::sleep_for(chrono::milliseconds(500));
         int damage = attack;
         if (evade >= attack) {
