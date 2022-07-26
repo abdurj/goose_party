@@ -90,6 +90,9 @@ namespace utils {
             case 6: {
                 return make_unique<JuiceCard>();
             }
+            case 7: {
+                return make_unique<HealthCard>();
+            }
             default: {
                 return make_unique<ExplosiveMine>();
             }

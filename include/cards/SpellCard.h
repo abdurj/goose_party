@@ -54,6 +54,16 @@ class PredatorCard: public SpellCard {
         std::string getDescription() override;
 };
 
+// Heal for 10 HP. 
+class HealthCard : public SpellCard {
+    public:
+        HealthCard();
+        void apply(Player*, std::shared_ptr<Player>, Board*) override;
+        bool requiresTarget() override;
+        std::string getName() override;
+        std::string getDescription() override;
+};
+
 
 // Other spell cards defined here
 

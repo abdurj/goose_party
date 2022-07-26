@@ -104,8 +104,8 @@ string CS247Card::getDescription() {
 PredatorCard::PredatorCard() {}
 void PredatorCard::apply(Player *caller, shared_ptr<Player> target, Board *b) {
     cout << "Stealing 15 grades from " << target->Options()->name << "." << endl;
-    caller->modifyGrades(15);
-    target->modifyGrades(-15);
+    int amount = target->modifyGrades(-15);
+    caller->modifyGrades(amount);
 }
 bool PredatorCard::requiresTarget() {
     return true;
@@ -117,3 +117,21 @@ string PredatorCard::getName() {
 string PredatorCard::getDescription() {
     return "Steals 15 grades from a target player.";
 }
+
+// Health Card
+HealthCard::HealthCard() {}
+void HealthCard::apply(Player *caller, shared_ptr<Player> target, Board *b) {
+    cout << "Healing for 10 HP" << endl;
+    target->modifyHP(10);
+}
+bool HealthCard::requiresTarget() {
+    return true;
+}
+string HealthCard::getName() {
+    return "Healing";
+}
+string HealthCard::getDescription() {
+    return "Heals for 10 HP";
+}
+
+
