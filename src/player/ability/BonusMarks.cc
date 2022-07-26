@@ -1,5 +1,6 @@
 #include "player/ability/BonusMarks.h"
 #include <iostream>
+#include "utils/Utils.h"
 using namespace std;
 
 BonusMarks::BonusMarks(shared_ptr<Player> p) : PlayerDecorator{p} {
@@ -13,7 +14,9 @@ void BonusMarks::abilityDesc() const {
 
 void BonusMarks::doEndTurn(vector<shared_ptr<Player>>& players) {
     playerComponent->endTurn(players);
-    cout << playerComponent->Options()->name << "'s Bonus Marks ability has activated. They will now get 4 grades." << endl;
-    playerComponent->modifyGrades(4); //TODO: 50% chance
+    if(utils::rng(1) == 1) {
+        cout << playerComponent->Options()->name << "'s Bonus Marks ability has activated. They will now get 4 grades." << endl;
+        playerComponent->modifyGrades(4);
+    }
 }
 
