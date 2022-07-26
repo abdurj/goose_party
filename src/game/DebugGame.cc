@@ -101,7 +101,7 @@ void DebugGame::debugInput(string c) {
         } else if (c == "ordering") {
             cout << "Player Ordering:" << endl;
             for (int i = 0; i < players.size(); i++) {
-                cout << i << ": " << getPlayer(i)->Options()->name << endl;
+                cout << i << ": " << players.at(i)->Options()->name << endl;
             }
         } else if (c == "turn") {
             try {
