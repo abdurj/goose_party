@@ -15,6 +15,7 @@ class Player { //Abstract base class
     virtual void abilityDesc() const = 0;
     virtual void doEndTurn(std::vector<std::shared_ptr<Player>>&) = 0;
     virtual void doEndCycle(std::vector<std::shared_ptr<Player>>&) = 0;
+    virtual int getRolls() const = 0;
 
     public:
     virtual int Grades() const = 0;
@@ -30,15 +31,14 @@ class Player { //Abstract base class
     virtual bool alive() const = 0;
     virtual void modifyHP(int) = 0;
     virtual void reset() = 0;
-
     virtual void addAbility(std::string) = 0;
     virtual const std::unordered_set<std::string>& Abilities() const = 0;
     virtual void info() const = 0;
+    int Rolls() const;
     void ListAbilities() const;
     void endTurn(std::vector<std::shared_ptr<Player>>&);
     void endCycle(std::vector<std::shared_ptr<Player>>&);
     virtual std::shared_ptr<PlayerOptions> Options() const = 0;
-    virtual ftxui::Element getPlayerTile() = 0;
 
     virtual ~Player() = 0;
 };

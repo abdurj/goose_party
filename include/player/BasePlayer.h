@@ -11,6 +11,7 @@ class BasePlayer : public Player {
     void doEndTurn(std::vector<std::shared_ptr<Player>>&) override; //Better name suggestions?
     void doEndCycle(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
+    int getRolls() const override;
     int degrees;
     int grades;
     int hp = 20;
@@ -39,7 +40,6 @@ class BasePlayer : public Player {
 
 
     std::shared_ptr<PlayerOptions> Options() const override;
-    ftxui::Element getPlayerTile() override;
 };
 
 #endif

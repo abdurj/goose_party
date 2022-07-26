@@ -103,8 +103,8 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
         }
 
         if (pos == degreeSpot) {
+            map[i][j]->apply(p);
             if (p->claimDegree()) {
-                map[i][j]->apply(p);
                 if (p->Degrees() >= 3) {
                     game->notifyWinner(*p);
                 } else {
@@ -251,6 +251,7 @@ vector<int> Board::checkCollision(const std::shared_ptr<Player>& player) const {
             ids.emplace_back(pid);
         }
     }
+
     return ids;
 }
 

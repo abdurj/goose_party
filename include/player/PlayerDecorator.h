@@ -7,7 +7,7 @@ class PlayerDecorator : public Player {
     void doEndTurn(std::vector<std::shared_ptr<Player>>&) override; //Better name suggestions?
     void doEndCycle(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
-    
+    int getRolls() const override;
     protected:
     std::shared_ptr<Player> playerComponent;
     public:
@@ -30,7 +30,6 @@ class PlayerDecorator : public Player {
     void reset() override;
 
     std::shared_ptr<PlayerOptions> Options() const override;
-    ftxui::Element getPlayerTile() override;
     virtual ~PlayerDecorator() = 0;
 };
 

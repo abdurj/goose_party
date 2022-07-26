@@ -15,6 +15,8 @@ void TuitionBeacon::doActivate(shared_ptr<Player>& p) {
 }
 
 void TuitionBeacon::doEffect(vector<shared_ptr<Player>> &players, Board &board) {
+    cout << "Tuition Beacon Action - " << activator->Options()->name <<
+    " is now stealing 5 grades from all players!" << endl;
     for(auto &p : players) {
         if(p != activator) {
             activator->modifyGrades(abs(p->modifyGrades(-5)));
@@ -23,5 +25,5 @@ void TuitionBeacon::doEffect(vector<shared_ptr<Player>> &players, Board &board) 
 }
 
 string TuitionBeacon::getDesc() const {
-    return "Tuition Beacon - At the end of every cycle for 5 cycles, the player who activated this beacon steals 3 grades from every other player.";
+    return "Tuition Beacon - At the end of every cycle for 5 cycles, the player who activated this beacon steals 5 grades from every other player.";
 }
