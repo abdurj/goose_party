@@ -57,9 +57,13 @@ void DebugGame::debugInput(string c) {
                     players.at(player)->claimDegree();
                 }
             } else if (c == "card") {
-                players.at(player)->addCard(utils::generateCard());
+                int card;
+                cin >> card;
+                players.at(player)->addCard(utils::generateCard(card));
             } else if (c == "abilities") {
-                utils::generateAbility(players.at(player));
+                int ability;
+                cin >> ability;
+                utils::generateAbility(players.at(player), ability);
             } else {
                 cin.clear();
                 cin.ignore();
