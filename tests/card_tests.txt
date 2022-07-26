@@ -1,0 +1,39 @@
+kev
+1
+abdur
+2
+done
+add grades 0 50
+add grades 1 50
+add card 0 0 ci
+add card 0 1 ci 
+add card 0 2 ci
+add card 0 3 ci
+add card 0 4 ci 
+add card 0 5 ci
+add card 0 6 ci
+add card 0 7 ci
+move 0 2
+ci
+c 0 
+c 0 
+move 0 1
+move 1 2
+inspect 2
+move 0 3
+add grades 1 50
+ci
+c 0 1
+c 0 1
+inspect 2 
+ci
+c 1 1 
+inspect 2
+ci
+c 2 1 
+inspect 2 
+c 1 0
+inspect 1 
+q
+
+
