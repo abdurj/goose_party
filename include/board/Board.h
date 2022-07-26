@@ -31,13 +31,13 @@ class Board{
 public:
     Board();
     void attach(Game*);
-    std::vector<std::vector<std::shared_ptr<Tile>>> getState();
+    std::vector<std::vector<std::shared_ptr<Tile>>> getState() const;
 
-    std::unordered_map<int, std::pair<int, std::pair<int, int>>> getPositions();
+    std::unordered_map<int, std::pair<int, std::pair<int, int>>> getPositions() const;
 
     void move(std::shared_ptr<Player> &, int);
 
-    void addPlayer(std::shared_ptr<Player> &);
+    void addPlayer(const std::shared_ptr<Player> &);
 
     void update();
 

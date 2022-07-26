@@ -8,7 +8,7 @@ TuitionBeacon::TuitionBeacon() {}
 
 PeriodType TuitionBeacon::period() const {return PeriodType::Cycle;}
 
-void TuitionBeacon::doActivate(shared_ptr<Player>& p) {
+void TuitionBeacon::doActivate(const shared_ptr<Player>& p) {
     duration = 5; //5 cycles
     cout << "Tuition Beacon has been activated by " << p->Options()->name << ". " << endl;
     

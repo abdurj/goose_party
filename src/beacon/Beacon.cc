@@ -13,7 +13,7 @@ void Beacon::decrementDuration() {
     if(duration == 0) {activator = nullptr;}
 }
 
-void Beacon::activate(shared_ptr<Player> &p) {
+void Beacon::activate(const shared_ptr<Player> &p) {
     activator = p;
     doActivate(p);
     string periodStr = (period() == PeriodType::Cycle) ? "cycles" : "turns";
