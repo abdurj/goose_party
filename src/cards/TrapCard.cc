@@ -29,7 +29,7 @@ string BossCard::getDescription() {
 
 // Explosive Mine
 void ExplosiveMine::activate(std::shared_ptr<Player> p) {
-    cout << "EXPLOSIVE MINE ACTIVATED. Lose 10 HP." << endl;
+    cout << "KERBLAM!. Lose 10 HP." << endl;
     p->modifyHP(-10);
 }
 
