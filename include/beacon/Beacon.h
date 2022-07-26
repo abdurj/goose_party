@@ -12,16 +12,16 @@ class Board;
 
 class Beacon {
     virtual void doEffect(std::vector<std::shared_ptr<Player>>&, Board &) = 0;
-    virtual void doActivate(std::shared_ptr<Player>&) = 0;
+    virtual void doActivate(const std::shared_ptr<Player>&) = 0;
     virtual std::string getDesc() const = 0;
-    protected:
+  protected:
     int duration;
     std::shared_ptr<Player> activator;
-    public:
+  public:
     void effect(std::vector<std::shared_ptr<Player>>&, Board &);
     virtual PeriodType period() const = 0;
     void decrementDuration();
-    void activate(std::shared_ptr<Player>&);
+    void activate(const std::shared_ptr<Player>&);
     int Duration() const;
     void Desc() const;
     Beacon();

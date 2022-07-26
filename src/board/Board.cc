@@ -35,7 +35,7 @@ Board::Board() : degreeSpot{0, 6}, beaconSpot{4,0}, game{nullptr} {
 
 void Board::attach(Game *g) { game = g; }
 
-void Board::addPlayer(std::shared_ptr<Player> &p) {
+void Board::addPlayer(const shared_ptr<Player> &p) {
     positions[p->Options()->id] = {DIRECTION_RIGHT, {0, 0}};
     display->notify();
 }
@@ -109,7 +109,7 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
             map[i][j]->apply(p);
             if (p->claimDegree()) {
                 if (p->Degrees() >= 3) {
-                    game->notifyWinner(*p);
+                    game->notifyWinner(p);
                     return;
                 } else {
                     generateNewDegree();
@@ -281,11 +281,11 @@ void Board::swapPositions(int p1, int p2) {
 }
 
 // Getters
-vector<vector<shared_ptr<Tile>>> Board::getState() {
+vector<vector<shared_ptr<Tile>>> Board::getState() const{
     return map;
 }
 
-unordered_map<int, pair<int, pair<int, int>>> Board::getPositions() {
+unordered_map<int, pair<int, pair<int, int>>> Board::getPositions() const{
     return positions;
 }
 

@@ -16,8 +16,8 @@
 
 using namespace std;
 
-void Game::notifyWinner(Player &p) {
-    cout << p.Options()->name << " has won the game!" << endl;
+void Game::notifyWinner(const shared_ptr<Player> &p) {
+    cout << p->Options()->name << " has won the game!" << endl;
     playing = false;
 }
 
@@ -279,7 +279,7 @@ void Game::GameLoop() {
     }
 }
 
-void Game::activateBeacon(shared_ptr<Player> &p) {
+void Game::activateBeacon(const shared_ptr<Player> &p) {
     int i = utils::rng(beacons.size() - 1);
     beacons.at(i)->activate(p);
 }
