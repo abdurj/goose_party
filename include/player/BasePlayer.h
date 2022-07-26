@@ -22,6 +22,7 @@ class BasePlayer : public Player {
     BasePlayer(std::shared_ptr<PlayerOptions>);
     void addAbility(std::string) override;
     const std::unordered_set<std::string>& Abilities() const override;
+    void info() const override;
     int Grades() const override;
     int Degrees() const override;
     int modifyGrades(int) override; //Maybe doesn't need to be virtual? Will we have stuff that lets them get more gold?

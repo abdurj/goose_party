@@ -33,6 +33,7 @@ class Player { //Abstract base class
 
     virtual void addAbility(std::string) = 0;
     virtual const std::unordered_set<std::string>& Abilities() const = 0;
+    virtual void info() const = 0;
     void ListAbilities() const;
     void endTurn(std::vector<std::shared_ptr<Player>>&);
     void endCycle(std::vector<std::shared_ptr<Player>>&);

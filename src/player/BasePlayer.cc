@@ -116,3 +116,12 @@ void BasePlayer::reset() {
     hp = 20;
 }
 
+void BasePlayer::info() const {
+    cout << "Name: " << options->name << endl;
+    cout << "ID: " << options->id << endl;
+    cout << "Attack: " << options->attack << endl;
+    cout << "Defence: " << options->defence << endl;
+    cout << "Luck: " << options->luck << endl;
+    cout << "Grades: " << Grades() << endl;
+    cout << "Degrees: " << Degrees() << endl;
+}

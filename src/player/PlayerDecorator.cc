@@ -81,3 +81,7 @@ void PlayerDecorator::modifyHP(int dmg) {
 void PlayerDecorator::reset() {
     playerComponent->reset();
 }
+
+void PlayerDecorator::info() const{
+    playerComponent->info();
+}

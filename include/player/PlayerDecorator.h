@@ -14,6 +14,7 @@ class PlayerDecorator : public Player {
     PlayerDecorator(std::shared_ptr<Player>);
     void addAbility(std::string) override;
     const std::unordered_set<std::string>& Abilities() const override;
+    void info() const override;
     int Grades() const override;
     int Degrees() const override;
     int modifyGrades(int) override;
