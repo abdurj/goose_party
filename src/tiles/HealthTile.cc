@@ -7,7 +7,7 @@ using namespace std;
 HealthTile::HealthTile(int type) : Tile(type){};
 
 void HealthTile::apply(shared_ptr<Player> &p) {
-    cout << "landed on health tile" << endl;
+    cout << "Landed on Health Tile. Healing " << p->Options()->name << " for 5 HP." << endl;
     p->modifyHP(5);
 }
 
