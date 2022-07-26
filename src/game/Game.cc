@@ -134,6 +134,7 @@ bool Game::input(string c) {
         if(!(cin >> index)){
             cout << "Invalid cmd" << endl;
             cin.clear();
+            cin.ignore(10000,'\n');
             return true;
         }
 
