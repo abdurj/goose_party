@@ -26,6 +26,8 @@ class Display : public Observer{
     Display(Board*, int, int);
     void notify() override;
     void print();
+
+    void clear();
 };
 
 #endif // DISPLAY_H

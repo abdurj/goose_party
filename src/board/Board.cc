@@ -45,9 +45,12 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
         return;
     }
 
-    std::cout << "\x1B[2J\x1B[H";
     auto &[dir, pos] = positions[p->Options()->id];
     auto &[i, j] = pos;
+
+    if(map[i][j]->Type() != TYPE_INTERSECTION){
+        std::cout << "\x1B[2J\x1B[H";
+    }   
 
     int moves = 0;
     while (moves < roll) {
@@ -114,6 +117,8 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
                 print();
                 return;
             }
+            cout << "\x1B[2K";  // CLEAR_LINE
+            cout << "\x1B[1A";  // MOVE_UP
         }
 
         if (pos == beaconSpot) {

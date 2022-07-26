@@ -1,2 +1,2 @@
 all : 
-	mkdir build && cd build && cmake .. && $(MAKE)
+	cd build && cmake .. && make -f Makefile
