@@ -65,10 +65,11 @@ namespace utils {
         shuffle (players.begin(), players.end(), eng);
     }
 
-    unique_ptr<Card> generateCard() {
-        // unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-        int rand = (eng()) % 10;
-        switch (rand) {
+    unique_ptr<Card> generateCard(int c) {
+        if(c == -1){
+            c = eng() % 10;
+        }
+        switch (c) {
             case 0: {
                 return make_unique<ExplosiveMine>();
             }
@@ -128,9 +129,11 @@ namespace utils {
         return make_shared<BeaconTile>(t);
     }
 
-    void generateAbility(shared_ptr<Player> &p) {    
+    void generateAbility(shared_ptr<Player> &p, int n) {
         int abilityCount = 10;
-        int n = eng() % (abilityCount+1);
+        if(n == -1){
+            n = eng() % (abilityCount+1);
+        }
         unordered_set<string> playerAbilities = p->Abilities();
         string ability;
 
@@ -224,8 +227,8 @@ namespace utils {
                     }  
                 break;                       
                 default:
-                cout << "Shouldn't be here" << endl;//TODO delete this
-            } 
+                    cout << "Invalid Option" << endl;
+             }
         }
     }
 }

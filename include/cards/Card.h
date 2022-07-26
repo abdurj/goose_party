@@ -10,6 +10,7 @@ class Card {
     virtual bool requiresTarget() = 0;
     virtual std::string getName() = 0;
     virtual std::string getDescription() = 0;
+    virtual ~Card();
 };
 
 // Player will have a use() method which will call card->apply(Player), but how do we handle cases when a card effect does not need a player?

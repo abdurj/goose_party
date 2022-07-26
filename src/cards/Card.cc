@@ -7,7 +7,7 @@
 
 using namespace std;
 
+Card::~Card() {}
 SpellCard::SpellCard() {}
 TrapCard::TrapCard() {}
 // Other spell cards defined here
-

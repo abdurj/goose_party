@@ -33,7 +33,7 @@ namespace utils {
 
     void shufflePlayers(std::vector<std::shared_ptr<Player>>&);
 
-    std::unique_ptr<Card> generateCard();
+    std::unique_ptr<Card> generateCard(int c = -1);
 
     std::shared_ptr<Tile> baseCell(int t = 0);
 
@@ -49,7 +49,7 @@ namespace utils {
 
     std::shared_ptr<Tile> beaconTile(int t = 0);
 
-    void generateAbility(std::shared_ptr<Player> &);
+    void generateAbility(std::shared_ptr<Player> &, int n = -1);
 }
 
 #endif //GOOSE_PARTY_UTILS_H
