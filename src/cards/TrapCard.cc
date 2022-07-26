@@ -31,6 +31,7 @@ string BossCard::getDescription() {
 void ExplosiveMine::activate(std::shared_ptr<Player> p) {
     cout << "explosive mine activated. Lose 10 HP." << endl;
     p->modifyHP(-10);
+    t
 }
 
 void ExplosiveMine::apply(Player *caller, shared_ptr<Player> target, Board *b) {

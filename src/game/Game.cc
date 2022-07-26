@@ -69,6 +69,8 @@ void Game::setup() {
             cerr << "An error occured when adding a player." << endl;
         }
     }
+    cin.clear();
+    cin.ignore(10000,'\n');
 }
 
 void Game::init() {
@@ -206,26 +208,29 @@ void Game::battle(const std::shared_ptr<Player>& challenger, const std::shared_p
     cin >> option;
 
     cout << challengerName << " is attacking. " << endl;
-    int attack = utils::roll(challenger->Options()->attack);
+    int attack = utils::roll2(challenger->Options()->attack);
+    this_thread::sleep_for(chrono::milliseconds(750));
     if(option == 'd'){
         cout << opponentName << " chose to defend! " << endl;
-        int defend = utils::roll(opponent->Options()->defence);
+        int defend = utils::roll2(opponent->Options()->defence);
+        this_thread::sleep_for(chrono::milliseconds(500));
         int damage = max(0, attack-defend);
         opponent->modifyHP(-damage);
     }else{
         cout << opponentName << " chose to evade! " << endl;
-        int evade = utils::roll(opponent->Options()->luck);
+        int evade = utils::roll2(opponent->Options()->luck);
+        this_thread::sleep_for(chrono::milliseconds(500));
         int damage = attack;
         if(evade >= attack){
             damage = 0;
         }
         opponent->modifyHP(-damage);
     }
+    this_thread::sleep_for(chrono::milliseconds(500));
 }
 
 void Game::GameLoop() {
     string c = "";
-    cin.exceptions(ios::eofbit | ios::failbit);
 
     while (playing) {
         auto currPlayer = players[curTurn];
@@ -234,10 +239,11 @@ void Game::GameLoop() {
             b.update();
             b.print();
             cout << endl << currPlayer->Options()->name << " is being resurrected. " << endl;
-            curTurn = curTurn + 1 % players.size();
+            curTurn = (curTurn + 1) % players.size();
         }else{
             auto name = currPlayer->Options()->name;
             auto id = currPlayer->Options()->id;
+            cout << endl;
             cout << "It is " << name << "'s turn." << " (Player "
                 << id << ")" << endl;
             cout << name << " you have " << currPlayer->getHP() << "hp a " << currPlayer->Grades() << "\% average." << endl;
@@ -249,9 +255,9 @@ void Game::GameLoop() {
                 cin >> c;
                 input(c);
             } catch (...) {
-                cerr << "An error occured when processing command. Ending game." << endl;
-                playing = false;
-                break;
+                cerr << "An error occured when processing command" << endl;
+                // playing = false;
+                // break;
             }
         }
     }

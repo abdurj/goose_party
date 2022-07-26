@@ -86,7 +86,7 @@ void CS247Card::apply(Player* caller, shared_ptr<Player> target, Board* b) {
         b->move(target, 10);
     } else {
         cout << "Failure! " << target->Options()->name << " takes 10 damage." << endl;
-        caller->modifyHP(-10);
+        target->modifyHP(-10);
     }
 }
 bool CS247Card::requiresTarget() {

@@ -42,6 +42,12 @@ namespace utils {
         return roll;
     }
 
+    int roll2(int c){
+        int roll = (eng() % 7) + c;
+        cout << "Rolled a: " << roll << endl;
+        return roll;
+    }
+
     void shufflePlayers(vector<shared_ptr<Player>> &players) {
         // randomize order of the players. 
         shuffle (players.begin(), players.end(), eng);
