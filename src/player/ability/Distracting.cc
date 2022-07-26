@@ -16,7 +16,6 @@ void Distracting::doEndCycle(vector<shared_ptr<Player>>& players) {
     cout << playerComponent->Options()->name << "'s Distracting ability has activated. Damaging all players except self." << endl;
     for(int i = 0; i < players.size(); ++i) {
         if(playerComponent->Options()->id != players.at(i)->Options()->id) {
-            cout << players.at(i)->Options()->id << endl;
             players.at(i)->modifyHP(-1);
         }
         

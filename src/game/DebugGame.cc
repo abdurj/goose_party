@@ -94,6 +94,16 @@ void DebugGame::debugInput(string c) {
             for (int i = 0; i < players.size(); i++) {
                 cout << i << ": " << players.at(i)->Options()->name << endl;
             }
+        } else if (c == "turn") {
+            try {
+                cin >> player;
+                players.at(player)->endTurn(players);
+            } catch (...) {
+                cout << "invalid player" << endl;
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
+            
         }
     } catch (...) {
         cerr << "Invalid debug command." << endl;
