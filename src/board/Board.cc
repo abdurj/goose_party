@@ -29,7 +29,6 @@ Board::Board() : degreeSpot{0, 6}, beaconSpot{3,6}, game{nullptr} {
     x = map.at(0).size();
     y = map.size();
     // set a marker for the degreetile (hard coded initially for now)
-
     display = make_unique<Display>(this, x, y);
 }
 
@@ -45,11 +44,11 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
         return;
     }
 
-    std::cout << "\x1B[2J\x1B[H";
     auto &[dir, pos] = positions[p->Options()->id];
     auto &[i, j] = pos;
 
     int moves = 0;
+    display->clear();
     while (moves < roll) {
         bool update = false;
         if (map[i][j]->Type() == TYPE_INTERSECTION) {
@@ -125,9 +124,7 @@ void Board::move(std::shared_ptr<Player> &p, int roll) {
         }
 
         if (update) {
-            cout << "\x1B[2K";  // CLEAR_LINE
-            cout << "\x1B[1A";  // MOVE_UP
-            cout << "\x1B[1A";  // MOVE_UP
+            cout << "\x1B[2K" << "\x1B[1A" << "\x1B[1A";  // CLEAR_LINE, MOVE_UP, MOVE_UP
             display->notify();
             display->print();
             cout << endl;
@@ -208,13 +205,17 @@ int Board::handleIntersection(int dir) {
     cout << endl;
     cout << "This tile is an intersection. Press 1 to continue on your path, or 2 to take a new path." << endl;
     int op = 0;
+    int count = 1;
     while (op != 1 && op != 2) {
         if(!(cin >> op)){
+            ++count;
             cin.clear();
             cin.ignore(10000, '\n');
         }
     }
-    cout << "\x1B[2J\x1B[H";
+    for(int i = 0; i < count; ++i){
+        cout << "\x1B[2K" << "\x1B[1A";
+    }
     if (op == 2) {
         switch (dir) {
             case DIRECTION_UP:
@@ -256,7 +257,6 @@ vector<int> Board::checkCollision(const std::shared_ptr<Player>& player) const {
 }
 
 void Board::update() {
-    //map[0][2] = make_shared<TrapTile>(std::move(map[0][2]));
     display->notify();
 }
 
@@ -266,7 +266,7 @@ void Board::placeTrap(int ID, unique_ptr<TrapCard> trap) {
 }
 
 void Board::print() {
-    std::cout << "\x1B[2J\x1B[H";
+    display->clear();
     display->print();
 }
 

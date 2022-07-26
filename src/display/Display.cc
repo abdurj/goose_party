@@ -57,6 +57,10 @@ void Display::setSize(){
     }
 }
 
+void Display::clear(){
+    std::cout << "\x1B[2J\x1B[H";
+}
+
 void Display::print(){
     screen.Clear();
     auto reset = screen.ResetPosition();

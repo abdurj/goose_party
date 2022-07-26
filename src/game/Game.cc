@@ -23,54 +23,56 @@ void Game::notifyWinner(Player &p) {
 
 Game::Game() : b{Board()} {
     b.attach(this);
+    init();
 }
 
 void Game::setup() {
-    bool settingUp = true;
     string name;
     int id = 1;
-    while(settingUp) {
-        if(id == 9) break; //8 players max
-        cout << 
-        "To add a player to the game, enter the player's name. To finish setup, type \"done\"." 
-        << endl;
-        try{
+    while (true) {
+        if (id == 9) break; //8 players max
+        cout <<
+             "To add a player to the game, enter the player's name. To finish setup, type \"done\"."
+             << endl;
+        try {
             cin >> name;
-            if(name == "done") break;
+            if (name == "done") break;
 
-            cout << "What class is " << name << "?"<<endl;
+            cout << "What class is " << name << "?" << endl;
             PlayerClass playerClass;
             cout << "1. Fighter" << endl << "2. Defender" << endl
-            << "3. Messenger" << endl << "4. Rogue" << endl;
+                 << "3. Messenger" << endl << "4. Rogue" << endl;
 
             int i = 0;
             cin >> i;
-            if(i == 1) {
+            if (i == 1) {
                 playerClass = PlayerClass::FIGHTER;
-            } else if( i == 2) {
+            } else if (i == 2) {
                 playerClass = PlayerClass::DEFENDER;
-            } else if( i == 3) {
+            } else if (i == 3) {
                 playerClass = PlayerClass::MESSENGER;
-            } else if( i == 4) {
+            } else if (i == 4) {
                 playerClass = PlayerClass::ROGUE;
             }
 
-            if(i >= 1 && i <= 4) {
+            if (i >= 1 && i <= 4) {
                 players.emplace_back(
-                make_shared<BasePlayer>(
-                    make_shared<PlayerOptions>(playerClass, name, id++)
-                    )
+                        make_shared<BasePlayer>(
+                                make_shared<PlayerOptions>(playerClass, name, id++)
+                        )
                 );
             } else {
                 cout << "Invalid class." << endl;
             }
-            
+
         } catch (...) {
-            cerr << "An error occured when adding a player." << endl;
+            cerr << "An error occurred when adding a player." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
         }
     }
     cin.clear();
-    cin.ignore(10000,'\n');
+    cin.ignore(10000, '\n');
 }
 
 void Game::init() {
@@ -78,7 +80,7 @@ void Game::init() {
 
     // randomize player order
     utils::shufflePlayers(players);
-    
+
     beacons.emplace_back(make_shared<TuitionBeacon>());
     beacons.emplace_back(make_shared<ExamBeacon>());
 
@@ -86,11 +88,11 @@ void Game::init() {
 }
 
 void Game::endCycle() {
-    for(auto &p : players) {
+    for (auto &p: players) {
         p->endCycle(players);
     }
-    for(auto &beacon : beacons) {
-        if(beacon->period() == PeriodType::Cycle && beacon->Duration() > 0) {
+    for (auto &beacon: beacons) {
+        if (beacon->period() == PeriodType::Cycle && beacon->Duration() > 0) {
             beacon->effect(players, b);
             beacon->decrementDuration();
         }
@@ -109,10 +111,7 @@ bool Game::input(string c) {
         vector<int> potentialBattles = b.checkCollision(currPlayer);
         if (!potentialBattles.empty()) {
             for (const int &id: potentialBattles) {
-                shared_ptr<Player> opponent = getPlayer(id);
-                if (opponent) {
-                    challenge(currPlayer, opponent);
-                }
+                challenge(currPlayer, getPlayer(id));
             }
             b.print();
         }
@@ -131,20 +130,19 @@ bool Game::input(string c) {
         cout << "Enter a number from 0 to " << size - 1 << " to use a card, -1 to not use anything" << endl;
 
         int index;
-        if(!(cin >> index)){
+        if (!(cin >> index)) {
             cout << "Invalid cmd" << endl;
             cin.clear();
-            cin.ignore(10000,'\n');
+            cin.ignore(10000, '\n');
             return true;
         }
-
         if (index < 0) {
             return true;
         }
         if (!(index >= size || size <= 0)) {
             if (currPlayer->requiresTarget(index)) {
                 cout << "Available Players: ";
-                for (const auto& i: players) {
+                for (const auto &i: players) {
                     cout << " " << i->Options()->name << ",";
                 }
                 cout << endl;
@@ -160,14 +158,13 @@ bool Game::input(string c) {
                 b.print();
                 cout << endl;
             } else {
-                currPlayer->useCard(index, currPlayer, &b); 
+                currPlayer->useCard(index, currPlayer, &b);
                 std::cout << "\x1B[2J\x1B[H";
                 b.update();
                 b.print();
                 cout << endl;
             }
-        } 
-        else {
+        } else {
             cout << "Chosen card index is out of range / doesn't exist." << endl;
         }
     } else if (c == "ci") {
@@ -177,12 +174,11 @@ bool Game::input(string c) {
     } else {
         return false;
     }
-
     return true;
 }
 
-void Game::challenge(std::shared_ptr<Player> challenger, std::shared_ptr<Player> opponent) {
-    if (!challenger->alive() || !opponent->alive()) {
+void Game::challenge(const std::shared_ptr<Player> &challenger, const std::shared_ptr<Player> &opponent) {
+    if (!challenger || !opponent || !challenger->alive() || !opponent->alive()) {
         return;
     }
     auto challengerName = challenger->Options()->name;
@@ -200,7 +196,7 @@ void Game::challenge(std::shared_ptr<Player> challenger, std::shared_ptr<Player>
     }
 }
 
-void Game::battle(const std::shared_ptr<Player>& challenger, const std::shared_ptr<Player>& opponent){
+void Game::battle(const std::shared_ptr<Player> &challenger, const std::shared_ptr<Player> &opponent) {
     if (!challenger->alive() || !opponent->alive()) {
         return;
     }
@@ -215,18 +211,18 @@ void Game::battle(const std::shared_ptr<Player>& challenger, const std::shared_p
     cout << challengerName << " is attacking. " << endl;
     int attack = utils::roll() + challenger->Options()->attack;
     this_thread::sleep_for(chrono::milliseconds(750));
-    if(option == 'd'){
+    if (option == 'd') {
         cout << opponentName << " chose to defend! " << endl;
         int defend = utils::roll() + opponent->Options()->defence;
         this_thread::sleep_for(chrono::milliseconds(500));
-        int damage = max(0, attack-defend);
+        int damage = max(0, attack - defend);
         opponent->modifyHP(-damage);
-    }else{
+    } else {
         cout << opponentName << " chose to evade! " << endl;
         int evade = utils::roll() + opponent->Options()->luck;
         this_thread::sleep_for(chrono::milliseconds(500));
         int damage = attack;
-        if(evade >= attack){
+        if (evade >= attack) {
             damage = 0;
         }
         opponent->modifyHP(-damage);
@@ -235,26 +231,27 @@ void Game::battle(const std::shared_ptr<Player>& challenger, const std::shared_p
 }
 
 void Game::GameLoop() {
-    string c = "";
+    string c;
 
     while (playing) {
         auto currPlayer = players[curTurn];
-        if(!currPlayer->alive()){
+        if (!currPlayer->alive()) {
             b.resurrect(currPlayer);
             b.update();
             b.print();
             cout << endl << currPlayer->Options()->name << " is being resurrected. " << endl;
             curTurn = (curTurn + 1) % players.size();
-        }else{
+        } else {
             auto name = currPlayer->Options()->name;
             auto id = currPlayer->Options()->id;
             cout << endl;
             cout << "It is " << name << "'s turn." << " (Player "
-                << id << ")" << endl;
-            cout << name << " you have " << currPlayer->getHP() << "hp a " << currPlayer->Grades() << "\% average." << endl;
+                 << id << ")" << endl;
+            cout << name << " you have " << currPlayer->getHP() << "hp a " << currPlayer->Grades() << "% average."
+                 << endl;
             cout << "Enter 'm' to roll. Note that this would mark the end of your turn." << endl;
             cout << "Enter 'c' to list the cards you have."
-                << endl; 
+                 << endl;
             cout << "Enter 'ci' to list the cards you have and their descriptions." << endl;
             try {
                 cin >> c;
@@ -262,19 +259,18 @@ void Game::GameLoop() {
             } catch (...) {
                 cerr << "An error occured when processing command" << endl;
                 cin.clear();
-                cin.ignore(10000,'\n');
+                cin.ignore(10000, '\n');
             }
         }
     }
 }
 
 void Game::activateBeacon(shared_ptr<Player> &p) {
-    int i = utils::rng(beacons.size()-1);
+    int i = utils::rng(beacons.size() - 1);
     beacons.at(i)->activate(p);
 }
 
 void Game::play() {
-    init();
     if (players.size() < 2) {
         cerr << "Not enough players to start the game. At least 2 player are required." << endl;
         return;
