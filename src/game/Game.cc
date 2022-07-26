@@ -261,6 +261,7 @@ void Game::GameLoop() {
             } catch (...) {
                 cerr << "An error occured when processing command" << endl;
                 cin.clear();
+                cin.ignore(10000,'\n');
             }
         }
     }
