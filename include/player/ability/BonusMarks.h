@@ -4,7 +4,7 @@
 #include "player/PlayerDecorator.h"
 
 class BonusMarks : public PlayerDecorator {
-    void doEndTurn() override;
+    void doEndTurn(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
     public:
     BonusMarks(std::shared_ptr<Player>);

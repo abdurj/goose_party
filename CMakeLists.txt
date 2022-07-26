@@ -55,6 +55,8 @@ add_executable(goose_party
         src/player/ability/TimeManagement.cc
         src/player/ability/Attendance.cc
         src/player/ability/PerfectGpa.cc
+        src/player/ability/CopyCat.cc
+        src/player/ability/Distracting.cc
         src/utils/Observer.cc
         src/utils/Utils.cc include/utils/Utils.h)
 target_include_directories(goose_party PRIVATE include)

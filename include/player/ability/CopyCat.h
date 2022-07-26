@@ -1,14 +1,13 @@
-#ifndef PERFECTGPA_H
-#define PERFECTGPA_H
+#ifndef COPYCAT_H
+#define COPYCAT_H
 
 #include "player/PlayerDecorator.h"
 
-class PerfectGpa : public PlayerDecorator {
-    int count;
+class CopyCat : public PlayerDecorator {
     void doEndCycle(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
     public:
-    PerfectGpa(std::shared_ptr<Player>);
+    CopyCat(std::shared_ptr<Player>);
 };
 
 

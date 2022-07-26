@@ -87,7 +87,7 @@ void Game::init() {
 
 void Game::endCycle() {
     for(auto &p : players) {
-        p->endCycle();
+        p->endCycle(players);
     }
     for(auto &beacon : beacons) {
         if(beacon->period() == PeriodType::Cycle && beacon->Duration() > 0) {
@@ -116,7 +116,7 @@ bool Game::input(string c) {
             }
             b.print();
         }
-        currPlayer->endTurn();
+        currPlayer->endTurn(players);
 
         curTurn = (curTurn + 1) % players.size();
         if (curTurn == 0) {

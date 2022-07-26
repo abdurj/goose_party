@@ -5,7 +5,7 @@
 
 class Attendance : public PlayerDecorator {
     int count;
-    void doEndTurn() override;
+    void doEndTurn(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
     public:
     Attendance(std::shared_ptr<Player>);

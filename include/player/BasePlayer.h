@@ -8,8 +8,8 @@
 #include "ftxui/dom/elements.hpp"
 
 class BasePlayer : public Player {
-    void doEndTurn() override; //Better name suggestions?
-    void doEndCycle() override;
+    void doEndTurn(std::vector<std::shared_ptr<Player>>&) override; //Better name suggestions?
+    void doEndCycle(std::vector<std::shared_ptr<Player>>&) override;
     void abilityDesc() const override;
     int degrees;
     int grades;

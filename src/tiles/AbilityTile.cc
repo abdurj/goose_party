@@ -8,7 +8,7 @@ AbilityTile::AbilityTile(int type) : Tile(type) {};
 
 void AbilityTile::apply(shared_ptr<Player> &p) {
     cout << "landed on ability tile" << endl;
-    utils::generateAbiltiy(p);
+    utils::generateAbility(p);
 }
 
 Element AbilityTile::tileElement() {
