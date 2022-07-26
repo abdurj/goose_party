@@ -30,7 +30,7 @@ class Game{
 
     std::shared_ptr<Player> getPlayer(const int &id);
 
-    void challenge(std::shared_ptr<Player> challenger, std::shared_ptr<Player> opponent);
+    void challenge(const std::shared_ptr<Player>& challenger, const std::shared_ptr<Player>& opponent);
 
     void battle(const std::shared_ptr<Player>& challenger, const std::shared_ptr<Player>& opponent);
 };

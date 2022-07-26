@@ -8,8 +8,8 @@ using namespace std;
 
 DebugGame::DebugGame() {};
 
-bool DebugGame::input(string c){
-    if(!Game::input(c)){
+bool DebugGame::input(string c) {
+    if (!Game::input(c)) {
         debugInput(c);
     }
     return true;
@@ -18,35 +18,39 @@ bool DebugGame::input(string c){
 void DebugGame::debugInput(string c) {
     int player, amt;
     try {
-        if(c == "move") {
+        if (c == "move") {
             cin >> player;
             cin >> amt;
-
             b.move(players.at(player), amt);
-
-            vector<int> potentialBattles = b.checkCollision(players.at(player));
-            if (!potentialBattles.empty()) {
-                for (const int &id: potentialBattles) {
-                    shared_ptr<Player> opponent = getPlayer(id);
-                    if (opponent) {
-                        challenge(getPlayer(player), opponent);
-                    }
+        } else if (c == "battle") {
+            string cmd;
+            cin >> cmd;
+            if (cmd == "check") {
+                cin >> player;
+                vector<int> potentialBattles = b.checkCollision(players.at(player));
+                if (!potentialBattles.empty()) {
+                    for (const int &id: potentialBattles)
+                        challenge(getPlayer(player), getPlayer(id));
                 }
                 b.print();
+            } else if (cmd == "force") {
+                int id1 = 0;
+                int id2 = 0;
+                cin >> id1 >> id2;
+                challenge(getPlayer(id1), getPlayer(id2));
             }
-
         } else if (c == "cycle") {
             endCycle();
         } else if (c == "add") {
             cin >> c;
             cin >> player;
-            
-            if(c == "grades") {
+
+            if (c == "grades") {
                 cin >> amt;
                 players.at(player)->modifyGrades(amt);
             } else if (c == "degrees") {
                 cin >> amt;
-                for(int i = 0; i < amt; ++i) {
+                for (int i = 0; i < amt; ++i) {
                     players.at(player)->modifyGrades(30);
                     players.at(player)->claimDegree();
                 }
@@ -58,19 +62,19 @@ void DebugGame::debugInput(string c) {
                 cin.clear();
                 cin.ignore();
             }
-        } else if (c == "damage"){
+        } else if (c == "damage") {
             cin >> player;
             cin >> amt;
             players.at(player)->modifyHP(amt);
         } else if (c == "show") {
             cin >> c;
             cin >> player;
-            if(c == "grades") {
+            if (c == "grades") {
                 cout << players.at(player)->Options()->name << "'s Grades: "
-                << players.at(player)->Grades() << endl;
+                     << players.at(player)->Grades() << endl;
             } else if (c == "hp") {
                 cout << players.at(player)->Options()->name << "'s HP: "
-                << players.at(player)->getHP() << endl;
+                     << players.at(player)->getHP() << endl;
             } else if (c == "abilities") {
                 players.at(player)->ListAbilities();
             } else {
@@ -79,15 +83,15 @@ void DebugGame::debugInput(string c) {
             }
         } else if(c == "clear") {
             system("clear");
-        } else if(c == "ordering") {
+        } else if (c == "ordering") {
             cout << "Player Ordering:" << endl;
-            for(int i = 0; i < players.size(); i++) {
+            for (int i = 0; i < players.size(); i++) {
                 cout << i << ": " << players.at(i)->Options()->name << endl;
             }
         }
-    } catch(...) {
+    } catch (...) {
         cerr << "Invalid debug command." << endl;
         cin.clear();
-        cin.ignore(10000,'\n');
+        cin.ignore(10000, '\n');
     }
 }
